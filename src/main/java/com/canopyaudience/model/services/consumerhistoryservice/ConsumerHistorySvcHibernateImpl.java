@@ -9,7 +9,6 @@ import com.canopyaudience.model.domain.consumerHistory;
 import com.canopyaudience.model.services.exception.ConsumerHistoryException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
