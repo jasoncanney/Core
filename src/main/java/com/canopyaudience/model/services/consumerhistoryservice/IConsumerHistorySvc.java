@@ -3,7 +3,7 @@ package com.canopyaudience.model.services.consumerhistoryservice;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.ConsumerHistoryException;
-import java.util.Set;
+import java.util.List;
 
 /** 
  This interface defines methods for persisting of consumerHistory.java
@@ -31,7 +31,7 @@ public interface IConsumerHistorySvc extends IService
 	 @exception ClassNotFoundException  
 	*/
 
-	public Set<consumerHistory> getConsumerHistory() throws ConsumerHistoryException, ClassNotFoundException;
+	public List<consumerHistory> getConsumerHistory() throws ConsumerHistoryException, ClassNotFoundException;
 
 
 	/** 
