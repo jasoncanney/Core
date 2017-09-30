@@ -3,8 +3,7 @@ package com.canopyaudience.model.services.consumerservice;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.ConsumerException;
-import java.sql.ResultSet;
-import java.util.Set;
+import java.util.List;
 
 /** 
  This interface defines methods for persisting of consumer.java
@@ -33,7 +32,7 @@ public interface IConsumerSvc extends IService
 	 @exception ClassNotFoundException  
 	*/
 
-	public Set<consumer> getConsumer() throws ConsumerException, ClassNotFoundException;
+	public List<consumer> getConsumer() throws ConsumerException, ClassNotFoundException;
 
 	/** 
 	 Updates a consumer

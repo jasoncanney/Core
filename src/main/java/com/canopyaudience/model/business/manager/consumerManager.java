@@ -3,11 +3,10 @@ package com.canopyaudience.model.business.manager;
 import com.canopyaudience.model.services.consumerservice.*;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.exception.ConsumerException;
-import java.util.Set;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 
 // @Service
 public class consumerManager extends ManagerSuperType
@@ -43,7 +42,7 @@ public class consumerManager extends ManagerSuperType
 	 @return Set<consumer>
         * @throws java.lang.ClassNotFoundException
 	*/
-	public final Set<consumer> Get() throws ConsumerException, ClassNotFoundException
+	public final List<consumer> Get() throws ConsumerException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
       		// IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");

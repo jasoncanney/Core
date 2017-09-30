@@ -9,11 +9,9 @@ import com.canopyaudience.model.domain.consumer;
 import com.canopyaudience.model.services.exception.ConsumerException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -77,8 +75,8 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
      * @return <list> of adimpression
      * @throws java.lang.ClassNotFoundException
      */
-        @Override
-    public Set<consumer> getConsumer() throws ConsumerException, ClassNotFoundException {
+     @Override
+    public List<consumer> getConsumer() throws ConsumerException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -115,7 +113,9 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<consumer>) theApplications;
+            // return (Set<consumer>) theApplications;
+            return theApplications;
+
        }  
     }
     /**
