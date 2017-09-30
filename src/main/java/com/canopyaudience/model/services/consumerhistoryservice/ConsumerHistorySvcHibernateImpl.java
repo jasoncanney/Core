@@ -79,7 +79,6 @@ public class ConsumerHistorySvcHibernateImpl implements IConsumerHistorySvc
     public List<consumerHistory> getConsumerHistory() throws ConsumerHistoryException, ClassNotFoundException {
         
         {
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -98,7 +97,9 @@ public class ConsumerHistorySvcHibernateImpl implements IConsumerHistorySvc
                 log.info ("beginTransaction");
                 
                 // query students
-                theApplications = session.createQuery("from consumerhistory").getResultList();
+                // the "from" statement here refers to the name of the domain object and NOT the table you are querying.  
+                // It then pulls the info from the @Entity model within that domain class
+                theApplications = session.createQuery("from consumerHistory").getResultList();
                 log.info ("session.createQuery passed");
                 session.close();    
                 log.info("consumerhistory queried and put into List.");

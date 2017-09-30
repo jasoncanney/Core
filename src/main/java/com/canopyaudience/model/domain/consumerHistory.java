@@ -3,8 +3,6 @@ package com.canopyaudience.model.domain;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 /** 
@@ -220,12 +218,7 @@ public class consumerHistory implements Serializable
 	}
 
 	/** Equals Test Method
-	 @param consumerID
-	 @param preferenceID 
-	 @param preferenceDate 
-	 @param preferenceChoice 
-	 @param advertisementID
-	 @param couponID
+        * @param consumerHistory
 	*/
 
 	public boolean equals(consumerHistory consumerHistory)
@@ -269,11 +262,6 @@ public class consumerHistory implements Serializable
 	 @return a <code>String</code> representation
 	 of this object
 	 /// @param consumerID
-	 @param preferenceID 
-	 @param preferenceDate 
-	 @param preferenceChoice 
-	 @param advertisementID
-	 @param couponID
 	*/
 
 	@Override
