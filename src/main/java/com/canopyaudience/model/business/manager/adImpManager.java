@@ -1,10 +1,9 @@
 package com.canopyaudience.model.business.manager;
 
-import com.canopyaudience.model.services.factory.Factory;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.adimpression.IAdImpressionSvc;
 import com.canopyaudience.model.services.exception.AdImpressionException;
-import java.util.Set;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -36,7 +35,7 @@ public class adImpManager extends ManagerSuperType
 	 @return Set<adimpression> 
         * @throws java.lang.ClassNotFoundException 
 	*/
-	public final Set<adimpression>  Get() throws AdImpressionException, ClassNotFoundException
+	public final List<adimpression>  Get() throws AdImpressionException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// IAdImpressionSvc adSvc = (IAdImpressionSvc)factory.getService("IAdImpressionSvc");

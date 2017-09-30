@@ -8,7 +8,7 @@ package com.canopyaudience.model.services.adimpression;
 import com.canopyaudience.model.domain.adimpression;
 import com.canopyaudience.model.services.IService;
 import com.canopyaudience.model.services.exception.AdImpressionException;
-import java.util.Set;
+import java.util.List;
 
 /**
  *
@@ -35,7 +35,7 @@ public interface IAdImpressionSvc extends IService {
 	 */
 	// public boolean getApplication(Application application) throws ApplicationException, ClassNotFoundException;
 	
-	public Set<adimpression> getAdImpression() throws AdImpressionException,
+	public List<adimpression> getAdImpression() throws AdImpressionException,
 			ClassNotFoundException;
  
         /**

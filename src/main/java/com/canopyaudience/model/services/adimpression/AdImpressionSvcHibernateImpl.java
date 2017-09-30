@@ -9,7 +9,6 @@ import com.canopyaudience.model.domain.adimpression;
 import com.canopyaudience.model.services.exception.AdImpressionException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -75,9 +74,10 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     /**
      * Pulls data from database through hibernate interface
      * @return <list> of adimpression
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public Set<adimpression> getAdImpression() throws AdImpressionException, ClassNotFoundException {
+    public List<adimpression> getAdImpression() throws AdImpressionException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -114,7 +114,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<adimpression>) theApplications;
+            return theApplications;
        }  
     }
     /**
