@@ -101,7 +101,7 @@ public class ConsumerHistorySvcHibernateImpl implements IConsumerHistorySvc
                 theApplications = session.createQuery("from consumerhistory").getResultList();
                 log.info ("session.createQuery passed");
                 session.close();    
-                log.info("consumerHistory queried and put into List.");
+                log.info("consumerhistory queried and put into List.");
             }
             catch(Exception e)
             {
