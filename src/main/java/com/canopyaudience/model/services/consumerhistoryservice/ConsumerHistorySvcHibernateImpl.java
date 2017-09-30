@@ -77,7 +77,7 @@ public class ConsumerHistorySvcHibernateImpl implements IConsumerHistorySvc
      * @return <list> of adimpression
      * @throws java.lang.ClassNotFoundException
      */
-    public Set<consumerHistory> getConsumerHistory() throws ConsumerHistoryException, ClassNotFoundException {
+    public List<consumerHistory> getConsumerHistory() throws ConsumerHistoryException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -114,7 +114,7 @@ public class ConsumerHistorySvcHibernateImpl implements IConsumerHistorySvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<consumerHistory>) theApplications;
+            return theApplications;
        }  
     }
     /**

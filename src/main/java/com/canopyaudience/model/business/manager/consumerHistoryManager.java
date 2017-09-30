@@ -2,7 +2,7 @@ package com.canopyaudience.model.business.manager;
 
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.consumerhistoryservice.IConsumerHistorySvc;
-import java.util.Set;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -34,7 +34,7 @@ public class consumerHistoryManager extends ManagerSuperType
 	 @param id
 	 @return 
 	*/
-	public final Set<consumerHistory> Get() throws ClassNotFoundException
+	public final List<consumerHistory> Get() throws ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// IConsumerHistorySvc consSvc = (IConsumerHistorySvc)factory.getService("IConsumerHistorySvc");
