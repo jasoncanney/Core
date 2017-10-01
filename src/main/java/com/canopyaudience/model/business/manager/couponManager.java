@@ -3,7 +3,7 @@ package com.canopyaudience.model.business.manager;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.couponservice.ICouponSvc;
 import com.canopyaudience.model.services.exception.CouponException;
-import java.util.Set;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -33,7 +33,7 @@ public class couponManager extends ManagerSuperType
 	 @param id
 	 @return Set<coupon>
 	*/
-	public final Set<coupon> Get() throws CouponException, ClassNotFoundException
+	public final List<coupon> Get() throws CouponException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// ICouponSvc coupSvc = (ICouponSvc)factory.getService("ICouponSvc");

@@ -3,7 +3,7 @@ package com.canopyaudience.model.business.manager;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.exception.PreferenceException;
 import com.canopyaudience.model.services.preferenceservice.IPreferenceSvc;
-import java.util.Set;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -33,7 +33,7 @@ public class preferenceManager extends ManagerSuperType
 	 @param id
 	 @return Set<preference> 
 	*/
-	public final Set<preference>  Get() throws PreferenceException, ClassNotFoundException
+	public final List<preference>  Get() throws PreferenceException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// IPreferenceSvc prefsSvc = (IPreferenceSvc)factory.getService("IPreferenceSvc");

@@ -3,7 +3,7 @@ package com.canopyaudience.model.services.loginservice;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.LoginException;
-import java.util.Set;
+import java.util.List;
 
 /** 
  This interface defines methods for persisting of login.java
@@ -31,7 +31,7 @@ public interface ILoginSvc extends IService
 	 @exception ClassNotFoundException  
 	*/
 
-	public Set<login> getLogin()throws LoginException, ClassNotFoundException;
+	public List<login> getLogin()throws LoginException, ClassNotFoundException;
 
 	/** 
 	 Updates a Login

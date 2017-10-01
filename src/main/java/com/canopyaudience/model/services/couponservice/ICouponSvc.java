@@ -3,7 +3,7 @@ package com.canopyaudience.model.services.couponservice;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.CouponException;
-import java.util.Set;
+import java.util.List;
 
 /** 
  This interface defines methods for persisting of coupon.cs
@@ -31,7 +31,7 @@ public interface ICouponSvc extends IService
 	 @exception CouponException 
 	 @exception ClassNotFoundException  
 	*/
-	public Set<coupon> getCoupon()throws CouponException, ClassNotFoundException;
+	public List<coupon> getCoupon()throws CouponException, ClassNotFoundException;
 
 	/** 
 	 Updates a coupon

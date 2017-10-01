@@ -3,7 +3,7 @@ package com.canopyaudience.model.business.manager;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.exception.LoginException;
 import com.canopyaudience.model.services.loginservice.ILoginSvc;
-import java.util.Set;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -32,7 +32,7 @@ public class loginManager extends ManagerSuperType
 	 
 	 @return Set<login>
 	*/
-	public final Set<login> Get() throws LoginException, ClassNotFoundException
+	public final List<login> Get() throws LoginException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// ILoginSvc consSvc = (ILoginSvc)factory.getService("ILoginSvc");

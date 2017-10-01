@@ -9,7 +9,6 @@ import com.canopyaudience.model.domain.coupon;
 import com.canopyaudience.model.services.exception.CouponException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -75,8 +74,8 @@ public class CouponSvcHibernateImpl implements ICouponSvc
      * @return <list> of coupon
      * @throws java.lang.ClassNotFoundException
      */
-    @Override
-    public Set<coupon> getCoupon() throws CouponException, ClassNotFoundException {
+        @Override
+    public List<coupon> getCoupon() throws CouponException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -113,7 +112,7 @@ public class CouponSvcHibernateImpl implements ICouponSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<coupon>) theApplications;
+            return theApplications;
        }  
     }
     /**

@@ -9,7 +9,6 @@ import com.canopyaudience.model.domain.preference;
 import com.canopyaudience.model.services.exception.CouponException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -76,7 +75,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
      * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public Set<preference> getPreference() throws CouponException, ClassNotFoundException {
+    public List<preference> getPreference() throws CouponException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -112,7 +111,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<preference>) theApplications;
+            return theApplications;
        }  
     }
     /**

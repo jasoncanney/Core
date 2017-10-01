@@ -3,7 +3,7 @@ package com.canopyaudience.model.services.preferenceservice;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.PreferenceException;
-import java.util.Set;
+import java.util.List;
 
 /** 
  This interface defines methods for storing and retrieving Preferences
@@ -29,7 +29,7 @@ public interface IPreferenceSvc extends IService
 	 @return  The Preference object matching Preference 
 	 
 	*/
-	public Set<preference> getPreference()throws PreferenceException, ClassNotFoundException;
+	public List<preference> getPreference()throws PreferenceException, ClassNotFoundException;
 
 	/** 
 	 Updates a preference

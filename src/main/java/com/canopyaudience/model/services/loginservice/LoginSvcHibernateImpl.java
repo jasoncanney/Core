@@ -9,7 +9,6 @@ import com.canopyaudience.model.domain.login;
 import com.canopyaudience.model.services.exception.LoginException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -76,7 +75,7 @@ public class LoginSvcHibernateImpl implements ILoginSvc
      * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public Set<login> getLogin() throws LoginException, ClassNotFoundException {
+    public List<login> getLogin() throws LoginException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -113,7 +112,7 @@ public class LoginSvcHibernateImpl implements ILoginSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<login>) theApplications;
+            return theApplications;
        }  
     }
     /**
