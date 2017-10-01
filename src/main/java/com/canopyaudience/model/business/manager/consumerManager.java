@@ -64,17 +64,16 @@ public class consumerManager extends ManagerSuperType
 */
 	/** 
 	 Business use case for "retrieve single consumer"
-	 
+         * @param id
 	 @return consumer
-	*//**
-	public final consumer Get(int id)
+	*/
+	public final consumer GetA(int id) throws ConsumerException, ClassNotFoundException
 	{
-		Factory factory = Factory.getInstance();
-		IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");
-		return consSvc.getConsumer(id);
+		// Factory factory = Factory.getInstance();
+		// IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");
+		return consSvc.getAConsumer(id);
 	}
-
-*/
+        
 	/** 
 	 Business use case for "update consumer"
 	 S
