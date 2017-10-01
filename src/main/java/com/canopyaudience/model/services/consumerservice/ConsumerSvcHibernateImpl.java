@@ -118,6 +118,55 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
 
        }  
     }
+   
+    /**
+     * Pulls data from database through hibernate interface
+     * @param id
+     * @return consumer object
+     * @throws java.lang.ClassNotFoundException
+     */
+    public consumer getAConsumer(int id) throws ConsumerException, ClassNotFoundException {
+        
+        {
+            
+            int i = id;
+            consumer c = new consumer();
+            
+            // boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+
+            log.info ("getConsumer - ConsumerSvcHibernateImpl.java");
+ 
+            Transaction tx = null;
+            
+            // List<consumer> theApplications = null;
+            
+            try 
+            {
+                Session session = fetchSession();
+                log.info ("fetched session");
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                c = session.get(consumer.class, i);
+                session.close();   
+
+            }
+            catch(Exception e)
+            {
+              if (tx==null) 
+                            {
+                                     //tx.rollback();
+                                     e.printStackTrace();
+
+                            }
+              log.error (e.getClass() + ": " + e.getMessage(), e);
+            }     
+                return c;              
+       }  
+    }
+  
     /**
   * Updates consumerHistory object received from GUI and put in database
   * @return boolean

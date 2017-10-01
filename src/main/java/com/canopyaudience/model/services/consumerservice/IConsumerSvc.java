@@ -34,7 +34,15 @@ public interface IConsumerSvc extends IService
 
 	public List<consumer> getConsumer() throws ConsumerException, ClassNotFoundException;
 
-	/** 
+	/**
+         * Pulls data from database through hibernate interface
+         * @param id
+         * @return consumer object
+         * @throws java.lang.ClassNotFoundException
+         */
+        public consumer getAConsumer(int id) throws ConsumerException, ClassNotFoundException;
+       
+        /** 
 	 Updates a consumer
 	 The updateConsumer takes in a consumer object as input and will pass it to the ConsumerSvcImpl 
 	 @param consumer The consumer to be updated

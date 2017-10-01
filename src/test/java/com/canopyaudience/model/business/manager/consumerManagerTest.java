@@ -57,11 +57,15 @@ public class consumerManagerTest extends TestCase{
 
     /**
      * Test of Get method, of class consumerManager.
-     *//*
+     */
     @Test
-    public void test2Get() throws Exception {
+    public void test2GetA() throws Exception {
+        log.info ("consumerManagerTest - test2GetA");
+        consumerManager instance = new consumerManager();
+        consumer c = instance.GetA(consumer1.getConsumerID());
+        assertEquals(c.getConsumerID(), consumer1.getConsumerID());   
     }
-*/
+    
     /**
      * Test of Update method, of class consumerManager.
      */

@@ -6,6 +6,7 @@
 package com.canopyaudience.model.services.consumerservice;
 
 import com.canopyaudience.model.domain.consumer;
+import com.canopyaudience.model.services.exception.ConsumerException;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
@@ -59,12 +60,17 @@ public class ConsumerSvcHibernateImplTest extends TestCase{
     }
 
     /**
-     * Test of getConsumer method, of class ConsumerSvcHibernateImpl.
-     *//*
+     * Test of getaConsumer method, of class ConsumerSvcHibernateImpl.
+     */
     @Test
-    public void test2GetConsumer() throws Exception {
+    public void test2GetAConsumer() throws ConsumerException, ClassNotFoundException {
+        log.info ("ConsumerSvcHibernateImplTest - test2GetAConsumer");
+        ConsumerSvcHibernateImpl instance = new ConsumerSvcHibernateImpl();
+        boolean expResult = true;
+        consumer c = new consumer();
+        c = instance.getAConsumer(consumer1.getConsumerID());
+        assertEquals(c.getConsumerID(), consumer1.getConsumerID());   
     }
-*/
     /**
      * Test of updateConsumer method, of class ConsumerSvcHibernateImpl.
      */
