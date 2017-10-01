@@ -3,7 +3,7 @@ package com.canopyaudience.model.business.manager;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.adservice.IAdSvc;
 import com.canopyaudience.model.services.exception.AdvertisementException;
-import java.util.Set;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -35,7 +35,7 @@ public class adManager extends ManagerSuperType
 	 @param id
 	 @return Set<advertisement> 
 	*/
-	public final Set<advertisement>  Get() throws AdvertisementException, ClassNotFoundException
+	public final List<advertisement>  Get() throws AdvertisementException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// IAdSvc adSvc = (IAdSvc)factory.getService("IAdSvc");

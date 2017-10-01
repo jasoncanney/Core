@@ -9,7 +9,6 @@ import com.canopyaudience.model.domain.advertisement;
 import com.canopyaudience.model.services.exception.AdvertisementException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -75,9 +74,10 @@ public class AdSvcHibernateImpl implements IAdSvc
     /**
      * Pulls data from database through hibernate interface
      * @return <list> of adimpression
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public Set<advertisement> getAdvertisement() throws AdvertisementException, ClassNotFoundException {
+    public List<advertisement> getAdvertisement() throws AdvertisementException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -114,7 +114,7 @@ public class AdSvcHibernateImpl implements IAdSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return (Set<advertisement>) theApplications;
+            return theApplications;
        }  
     }
     /**

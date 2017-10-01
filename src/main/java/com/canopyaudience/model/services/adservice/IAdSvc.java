@@ -3,8 +3,7 @@ package com.canopyaudience.model.services.adservice;
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.AdvertisementException;
-import java.sql.ResultSet;
-import java.util.Set;
+import java.util.List;
 
 /** 
  This interface defines methods for persisting of advertisement.cs
@@ -35,7 +34,7 @@ public interface IAdSvc extends IService
 	 @exception ClassNotFoundException  
 	*/
 
-        public Set<advertisement> getAdvertisement() throws AdvertisementException,
+        public List<advertisement> getAdvertisement() throws AdvertisementException,
 			ClassNotFoundException;
 	/** 
 	 Updates a consumer
