@@ -40,6 +40,18 @@ public class couponManager extends ManagerSuperType
 		return coupSvc.getCoupon();
 	}
   
+        /** 
+	 Business use case for "retrieve single coupon"
+         * @param id
+	 @return coupon
+	*/
+	public final coupon GetA(int id) throws CouponException, ClassNotFoundException
+	{
+		// Factory factory = Factory.getInstance();
+		// IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");
+		return coupSvc.getACoupon(id);
+	}
+        
 	/** 
 	 Business use case for "update coupon"
 	 

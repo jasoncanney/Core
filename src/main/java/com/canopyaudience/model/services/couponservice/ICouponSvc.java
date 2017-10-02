@@ -33,6 +33,14 @@ public interface ICouponSvc extends IService
 	*/
 	public List<coupon> getCoupon()throws CouponException, ClassNotFoundException;
 
+        /**
+        * Pulls a coupon from database through hibernate interface
+        * @param id
+        * @return coupon
+        * @throws java.lang.ClassNotFoundException
+        */
+        public coupon getACoupon(int id) throws CouponException, ClassNotFoundException;
+        
 	/** 
 	 Updates a coupon
 	 The updateCoupon takes in a coupon object as input and will pass it to the CouponSvcImpl 

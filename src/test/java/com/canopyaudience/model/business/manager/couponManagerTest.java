@@ -59,11 +59,14 @@ public class couponManagerTest extends TestCase{
 
     /**
      * Test of Get method, of class couponManager.
-     *//*
+     */
     @Test
-    public void test2Get() throws Exception {
+    public void test2GetA() throws Exception {
+        log.info ("couponManagerTest - test2GetA");
+        couponManager instance = new couponManager();
+        coupon c = instance.GetA(coupon1.getCouponID());
+        assertEquals(c.getCouponID(), coupon1.getCouponID());   
     }
-*/
     /**
      * Test of Update method, of class couponManager.
      */

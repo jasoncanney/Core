@@ -115,7 +115,53 @@ public class CouponSvcHibernateImpl implements ICouponSvc
             return theApplications;
        }  
     }
+  
     /**
+     * Pulls a coupon from database through hibernate interface
+     * @param id
+     * @return coupon
+     * @throws java.lang.ClassNotFoundException
+     */
+    public coupon getACoupon(int id) throws CouponException, ClassNotFoundException {
+        {
+            int i = id;
+            coupon c = new coupon();
+            
+            // boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+
+            log.info ("getCoupon - CouponSvcHibernateImpl.java");
+ 
+            Transaction tx = null;
+            
+            try 
+            {
+                Session session = fetchSession();
+                log.info ("fetched session");
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                c = session.get(coupon.class, i);
+                log.info ("session.createQuery passed");
+                session.close();   
+                log.info("coupon queried and put into List.");
+            }
+            catch(Exception e)
+            {
+              if (tx==null) 
+                            {
+                                     // tx.rollback();
+                                     e.printStackTrace();
+
+                            }
+              log.error (e.getClass() + ": " + e.getMessage(), e);
+            }     
+            return c;
+       }  
+    }
+ 
+  /**
   * Updates coupon object received from GUI and put in database
   * @return boolean
   */

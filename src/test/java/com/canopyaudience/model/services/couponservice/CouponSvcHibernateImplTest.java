@@ -6,6 +6,7 @@
 package com.canopyaudience.model.services.couponservice;
 
 import com.canopyaudience.model.domain.coupon;
+import com.canopyaudience.model.services.exception.CouponException;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
@@ -57,12 +58,17 @@ public class CouponSvcHibernateImplTest extends TestCase{
     }
 
     /**
-     * Test of getCoupon method, of class CouponSvcHibernateImpl.
-     *//*
+     * Test of getaCoupon method, of class CouponSvcHibernateImpl.
+     */
     @Test
-    public void test2GetCoupon() throws Exception {
+    public void test2GetACoupon() throws CouponException, ClassNotFoundException {
+        log.info ("CouponSvcHibernateImplTest - test2GetACoupon");
+        CouponSvcHibernateImpl instance = new CouponSvcHibernateImpl();
+        coupon c = new coupon();
+        c = instance.getACoupon(coupon1.getCouponID());
+        assertEquals(c.getCouponID(), coupon1.getCouponID());   
     }
-*/
+    
     /**
      * Test of updateCoupon method, of class CouponSvcHibernateImpl.
      */
