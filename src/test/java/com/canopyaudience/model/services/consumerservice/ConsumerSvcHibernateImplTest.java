@@ -61,7 +61,7 @@ public class ConsumerSvcHibernateImplTest extends TestCase{
 
     /**
      * Test of getaConsumer method, of class ConsumerSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test2GetAConsumer() throws ConsumerException, ClassNotFoundException {
         log.info ("ConsumerSvcHibernateImplTest - test2GetAConsumer");
@@ -69,8 +69,8 @@ public class ConsumerSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         consumer c = new consumer();
         c = instance.getAConsumer(consumer1.getConsumerID());
-        assertEquals(c.getConsumerID(), consumer1.getConsumerID());   
-    }
+        assertEquals(consumer1.getConsumerID(), c.getConsumerID());   
+    } */
     /**
      * Test of updateConsumer method, of class ConsumerSvcHibernateImpl.
      */
