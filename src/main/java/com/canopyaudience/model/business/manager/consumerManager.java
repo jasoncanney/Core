@@ -66,6 +66,7 @@ public class consumerManager extends ManagerSuperType
 	 Business use case for "retrieve single consumer"
          * @param id
 	 @return consumer
+        * @throws java.lang.ClassNotFoundException
 	*/
 	public final consumer GetA(int id) throws ConsumerException, ClassNotFoundException
 	{
