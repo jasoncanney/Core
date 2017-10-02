@@ -101,6 +101,8 @@ public class AdSvcHibernateImpl implements IAdSvc
                 // query students
                 theApplications = session.createQuery("from advertisement").getResultList();
                 log.info ("session.createQuery passed");
+                // For logging what is in the List
+                // displayAdvertisements(theApplications);
                 session.close();    
                 log.info("advertisement queried and put into List.");
             }
@@ -296,5 +298,11 @@ public class AdSvcHibernateImpl implements IAdSvc
 			return session;
 	    
 	} //end fetchConnection
+        
+        private static void displayAdvertisements(List<advertisement> theAdvertisements) {
+		for (advertisement tempAdvertisement : theAdvertisements) {
+			log.info(tempAdvertisement);
+		}
+	}
 
 }// end class AdImpressionSvcHibernateImpl
