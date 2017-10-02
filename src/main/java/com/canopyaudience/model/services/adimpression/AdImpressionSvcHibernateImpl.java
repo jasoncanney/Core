@@ -117,6 +117,51 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             return theApplications;
        }  
     }
+    
+     /**
+     * Pulls one ad impression from database through hibernate interface
+     * @param id
+     * @return c which is an adimpression object
+     * @throws java.lang.ClassNotFoundException
+     */
+    public adimpression getAAdImpression(int id) throws AdImpressionException, ClassNotFoundException {
+        
+        {
+            int i = id;
+            adimpression c = new adimpression();
+            
+            // boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+
+            log.info ("getAdImpression - AdImpressionSvcHibernateImpl.java");
+ 
+            Transaction tx = null;
+                        
+            try 
+            {
+                Session session = fetchSession();
+                log.info ("fetched session");
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                c = session.get(adimpression.class, i);
+                session.close();   
+            }
+            catch(Exception e)
+            {
+              if (tx==null) 
+                            {
+                                     //tx.rollback();
+                                     e.printStackTrace();
+
+                            }
+              log.error (e.getClass() + ": " + e.getMessage(), e);
+            }     
+            return c;
+       }  
+    }
+ 
     /**
   * Updates Application object received from GUI and put in database
   * @param adimpression

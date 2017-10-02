@@ -39,6 +39,14 @@ public interface IAdImpressionSvc extends IService {
 			ClassNotFoundException;
  
         /**
+        * Pulls one ad impression from database through hibernate interface
+        * @param id
+        * @return c which is an adimpression object
+        * @throws java.lang.ClassNotFoundException
+        */
+        public adimpression getAAdImpression(int id) throws AdImpressionException, ClassNotFoundException;
+        
+        /**
         * Updates Application object received from GUI and put in database
         * @param adimpression
         * @return boolean

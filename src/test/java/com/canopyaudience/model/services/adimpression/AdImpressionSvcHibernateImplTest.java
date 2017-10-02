@@ -8,6 +8,7 @@ package com.canopyaudience.model.services.adimpression;
 // import static org.junit.Assert.*;
 
 import com.canopyaudience.model.domain.adimpression;
+import com.canopyaudience.model.services.exception.AdImpressionException;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
@@ -66,11 +67,24 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
         assertEquals(expResult, result);
     
     }
+    
+    /**
+     * Test of getaConsumer method, of class AdImpressionSvcHibernateImpl.
+     */
+    @Test
+    public void test2GetAAdImpression() throws AdImpressionException, ClassNotFoundException {
+        log.info ("AdImpressionSvcHibernateImplTest - test2GetAAdImpression");
+        AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
+        adimpression c = new adimpression();
+        c = instance.getAAdImpression(adimpression1.getConsumerID());
+        assertEquals(c.getConsumerID(), adimpression1.getConsumerID());   
+    }
+    
     /**
      * Test of updateAdImpression method, of class AdImpressionSvcHibernateImpl.
      */
     @Test
-    public void test2UpdateAdImpression() {
+    public void test3UpdateAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testUpdateAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
         boolean expResult = true;

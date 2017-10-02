@@ -28,7 +28,6 @@ public class adImpManager extends ManagerSuperType
 		return true;
 
 	}
-
 	/** 
 	 Business use case for "retrieve adimpression list"
 	 
@@ -40,6 +39,19 @@ public class adImpManager extends ManagerSuperType
 		// Factory factory = Factory.getInstance();
 		// IAdImpressionSvc adSvc = (IAdImpressionSvc)factory.getService("IAdImpressionSvc");
 		return adSvc.getAdImpression();
+	}
+        
+        /** 
+	 Business use case for "retrieve single adimpression"
+         * @param id
+	 @return adimpression
+         * @throws java.lang.ClassNotFoundException
+        */
+	public final adimpression GetA(int id) throws AdImpressionException, ClassNotFoundException
+	{
+		// Factory factory = Factory.getInstance();
+		// IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");
+		return adSvc.getAAdImpression(id);
 	}
         
 	/** 
