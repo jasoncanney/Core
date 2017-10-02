@@ -151,163 +151,103 @@ public class advertisement implements Serializable
 
 	// getters and setters
 
-	/** @return  Returns the advertisement's ID 
-	 <sets>Sets the advertisement's ID</sets>
-	*/
+        public int getAdID() {
+            return adID;
+        }
 
-	public int getadId()
-	{
-		return adID;
-	}
-	public void setadId(int value)
-	{
-		this.adID = value;
-	}
+        public void setAdID(int adID) {
+            this.adID = adID;
+        }
 
-	/** @return  Returns the advertisement's title 
-	 <sets>Sets the advertisement's title </sets>
-	*/
+        public String getAdtitle() {
+            return adtitle;
+        }
 
-	public String getadTitle()
-	{
-		return adtitle;
-	}
-	public void setadTitle(String value)
-	{
-		this.adtitle = value;
-	}
+        public void setAdtitle(String adtitle) {
+            this.adtitle = adtitle;
+        }
 
+        public int getAddemo01() {
+            return addemo01;
+        }
 
+        public void setAddemo01(int addemo01) {
+            this.addemo01 = addemo01;
+        }
 
-	/** @return  Returns the advertisement's demo 01 
-	 <sets>Sets the advertisement's demo 01</sets>
-	*/
+        public int getAddemo02() {
+            return addemo02;
+        }
 
-	public int getadDemo01()
-	{
-		return addemo01;
-	}
-	public void setadDemo01(int value)
-	{
-		this.addemo01 = value;
-	}
+        public void setAddemo02(int addemo02) {
+            this.addemo02 = addemo02;
+        }
 
-	/** @return  Returns the advertisement's demo 02 
-	 <sets>Sets the advertisement's demo 02</sets>
-	*/
+        public int getAddemo03() {
+            return addemo03;
+        }
 
-	public int getadDemo02()
-	{
-		return addemo02;
-	}
-	public void setadDemo02(int value)
-	{
-		this.addemo02 = value;
-	}
+        public void setAddemo03(int addemo03) {
+            this.addemo03 = addemo03;
+        }
 
-	/** @return  Returns the advertisement's demo 03
-	 <sets>Sets the advertisement's demo 03</sets>
-	*/
+        public int getAddemo04() {
+            return addemo04;
+        }
 
-	public int getadDemo03()
-	{
-		return addemo03;
-	}
-	public void setadDemo03(int value)
-	{
-		this.addemo03 = value;
-	}
+        public void setAddemo04(int addemo04) {
+            this.addemo04 = addemo04;
+        }
 
-	/** @return  Returns the advertisement's demo 04 
-	 <sets>Sets the advertisement's demo 04</sets>
-	*/
+        public String getAddescription() {
+            return addescription;
+        }
 
-	public int getadDemo04()
-	{
-		return addemo04;
-	}
-	public void setadDemo04(int value)
-	{
-		this.addemo04 = value;
-	}
+        public void setAddescription(String addescription) {
+            this.addescription = addescription;
+        }
 
-	/** @return  Returns the advertisement's description 
-	 <sets>Sets the advertisement's description</sets>
-	*/
+        public String getAdowner() {
+            return adowner;
+        }
 
-	public String getadDescription()
-	{
-		return addescription;
-	}
-	public void setadDescription(String value)
-	{
-		this.addescription = value;
-	}
+        public void setAdowner(String adowner) {
+            this.adowner = adowner;
+        }
 
-	/** @return  Returns the advertisement's owner 
-	 <sets>Sets the advertisement's owner</sets>
-	*/
+        public String getAdbrand() {
+            return adbrand;
+        }
 
-	public String getadOwner()
-	{
-		return adowner;
-	}
-	public void setadOwner(String value)
-	{
-		this.adowner = value;
-	}
+        public void setAdbrand(String adbrand) {
+            this.adbrand = adbrand;
+        }
 
-	/** @return  Returns the advertisement's brand 
-	 <sets>Sets the advertisement's brand</sets>
-	*/
+        public String getAdPCC() {
+            return adPCC;
+        }
 
-	public String getadBrand()
-	{
-		return adbrand;
-	}
-	public void setadBrand(String value)
-	{
-		this.adbrand = value;
-	}
+        public void setAdPCC(String adPCC) {
+            this.adPCC = adPCC;
+        }
 
-	/** @return  Returns the advertisement's PCC code 
-	 <sets>Sets the advertisement's PCC code</sets>
-	*/
+        public String getAdURL() {
+            return adURL;
+        }
 
-	public String getadPcc()
-	{
-		return adPCC;
-	}
-	public void setadPcc(String value)
-	{
-		this.adPCC = value;
-	}
+        public void setAdURL(String adURL) {
+            this.adURL = adURL;
+        }
 
-	/** @return  Returns the advertisement's URL 
-	 <sets>Sets the advertisement's URL</sets>
-	*/
+        public String getAdCampID() {
+            return adCampID;
+        }
 
-	public String getadUrl()
-	{
-		return adURL;
-	}
-	public void setadUrl(String value)
-	{
-		this.adURL = value;
-	}
+        public void setAdCampID(String adCampID) {
+            this.adCampID = adCampID;
+        }
 
-	/** @return  Returns the advertisement's Campaign ID 
-	 <sets>Sets the advertisement's Campaign ID</sets>
-	*/
-
-	public String getadCampId()
-	{
-		return adCampID;
-	}
-	public void setadCampId(String value)
-	{
-		this.adCampID = value;
-	}
+	
 
 	/** 
 	 Validate if the instance variables are valid

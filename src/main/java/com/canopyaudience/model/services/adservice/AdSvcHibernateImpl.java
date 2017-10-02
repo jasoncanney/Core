@@ -198,22 +198,22 @@ public class AdSvcHibernateImpl implements IAdSvc
                 Session session = fetchSession();
                 log.info ("fetched session");
                 tx = session.beginTransaction();
-                log.info ("beginTransaction, Getting advertisement with adID:" + appdb.getadId());
+                log.info ("beginTransaction, Getting advertisement with adID:" + appdb.getAdID());
                 
                 // retrieve the current application object from the database
-                appnew = session.get(advertisement.class, appdb.getadId());
+                appnew = session.get(advertisement.class, appdb.getAdID());
                 // update all fields in the current advertisement object except the PK of consumerID  
-                appnew.setadTitle(appdb.getadTitle());
-                appnew.setadDemo01(appdb.getadDemo01());
-                appnew.setadDemo02(appdb.getadDemo02());
-                appnew.setadDemo03(appdb.getadDemo03());
-                appnew.setadDemo04(appdb.getadDemo04());
-                appnew.setadDescription(appdb.getadDescription());
-                appnew.setadOwner(appdb.getadOwner());
-                appnew.setadBrand(appdb.getadBrand());
-                appnew.setadPcc(appdb.getadPcc());
-                appnew.setadUrl(appdb.getadUrl());
-                appnew.setadCampId(appdb.getadCampId());
+                appnew.setAdtitle(appdb.getAdtitle());
+                appnew.setAddemo01(appdb.getAddemo01());
+                appnew.setAddemo02(appdb.getAddemo02());
+                appnew.setAddemo03(appdb.getAddemo03());
+                appnew.setAddemo04(appdb.getAddemo04());
+                appnew.setAddescription(appdb.getAddescription());
+                appnew.setAdowner(appdb.getAdowner());
+                appnew.setAdbrand(appdb.getAdbrand());
+                appnew.setAdPCC(appdb.getAdPCC());
+                appnew.setAdURL(appdb.getAdURL());
+                appnew.setAdCampID(appdb.getAdCampID());
 	
 		System.out.println("Updating advertisement...");
 
