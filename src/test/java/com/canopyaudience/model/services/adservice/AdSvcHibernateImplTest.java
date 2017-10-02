@@ -63,7 +63,7 @@ public class AdSvcHibernateImplTest extends TestCase{
 
     /**
      * Test of getAdvertisement method, of class AdSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test2GetAAdvertisement() throws AdvertisementException, ClassNotFoundException {
         log.info ("AdSvcHibernateImplTest - test2GetAAdvertisement");
@@ -72,7 +72,7 @@ public class AdSvcHibernateImplTest extends TestCase{
         c = instance.getAAdvertisement(advertisement1.getadId());
         assertEquals(c.getadId(), advertisement1.getadId());   
     }
-    
+    */
     /**
      * Test of updateAdvertisement method, of class AdSvcHibernateImpl.
      */
