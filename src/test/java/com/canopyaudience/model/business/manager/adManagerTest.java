@@ -67,8 +67,8 @@ public class adManagerTest  extends TestCase {
     public void test2AdManagerCreateGetA() throws Exception {
         log.info ("adManagerTest - test2AdManagerCreateGetA");
         adManager instance = new adManager();
-        advertisement c = instance.GetA(advertisement1.getadId());
-        assertEquals(c.getadId(), advertisement1.getadId());   
+        advertisement c = instance.GetA(advertisement1.getAdID());
+        assertEquals(c.getAdID(), advertisement1.getAdID());   
     }
     /**
      * Test of Update method, of class adManager.
