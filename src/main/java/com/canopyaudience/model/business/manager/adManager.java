@@ -42,6 +42,19 @@ public class adManager extends ManagerSuperType
 		return adSvc.getAdvertisement();
 	}
         
+        /** 
+	 Business use case for "retrieve single advertisement"
+         * @param id
+	 @return advertisement
+         * @throws java.lang.ClassNotFoundException
+        */
+	public final advertisement GetA(int id) throws AdvertisementException, ClassNotFoundException
+	{
+		// Factory factory = Factory.getInstance();
+		// IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");
+		return adSvc.getAAdvertisement(id);
+	}
+        
 	/** 
 	 Business use case for "update advertisement"
 	 

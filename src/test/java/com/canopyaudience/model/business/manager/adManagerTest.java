@@ -60,13 +60,16 @@ public class adManagerTest  extends TestCase {
         
     }
 
-    /**
-     * Test of Get method, of class adManager.
-     *//*
+     /**
+     * Test of Get method, of class adImpManager.
+     */
     @Test
-    public void testGet() throws Exception {
+    public void test2AdManagerCreateGetA() throws Exception {
+        log.info ("adManagerTest - test2AdManagerCreateGetA");
+        adManager instance = new adManager();
+        advertisement c = instance.GetA(advertisement1.getadId());
+        assertEquals(c.getadId(), advertisement1.getadId());   
     }
-*/
     /**
      * Test of Update method, of class adManager.
      */

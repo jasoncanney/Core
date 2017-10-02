@@ -36,7 +36,15 @@ public interface IAdSvc extends IService
 
         public List<advertisement> getAdvertisement() throws AdvertisementException,
 			ClassNotFoundException;
-	/** 
+	/**
+        * Pulls an advertisement data from database through hibernate interface
+        * @param id
+        * @return advertisement
+        * @throws java.lang.ClassNotFoundException
+        */
+        public advertisement getAAdvertisement(int id) throws AdvertisementException, ClassNotFoundException;
+        
+        /** 
 	 Updates a consumer
 	 The updateAdvertisement takes in a advertisement object as input and will pass it to the advertisementSvcImpl 
 	 @param advertisement The advertisement to be updated

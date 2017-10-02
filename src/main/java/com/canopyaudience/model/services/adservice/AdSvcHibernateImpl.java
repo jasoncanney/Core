@@ -117,7 +117,57 @@ public class AdSvcHibernateImpl implements IAdSvc
             return theApplications;
        }  
     }
+    
     /**
+     * Pulls an advertisement data from database through hibernate interface
+     * @param id
+     * @return advertisement
+     * @throws java.lang.ClassNotFoundException
+     */
+    public advertisement getAAdvertisement(int id) throws AdvertisementException, ClassNotFoundException {
+        
+        {
+            
+            int i = id;
+            advertisement c = new advertisement();
+            
+            
+            // boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+
+            log.info ("getAdvertisement - AdSvcHibernateImpl.java");
+ 
+            Transaction tx = null;
+            
+            List<advertisement> theApplications = null;
+            
+            try 
+            {
+                Session session = fetchSession();
+                log.info ("fetched session");
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                c = session.get(advertisement.class, i);
+                session.close();   
+                
+            }
+            catch(Exception e)
+            {
+              if (tx==null) 
+                            {
+                                     //tx.rollback();
+                                     e.printStackTrace();
+
+                            }
+              log.error (e.getClass() + ": " + e.getMessage(), e);
+            }     
+            return c;
+       }  
+    }
+    
+  /**
   * Updates Application object received from GUI and put in database
   * @param adimpression
   * @return boolean

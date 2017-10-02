@@ -8,6 +8,7 @@ package com.canopyaudience.model.services.adservice;
 // import static org.junit.Assert.*;
 
 import com.canopyaudience.model.domain.advertisement;
+import com.canopyaudience.model.services.exception.AdvertisementException;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
@@ -41,7 +42,6 @@ public class AdSvcHibernateImplTest extends TestCase{
                 advertisement3 = new advertisement (8675322,"Delete", 1, 2, 3, 4,"TVGuide","1239876","A987654321","RDK-B","http://www.adobe.com/ocap","Hans Bender");                
 
         }
-
         /*
 	 * Category set in config/log4j.properties as
 	 * log4j.category.com.classexercise=DEBUG, A1
@@ -63,23 +63,22 @@ public class AdSvcHibernateImplTest extends TestCase{
 
     /**
      * Test of getAdvertisement method, of class AdSvcHibernateImpl.
-     */ /*
+     */
     @Test
-    public void testGetAdvertisement() throws Exception {
-        log.info ("AdSvcHibernateImplTest - testGetAdvertisement");
+    public void test2GetAAdvertisement() throws AdvertisementException, ClassNotFoundException {
+        log.info ("AdSvcHibernateImplTest - test2GetAAdvertisement");
         AdSvcHibernateImpl instance = new AdSvcHibernateImpl();
-        // boolean expResult = true;
-        Set<advertisement> result = instance.getAdvertisement();
-        Set<advertisement> expResult = instance.getAdvertisement();
-        assertEquals(expResult, result);   
+        advertisement c = new advertisement();
+        c = instance.getAAdvertisement(advertisement1.getadId());
+        assertEquals(c.getadId(), advertisement1.getadId());   
     }
-*/
+    
     /**
      * Test of updateAdvertisement method, of class AdSvcHibernateImpl.
      */
     @Test
-    public void test2UpdateAdvertisement() {
-        log.info ("AdSvcHibernateImplTest - test2UpdateAdvertisement");
+    public void test3UpdateAdvertisement() {
+        log.info ("AdSvcHibernateImplTest - test3UpdateAdvertisement");
         AdSvcHibernateImpl instance = new AdSvcHibernateImpl();
         boolean expResult = true;
         boolean result = instance.updateAdvertisement(advertisement2);  // advertisement2 is a pre-updated advertisement object for advertisement1
@@ -90,8 +89,8 @@ public class AdSvcHibernateImplTest extends TestCase{
      * Test of deleteAdvertisement method, of class AdSvcHibernateImpl.
      */
     @Test
-    public void test3DeleteAdvertisement() {
-        log.info ("AdSvcHibernateImplTest - test3DeleteAdvertisement");
+    public void test4DeleteAdvertisement() {
+        log.info ("AdSvcHibernateImplTest - test4DeleteAdvertisement");
         AdSvcHibernateImpl instance = new AdSvcHibernateImpl();
         boolean expResult = true;
         boolean result = instance.deleteAdvertisement(advertisement1);
