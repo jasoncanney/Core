@@ -85,7 +85,7 @@ public class preference implements Serializable
 	*/
 	private String preferenceDate;
 
-        @Column(name = "consumerId")
+        @Column(name = "consumerID")
 	/** 
 	 @param - consumerID is a value sent from the mobile app with preferences
 	 that link the preference back to a particular consumer.
