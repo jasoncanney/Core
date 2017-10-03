@@ -5,8 +5,6 @@ import java.util.Objects;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 /** 
@@ -135,57 +133,37 @@ public class preference implements Serializable
 
 	// getters and setters
 
-	/** @return  Returns the preference ID 
-	 <sets>Sets the preference ID </sets>
-	*/
+        public int getPreferenceId() {
+            return preferenceId;
+        }
 
-	public int getPreferenceId()
-	{
-		return preferenceId;
-	}
-	public void setPreferenceId(int value)
-	{
-		this.preferenceId = value;
-	}
+        public void setPreferenceId(int preferenceId) {
+            this.preferenceId = preferenceId;
+        }
 
-	/** @return  Returns the preference GS Segment code 
-	 <sets>Sets the preference GS Segment code</sets>
-	*/
+        public int getPreferenceGsSegment() {
+            return preferenceGsSegment;
+        }
 
-	public int getPreferenceGsSegment()
-	{
-		return preferenceGsSegment;
-	}
-	public void setPreferenceGsSegment(int value)
-	{
-		this.preferenceGsSegment = value;
-	}
+        public void setPreferenceGsSegment(int preferenceGsSegment) {
+            this.preferenceGsSegment = preferenceGsSegment;
+        }
 
-	/** @return  Returns the preferenceCaTypeCode 
-	 <sets>Sets the preferenceCaTypeCode</sets>
-	*/
+        public int getPreferenceCaTypeCode() {
+            return preferenceCaTypeCode;
+        }
 
-	public int getPreferenceCaTypeCode()
-	{
-		return preferenceCaTypeCode;
-	}
-	public void setPreferenceCaTypeCode(int value)
-	{
-		this.preferenceCaTypeCode = value;
-	}
+        public void setPreferenceCaTypeCode(int preferenceCaTypeCode) {
+            this.preferenceCaTypeCode = preferenceCaTypeCode;
+        }
 
-	/** @return  Returns the preferenceCaValueCode 
-	 <sets>Sets the preferenceCaValueCode</sets>
-	*/
+        public int getPreferenceCaValueCode() {
+            return preferenceCaValueCode;
+        }
 
-	public int getPreferenceCaValueCode()
-	{
-		return preferenceCaValueCode;
-	}
-	public void setPreferenceCaValueCode(int value)
-	{
-		this.preferenceCaValueCode = value;
-	}
+        public void setPreferenceCaValueCode(int preferenceCaValueCode) {
+            this.preferenceCaValueCode = preferenceCaValueCode;
+        }
 
         public int getPreferencePcc() {
             return preferencePcc;
@@ -195,57 +173,37 @@ public class preference implements Serializable
             this.preferencePcc = preferencePcc;
         }
 
-	/** @return  Returns the preferenceBrandOwner 
-	 <sets>Sets the preferenceBrandOwner</sets>
-	*/
+        public String getPreferenceBrandOwner() {
+            return preferenceBrandOwner;
+        }
 
-	public String getPreferenceBrandOwner()
-	{
-		return preferenceBrandOwner;
-	}
-	public void setPreferenceBrandOwner(String value)
-	{
-		this.preferenceBrandOwner = value;
-	}
+        public void setPreferenceBrandOwner(String preferenceBrandOwner) {
+            this.preferenceBrandOwner = preferenceBrandOwner;
+        }
 
-	/** @return  Returns the preferenceProductDesc 
-	 <sets>Sets the preferenceProductDesc</sets>
-	*/
+        public String getPreferenceProductDesc() {
+            return preferenceProductDesc;
+        }
 
-	public String getPreferenceProductDesc()
-	{
-		return preferenceProductDesc;
-	}
-	public void setPreferenceProductDesc(String value)
-	{
-		this.preferenceProductDesc = value;
-	}
+        public void setPreferenceProductDesc(String preferenceProductDesc) {
+            this.preferenceProductDesc = preferenceProductDesc;
+        }
 
-	/** @return  Returns the preferenceDate 
-	 <sets>Sets the preferenceDate</sets>
-	*/
+        public String getPreferenceDate() {
+            return preferenceDate;
+        }
 
-	public String getPreferenceDate()
-	{
-		return preferenceDate;
-	}
-	public void setPreferenceDate(String value)
-	{
-		this.preferenceDate = value;
-	}
+        public void setPreferenceDate(String preferenceDate) {
+            this.preferenceDate = preferenceDate;
+        }
 
-	/** @return  Returns the consumerId 
-	 <sets>Sets the consumerId</sets>
-	*/
+        public int getConsumerId() {
+            return consumerId;
+        }
 
-	public int getConsumerId()
-	{
-		return consumerId;
-	}
-	public void setConsumerId(int value)
-	{
-		this.consumerId = value;
-	}
+        public void setConsumerId(int consumerId) {
+            this.consumerId = consumerId;
+        }
 
 	
 	/** 
@@ -293,79 +251,67 @@ public class preference implements Serializable
 		return true;
 	}
 
+        @Override
+        public String toString() {
+            return "preference{" + "preferenceId=" + preferenceId + ", preferenceGsSegment=" + preferenceGsSegment + ", preferenceCaTypeCode=" + preferenceCaTypeCode + ", preferenceCaValueCode=" + preferenceCaValueCode + ", preferencePcc=" + preferencePcc + ", preferenceBrandOwner=" + preferenceBrandOwner + ", preferenceProductDesc=" + preferenceProductDesc + ", preferenceDate=" + preferenceDate + ", consumerId=" + consumerId + '}';
+        }
 
-	/** 
-	 Constructs a <code>STring</code> with all attributes
-	 in name = value format
-	 
-	 @return a <code>String</code> representation
-	 of this object
-	 
-	*/
+        @Override
+        public int hashCode() {
+            int hash = 5;
+            hash = 83 * hash + this.preferenceId;
+            hash = 83 * hash + this.preferenceGsSegment;
+            hash = 83 * hash + this.preferenceCaTypeCode;
+            hash = 83 * hash + this.preferenceCaValueCode;
+            hash = 83 * hash + this.preferencePcc;
+            hash = 83 * hash + Objects.hashCode(this.preferenceBrandOwner);
+            hash = 83 * hash + Objects.hashCode(this.preferenceProductDesc);
+            hash = 83 * hash + Objects.hashCode(this.preferenceDate);
+            hash = 83 * hash + this.consumerId;
+            return hash;
+        }
 
-	
-
-    @Override
-    public String toString() {
-        return "preference{" + "preferenceId=" + preferenceId + ", preferenceGsSegment=" + preferenceGsSegment + ", preferenceCaTypeCode=" + preferenceCaTypeCode + ", preferenceCaValueCode=" + preferenceCaValueCode + ", preferencePcc=" + preferencePcc + ", preferenceBrandOwner=" + preferenceBrandOwner + ", preferenceProductDesc=" + preferenceProductDesc + ", preferenceDate=" + preferenceDate + ", consumerId=" + consumerId + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + this.preferenceId;
-        hash = 83 * hash + this.preferenceGsSegment;
-        hash = 83 * hash + this.preferenceCaTypeCode;
-        hash = 83 * hash + this.preferenceCaValueCode;
-        hash = 83 * hash + this.preferencePcc;
-        hash = 83 * hash + Objects.hashCode(this.preferenceBrandOwner);
-        hash = 83 * hash + Objects.hashCode(this.preferenceProductDesc);
-        hash = 83 * hash + Objects.hashCode(this.preferenceDate);
-        hash = 83 * hash + this.consumerId;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final preference other = (preference) obj;
+            if (this.preferenceId != other.preferenceId) {
+                return false;
+            }
+            if (this.preferenceGsSegment != other.preferenceGsSegment) {
+                return false;
+            }
+            if (this.preferenceCaTypeCode != other.preferenceCaTypeCode) {
+                return false;
+            }
+            if (this.preferenceCaValueCode != other.preferenceCaValueCode) {
+                return false;
+            }
+            if (this.preferencePcc != other.preferencePcc) {
+                return false;
+            }
+            if (this.consumerId != other.consumerId) {
+                return false;
+            }
+            if (!Objects.equals(this.preferenceBrandOwner, other.preferenceBrandOwner)) {
+                return false;
+            }
+            if (!Objects.equals(this.preferenceProductDesc, other.preferenceProductDesc)) {
+                return false;
+            }
+            if (!Objects.equals(this.preferenceDate, other.preferenceDate)) {
+                return false;
+            }
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final preference other = (preference) obj;
-        if (this.preferenceId != other.preferenceId) {
-            return false;
-        }
-        if (this.preferenceGsSegment != other.preferenceGsSegment) {
-            return false;
-        }
-        if (this.preferenceCaTypeCode != other.preferenceCaTypeCode) {
-            return false;
-        }
-        if (this.preferenceCaValueCode != other.preferenceCaValueCode) {
-            return false;
-        }
-        if (this.preferencePcc != other.preferencePcc) {
-            return false;
-        }
-        if (this.consumerId != other.consumerId) {
-            return false;
-        }
-        if (!Objects.equals(this.preferenceBrandOwner, other.preferenceBrandOwner)) {
-            return false;
-        }
-        if (!Objects.equals(this.preferenceProductDesc, other.preferenceProductDesc)) {
-            return false;
-        }
-        if (!Objects.equals(this.preferenceDate, other.preferenceDate)) {
-            return false;
-        }
-        return true;
-    }
 	
 
 }
