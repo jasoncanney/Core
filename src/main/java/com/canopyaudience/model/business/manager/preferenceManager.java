@@ -39,8 +39,20 @@ public class preferenceManager extends ManagerSuperType
 		// IPreferenceSvc prefsSvc = (IPreferenceSvc)factory.getService("IPreferenceSvc");
 		return prefsSvc.getPreference();
 	}
-	/** 
-	 Business use case for "update coupon"
+	
+        /** 
+	 Business use case for "retrieve single preference"
+         * @param id
+	 @return preference
+         * @throws java.lang.ClassNotFoundException
+	*/
+	public final preference GetA(int id) throws PreferenceException, ClassNotFoundException
+	{
+		return prefsSvc.getAPreference(id);
+	}
+        
+        /** 
+	 Business use case for "update preference"
 	 
 	 @param c
 	*/
@@ -54,7 +66,7 @@ public class preferenceManager extends ManagerSuperType
 	}
 
 	/** 
-	 Business use case for "delete coupon"
+	 Business use case for "delete preference"
 	 
 	 @param c
 	*/

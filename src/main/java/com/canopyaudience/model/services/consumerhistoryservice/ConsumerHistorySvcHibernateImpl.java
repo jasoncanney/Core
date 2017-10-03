@@ -117,6 +117,49 @@ public class ConsumerHistorySvcHibernateImpl implements IConsumerHistorySvc
             return theApplications;
        }  
     }
+    
+    /**
+     * Pulls single consumerHistory from database through hibernate interface
+     * @param id
+     * @return consumerHistory
+     * @throws java.lang.ClassNotFoundException
+     */
+    public consumerHistory getAConsumerHistory(int id) throws ConsumerHistoryException, ClassNotFoundException {
+        
+        {
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+
+            log.info ("getAConsumerHistory - ConsumerHistorySvcHibernateImpl.java");
+ 
+            Transaction tx = null;
+            int i = id;
+            consumerHistory c = new consumerHistory();
+            
+            try 
+            {
+                Session session = fetchSession();
+                log.info ("fetched session");
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                c = session.get(consumerHistory.class, i);
+                session.close();   
+            }
+            catch(Exception e)
+            {
+              if (tx==null) 
+                            {
+                                     // tx.rollback();
+                                     e.printStackTrace();
+
+                            }
+              log.error (e.getClass() + ": " + e.getMessage(), e);
+            }     
+            return c;
+       }  
+    }
+    
     /**
   * Updates consumerHistory object received from GUI and put in database
   * @param consumerHistory

@@ -33,7 +33,14 @@ public interface IConsumerHistorySvc extends IService
 
 	public List<consumerHistory> getConsumerHistory() throws ConsumerHistoryException, ClassNotFoundException;
 
-
+        /**
+        * Pulls single consumerHistory from database through hibernate interface
+        * @param id
+        * @return consumerHistory
+        * @throws java.lang.ClassNotFoundException
+        */
+        public consumerHistory getAConsumerHistory(int id) throws ConsumerHistoryException, ClassNotFoundException;
+        
 	/** 
 	 Updates a consumer
 	 The updateConsumerHistory takes in a consumerHistory object as input and will pass it to the ConsumerHistorySvcImpl 

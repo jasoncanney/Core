@@ -2,6 +2,7 @@ package com.canopyaudience.model.business.manager;
 
 import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.consumerhistoryservice.IConsumerHistorySvc;
+import com.canopyaudience.model.services.exception.ConsumerHistoryException;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,11 +22,8 @@ public class consumerHistoryManager extends ManagerSuperType
 	*/
 	public final boolean Create(consumerHistory c)
 	{
-		// Factory factory = Factory.getInstance();
-		// IConsumerHistorySvc consSvc = (IConsumerHistorySvc)factory.getService("IConsumerHistorySvc");
 		consSvc.storeConsumerHistory(c);
 		return true;
-
 	}
 
 	/** 
@@ -36,12 +34,20 @@ public class consumerHistoryManager extends ManagerSuperType
 	*/
 	public final List<consumerHistory> Get() throws ClassNotFoundException
 	{
-		// Factory factory = Factory.getInstance();
-		// IConsumerHistorySvc consSvc = (IConsumerHistorySvc)factory.getService("IConsumerHistorySvc");
 		return consSvc.getConsumerHistory();
        	}
 	
-
+        /** 
+	 Business use case for "retrieve single consumer"
+         * @param id
+	 @return consumer
+         * @throws java.lang.ClassNotFoundException
+	*/
+	public final consumerHistory GetA(int id) throws ConsumerHistoryException, ClassNotFoundException
+	{
+		return consSvc.getAConsumerHistory(id);
+	}
+        
 	/** 
 	 Business use case for "update consumerHistory"
 	 
@@ -49,11 +55,8 @@ public class consumerHistoryManager extends ManagerSuperType
 	*/
 	public final boolean Update(consumerHistory c)
 	{
-		// Factory factory = Factory.getInstance();
-		// IConsumerHistorySvc consSvc = (IConsumerHistorySvc)factory.getService("IConsumerHistorySvc");
 		consSvc.updateConsumerHistory(c);
 		return true;
-
 	}
 
 	/** 
@@ -63,8 +66,6 @@ public class consumerHistoryManager extends ManagerSuperType
 	*/
 	public final boolean Delete(consumerHistory c)
 	{
-		// Factory factory = Factory.getInstance();
-		// IConsumerHistorySvc consSvc = (IConsumerHistorySvc)factory.getService("IConsumerHistorySvc");
 		consSvc.deleteConsumerHistory(c);
 		return true;
 	}

@@ -7,6 +7,7 @@ package com.canopyaudience.model.services.preferenceservice;
 
 import com.canopyaudience.model.domain.preference;
 import com.canopyaudience.model.services.exception.CouponException;
+import com.canopyaudience.model.services.exception.PreferenceException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -75,7 +76,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
      * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public List<preference> getPreference() throws CouponException, ClassNotFoundException {
+    public List<preference> getPreference() throws PreferenceException, ClassNotFoundException {
         
         {
             // boolean status = true;
@@ -114,10 +115,54 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             return theApplications;
        }  
     }
+    
     /**
-  * Updates preference object received from GUI and put in database
-  * @return boolean
-  */
+     * Pulls single preference from database through hibernate interface
+     * @return preference
+     * @throws java.lang.ClassNotFoundException
+     */
+    public preference getAPreference(int id) throws PreferenceException, ClassNotFoundException {
+        
+        {
+            // boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+
+            log.info ("getPreference - PreferenceSvcHibernateImpl.java");
+ 
+            Transaction tx = null;
+            
+           int i = id;
+            preference c = new preference();
+            
+            try 
+            {
+                Session session = fetchSession();
+                log.info ("fetched session");
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                c = session.get(preference.class, i);
+                session.close();   
+            }
+            catch(Exception e)
+            {
+              if (tx==null) 
+                            {
+                                     // tx.rollback();
+                                     e.printStackTrace();
+
+                            }
+              log.error (e.getClass() + ": " + e.getMessage(), e);
+            }     
+            return c;
+       }  
+    }
+    
+    /**
+    * Updates preference object received from GUI and put in database
+    * @return boolean
+    */
   @Override
   public boolean updatePreference(preference preference)
         {

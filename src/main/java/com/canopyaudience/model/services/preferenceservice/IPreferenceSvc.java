@@ -31,6 +31,13 @@ public interface IPreferenceSvc extends IService
 	*/
 	public List<preference> getPreference()throws PreferenceException, ClassNotFoundException;
 
+        /**
+        * Pulls single preference from database through hibernate interface
+        * @return preference
+        * @throws java.lang.ClassNotFoundException
+        */
+        public preference getAPreference(int id) throws PreferenceException, ClassNotFoundException;
+        
 	/** 
 	 Updates a preference
 	 The updatePreference takes in a preference object as input and will pass it to the preferenceSvcImpl 
