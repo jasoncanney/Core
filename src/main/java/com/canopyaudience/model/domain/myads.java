@@ -10,10 +10,6 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-
-
-
-
 /** 
  @author Jason Canney
  Domain myAds class 
@@ -134,7 +130,7 @@ public class myads implements Serializable
 
 	/** 
 	 Overloaded Constructor
-         @param Identifier
+     * @param IDentifier
 	 @param consumerID
 	 @param adID
 	 @param adURL
