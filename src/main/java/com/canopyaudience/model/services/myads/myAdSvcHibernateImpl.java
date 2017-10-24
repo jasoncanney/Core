@@ -26,11 +26,11 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
         static Logger log = Logger.getLogger("myAdSvcHibernateImpl.class");
 	
  /**
-  * Set adimpression data received from GUI and put in database
+  * Set myads data received from GUI and put in database
   * @return boolean
   */
  
-        @Override
+  @Override
   public boolean storemyAds(myads myads)
         {
           boolean status = true;
@@ -73,7 +73,7 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
     
     /**
      * Pulls data from database through hibernate interface
-     * @return <list> of adimpression
+     * @return <list> of myads
      * @throws java.lang.ClassNotFoundException
      */
     @Override
@@ -102,7 +102,7 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
                 theApplications = session.createQuery("from myads").getResultList();
                 log.info ("session.createQuery passed");
                 // For logging what is in the List
-                // displayAdvertisements(theApplications);
+                displaymyAds(theApplications);
                 session.close();    
                 log.info("myads queried and put into List.");
             }

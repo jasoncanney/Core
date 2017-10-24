@@ -12,12 +12,12 @@ import javax.persistence.GenerationType;
 
 /** 
  @author Jason Canney
- Domain myAds class 
+ Domain myads class 
  The myads class defines the domain object for ad and coupon data that the mobile app will
  request upon startup
- 
- 
 */
+
+
 @JsonAutoDetect
 @Entity
 @Table(name = "myads")
