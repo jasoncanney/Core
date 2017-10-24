@@ -40,7 +40,7 @@ public interface ImyAdSvc extends IService
         * @return myads
         * @throws java.lang.ClassNotFoundException
         */
-        public myads getAmyAds(int id) throws myAdsException, ClassNotFoundException;
+        public List<myads> getAmyAds(int id) throws myAdsException, ClassNotFoundException;
         
         /** 
 	 Updates a myads

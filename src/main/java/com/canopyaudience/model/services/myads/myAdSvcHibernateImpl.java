@@ -121,18 +121,17 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
     }
     
     /**
-     * Pulls an advertisement data from database through hibernate interface
+     * Pulls an all myads for a single consumerID from database through hibernate interface
      * @param id
      * @return advertisement
      * @throws java.lang.ClassNotFoundException
      */
-        @Override
-    public myads getAmyAds(int id) throws myAdsException, ClassNotFoundException {
+    public List<myads> getAmyAds(int id) throws myAdsException, ClassNotFoundException {
         
         {
             
             int i = id;
-            myads c = new myads();
+            // myads c = new myads();
             
             
             // boolean status = true;
@@ -152,7 +151,8 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
                 log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                c = session.get(myads.class, i);
+                theApplications = session.createQuery("SELECT * FROM myads WHERE consumerID = id").setParameter("id", id).getResultList();
+                // c = session.get(myads.class, i);
                 session.close();   
                 
             }
@@ -166,7 +166,8 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
                             }
               log.error (e.getClass() + ": " + e.getMessage(), e);
             }     
-            return c;
+            return theApplications;
+            // return c;
        }  
     }
     

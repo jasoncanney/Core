@@ -52,7 +52,7 @@ public class myadsManager extends ManagerSuperType
 	 @return myads
         * @throws java.lang.ClassNotFoundException
 	*/
-	public final myads GetA(int id) throws myAdsException, ClassNotFoundException
+	public final List<myads> GetA(int id) throws myAdsException, ClassNotFoundException
 	{
 		return consSvc.getAmyAds(id);
 	}
