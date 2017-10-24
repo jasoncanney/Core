@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 
 
 @JsonAutoDetect
+
 @Entity
 @Table(name = "myads")
 public class myads implements Serializable
