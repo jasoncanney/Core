@@ -23,6 +23,10 @@
 			<interface>IAdSvc</interface>
 			<implementation>com.canopyaudience.model.services.adservice.AdSvcHibernateImpl</implementation>
 		</service>
+                 <service>
+			<interface>ImyAdSvc</interface>
+			<implementation>com.canopyaudience.model.services.myads.myAdSvcHibernateImpl</implementation>
+		</service>
                 <service>
 			<interface>IConsumerHistorySvc</interface>
 			<implementation>com.canopyaudience.model.services.consumerhistoryservice.ConsumerHistorySvcHibernateImpl</implementation>
