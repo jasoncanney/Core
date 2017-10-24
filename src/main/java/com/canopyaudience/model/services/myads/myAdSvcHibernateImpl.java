@@ -120,6 +120,7 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
        }  
     }
     
+    
     /**
      * Pulls an all myads for a single consumerID from database through hibernate interface
      * @param id

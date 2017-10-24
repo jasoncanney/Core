@@ -1,6 +1,18 @@
 package com.canopyaudience.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+
+
+
 
 /** 
  @author Jason Canney
@@ -10,7 +22,9 @@ import java.io.Serializable;
  
  
 */
-
+@JsonAutoDetect
+@Entity
+@Table(name = "myads")
 public class myads implements Serializable
 {
 
@@ -22,66 +36,87 @@ public class myads implements Serializable
 
 	private static final long serialVersionUID = 4349382150030819493L;
 
+        @Id
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        @Column(name = "IDentifier")
+	/** 
+        Identifier used as PK within the database
+        */
+	private int IDentifier;
+        
+        @Column(name = "consumerID")
 	/** 
 	 Consumers ID
 	*/
 	private int consumerID;
 
+        @Column(name = "adID")
 	/** 
 	 Advertisement ID
 	*/
 	private int adID;
 
+        @Column(name = "adurl")
 	/** 
 	 advertisement URL location for image
 	*/
 	private String AdURL;
-
+        
+        @Column(name = "adpcc")
 	/** 
 	 advertisement PCC code
 	*/
 	private String adPCC;
 
+        @Column(name = "adtitle")
 	/** 
 	 advertisement title
 	*/
 	private String adtitle;
 
+        @Column(name = "addescription")
 	/** 
 	 advertisement description
 	*/
 	private String addescription;
 
+        @Column(name = "adowner")
 	/** 
 	 advertisement owner
 	*/
 	private String adowner;
 
+        @Column(name = "couponID")        
 	/** 
 	 Coupon ID
 	*/
 	private int couponID;
 
+        @Column(name = "couponURL") 
 	/** 
 	 coupon URL location for image
 	*/
 	private String couponURL;
 
+        @Column(name = "couponTitle") 
 	/** 
 	 Coupon Title
 	*/
 	private String couponTitle;
 
+        @Column(name = "couponDescription")         
 	/** 
 	 Coupon Description
 	*/
 	private String couponDescription;
 
+        @Column(name = "couponValue") 
 	/** 
 	 Coupon Value
 	*/
 	private String couponValue;
 
+        @Column(name = "adcampid") 
 	/** 
 	 campaign ID for advertiser reference
 	*/
@@ -99,6 +134,7 @@ public class myads implements Serializable
 
 	/** 
 	 Overloaded Constructor
+         @param Identifier
 	 @param consumerID
 	 @param adID
 	 @param adURL
@@ -115,9 +151,10 @@ public class myads implements Serializable
 	*/
 
 
-	public myads(int consumerID, int adID, String adURL, String adPCC, String adtitle, String addescription, String adowner, int couponID, String couponURL, String couponTitle, String couponDescription, String couponValue, String adCampID)
+	public myads(int IDentifier, int consumerID, int adID, String adURL, String adPCC, String adtitle, String addescription, String adowner, int couponID, String couponURL, String couponTitle, String couponDescription, String couponValue, String adCampID)
 	{
 		super();
+                this.IDentifier = IDentifier;
 		this.consumerID = consumerID;
 		this.adID = adID;
 		this.AdURL = adURL;
@@ -133,178 +170,117 @@ public class myads implements Serializable
 		this.adCampID = adCampID;
 	}
 
-	// getters and setters
+        public int getIDentifier() {
+            return IDentifier;
+        }
 
-	/** @return  Returns the consumer's ID 
-	 <sets>Sets the consumer's ID</sets>
-	*/
+        public void setIDentifier(int IDentifier) {
+            this.IDentifier = IDentifier;
+        }
 
-	public int getConsumerID()
-	{
-		return consumerID;
-	}
-	public void setConsumerID(int value)
-	{
-		this.consumerID = value;
-	}
+        public int getConsumerID() {
+            return consumerID;
+        }
 
-	/** @return  Returns the advertisement's ID 
-	  <sets>Sets the advertisement's ID</sets>
-	*/
+        public void setConsumerID(int consumerID) {
+            this.consumerID = consumerID;
+        }
 
-	public int getAdId()
-	{
-		return adID;
-	}
-	public void setAdId(int value)
-	{
-		this.adID = value;
-	}
+        public int getAdID() {
+            return adID;
+        }
 
-	/** @return  Returns the advertisement's URL 
-	 <sets>Sets the advertisement's URL</sets>
-	*/
+        public void setAdID(int adID) {
+            this.adID = adID;
+        }
 
-	public String getAdUrl()
-	{
-		return AdURL;
-	}
-	public void setAdUrl(String value)
-	{
-		this.AdURL = value;
-	}
+        public String getAdURL() {
+            return AdURL;
+        }
 
-	/** @return  Returns the advertisement's PCC code 
-	 <sets>Sets the advertisement's PCC code</sets>
-	*/
+        public void setAdURL(String AdURL) {
+            this.AdURL = AdURL;
+        }
 
-	public String getAdPcc()
-	{
-		return adPCC;
-	}
-	public void setAdPcc(String value)
-	{
-		this.adPCC = value;
-	}
+        public String getAdPCC() {
+            return adPCC;
+        }
 
-	/** @return  Returns the advertisement's title 
-	 <sets>Sets the advertisement's title </sets>
-	*/
+        public void setAdPCC(String adPCC) {
+            this.adPCC = adPCC;
+        }
 
-	public String getAdTitle()
-	{
-		return adtitle;
-	}
-	public void setAdTitle(String value)
-	{
-		this.adtitle = value;
-	}
+        public String getAdtitle() {
+            return adtitle;
+        }
 
-	/** @return  Returns the advertisement's description 
-	 <sets>Sets the advertisement's description</sets>
-	*/
+        public void setAdtitle(String adtitle) {
+            this.adtitle = adtitle;
+        }
 
-	public String getAdDescription()
-	{
-		return addescription;
-	}
-	public void setAdDescription(String value)
-	{
-		this.addescription = value;
-	}
+        public String getAddescription() {
+            return addescription;
+        }
 
-	/** @return  Returns the advertisement's owner 
-	 <sets>Sets the advertisement's owner</sets>
-	*/
+        public void setAddescription(String addescription) {
+            this.addescription = addescription;
+        }
 
-	public String getAdOwner()
-	{
-		return adowner;
-	}
-	public void setAdOwner(String value)
-	{
-		this.adowner = value;
-	}
+        public String getAdowner() {
+            return adowner;
+        }
 
-	/** @return  Returns the coupon's ID 
-	 <sets>Sets the coupon's ID</sets>
-	*/
+        public void setAdowner(String adowner) {
+            this.adowner = adowner;
+        }
 
-	public int getCouponID()
-	{
-		return couponID;
-	}
-	public void setCouponID(int value)
-	{
-		this.couponID = value;
-	}
+        public int getCouponID() {
+            return couponID;
+        }
 
-	/** @return  Returns the coupon's URL 
-	 <sets>Sets the coupon's URL</sets>
-	*/
+        public void setCouponID(int couponID) {
+            this.couponID = couponID;
+        }
 
-	public String getCouponUrl()
-	{
-		return couponURL;
-	}
-	public void setCouponUrl(String value)
-	{
-		this.couponURL = value;
-	}
+        public String getCouponURL() {
+            return couponURL;
+        }
 
-	/** @return  Returns the Coupon Title 
-	 <sets>Sets the Coupon Title  </sets>
-	*/
+        public void setCouponURL(String couponURL) {
+            this.couponURL = couponURL;
+        }
 
-	public String getCouponTitle()
-	{
-		return couponTitle;
-	}
-	public void setCouponTitle(String value)
-	{
-		this.couponTitle = value;
-	}
+        public String getCouponTitle() {
+            return couponTitle;
+        }
 
-	/** @return  Returns the Coupon Description 
-	 <sets>Sets the Coupon Description</sets>
-	*/
+        public void setCouponTitle(String couponTitle) {
+            this.couponTitle = couponTitle;
+        }
 
-	public String getCouponDescription()
-	{
-		return couponDescription;
-	}
-	public void setCouponDescription(String value)
-	{
-		this.couponDescription = value;
-	}
+        public String getCouponDescription() {
+            return couponDescription;
+        }
 
-	/** @return  Returns the Coupon Value 
-	 <sets>Sets the Coupon Value</sets>
-	*/
+        public void setCouponDescription(String couponDescription) {
+            this.couponDescription = couponDescription;
+        }
 
-	public String getCouponValue()
-	{
-		return couponValue;
-	}
-	public void setCouponValue(String value)
-	{
-		this.couponValue = value;
-	}
+        public String getCouponValue() {
+            return couponValue;
+        }
 
-	/** @return  Returns the advertisement's Campaign ID 
-	 <sets>Sets the advertisement's Campaign ID</sets>
-	*/
+        public void setCouponValue(String couponValue) {
+            this.couponValue = couponValue;
+        }
 
-	public String getAdCampId()
-	{
-		return adCampID;
-	}
-	public void setAdCampId(String value)
-	{
-		this.adCampID = value;
-	}
+        public String getAdCampID() {
+            return adCampID;
+        }
 
-
+        public void setAdCampID(String adCampID) {
+            this.adCampID = adCampID;
+        }
 
 	/** 
 	 Validate if the instance variables are valid
@@ -369,84 +345,7 @@ public class myads implements Serializable
 
 		return true;
 	}
-
-	/** Equals Test Method
-	 @param consumerID
-	 @param adID
-	 @param adURL
-	 @param adPCC
-	 @param adtitle 
-	 @param addescription
-	 @param adowner
-	 @param couponID
-	 @param couponURL
-	 @param couponTitle
-	 @param couponDescription
-	 @param couponValue
-	 @param adCampID
-	*/
-
-
-	public boolean equals(myads myads)
-
-
-	{
-			if (!(new Integer(consumerID)).equals(myads.consumerID))
-			{
-				return false;
-			}
-			if (!(new Integer(adID)).equals(myads.adID))
-			{
-				return false;
-			}
-			if (!AdURL.equals(myads.AdURL))
-			{
-				return false;
-			}
-			if (!adPCC.equals(myads.adPCC))
-			{
-				return false;
-			}
-			if (!adtitle.equals(myads.adtitle))
-			{
-				return false;
-			}
-			if (!addescription.equals(myads.addescription))
-			{
-				return false;
-			}
-			if (!adowner.equals(myads.adowner))
-			{
-				return false;
-			}
-			if (!(new Integer(couponID)).equals(myads.couponID))
-			{
-				return false;
-			}
-			if (!AdURL.equals(myads.couponURL))
-			{
-				return false;
-			}
-			if (!couponTitle.equals(myads.couponTitle))
-			{
-				return false;
-			}
-			if (!couponDescription.equals(myads.couponDescription))
-			{
-				return false;
-			}
-			if (!couponValue.equals(myads.couponValue))
-			{
-				return false;
-			}
-			if (!adCampID.equals(myads.adCampID))
-			{
-				return false;
-			}
-
-		return true;
-	}
-
+        
 		/** 
 		 Constructs a <code>STring</code> with all attributes
 		 in name = value format
@@ -489,5 +388,84 @@ public class myads implements Serializable
 
 		return strBfr.toString();
 		}
+
+        @Override
+        public int hashCode() {
+            int hash = 3;
+            hash = 89 * hash + this.IDentifier;
+            hash = 89 * hash + this.consumerID;
+            hash = 89 * hash + this.adID;
+            hash = 89 * hash + Objects.hashCode(this.AdURL);
+            hash = 89 * hash + Objects.hashCode(this.adPCC);
+            hash = 89 * hash + Objects.hashCode(this.adtitle);
+            hash = 89 * hash + Objects.hashCode(this.addescription);
+            hash = 89 * hash + Objects.hashCode(this.adowner);
+            hash = 89 * hash + this.couponID;
+            hash = 89 * hash + Objects.hashCode(this.couponURL);
+            hash = 89 * hash + Objects.hashCode(this.couponTitle);
+            hash = 89 * hash + Objects.hashCode(this.couponDescription);
+            hash = 89 * hash + Objects.hashCode(this.couponValue);
+            hash = 89 * hash + Objects.hashCode(this.adCampID);
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final myads other = (myads) obj;
+            if (this.IDentifier != other.IDentifier) {
+                return false;
+            }
+            if (this.consumerID != other.consumerID) {
+                return false;
+            }
+            if (this.adID != other.adID) {
+                return false;
+            }
+            if (this.couponID != other.couponID) {
+                return false;
+            }
+            if (!Objects.equals(this.AdURL, other.AdURL)) {
+                return false;
+            }
+            if (!Objects.equals(this.adPCC, other.adPCC)) {
+                return false;
+            }
+            if (!Objects.equals(this.adtitle, other.adtitle)) {
+                return false;
+            }
+            if (!Objects.equals(this.addescription, other.addescription)) {
+                return false;
+            }
+            if (!Objects.equals(this.adowner, other.adowner)) {
+                return false;
+            }
+            if (!Objects.equals(this.couponURL, other.couponURL)) {
+                return false;
+            }
+            if (!Objects.equals(this.couponTitle, other.couponTitle)) {
+                return false;
+            }
+            if (!Objects.equals(this.couponDescription, other.couponDescription)) {
+                return false;
+            }
+            if (!Objects.equals(this.couponValue, other.couponValue)) {
+                return false;
+            }
+            if (!Objects.equals(this.adCampID, other.adCampID)) {
+                return false;
+            }
+            return true;
+        }
+
+                
 
 }
