@@ -10,6 +10,7 @@ import com.canopyaudience.model.services.consumerhistoryservice.ConsumerHistoryS
 import com.canopyaudience.model.services.consumerservice.ConsumerSvcHibernateImplTest;
 import com.canopyaudience.model.services.couponservice.CouponSvcHibernateImplTest;
 import com.canopyaudience.model.services.loginservice.LoginSvcHibernateImplTest;
+import com.canopyaudience.model.services.myads.myAdSvcHibernateImplTest;
 import com.canopyaudience.model.services.preferenceservice.PreferenceSvcHibernateImplTest;
 /** Test suite runs all service level tests */
 @RunWith(Suite.class)
@@ -21,7 +22,8 @@ import com.canopyaudience.model.services.preferenceservice.PreferenceSvcHibernat
                 ConsumerSvcHibernateImplTest.class,
                 CouponSvcHibernateImplTest.class,
                 LoginSvcHibernateImplTest.class,
-                PreferenceSvcHibernateImplTest.class//,
+                PreferenceSvcHibernateImplTest.class,
+                myAdSvcHibernateImplTest.class
         //      HibernateFactoryTest.class
 })
 public class AllServicesTests {
