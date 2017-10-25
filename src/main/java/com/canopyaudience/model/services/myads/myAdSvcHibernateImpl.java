@@ -11,7 +11,7 @@ import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -41,30 +41,27 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             log.info ("storemyAds - myAdSvcHibernateImpl.java");
  
             myads appdb  = myads;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info(appdb.toString());
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                log.info(appdb.toString());               
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                session.getTransaction().commit();                               // added this line to fix session closing
-                session.close();                                                 // added this line to fix session closing
                 log.info("myads saved. Check database for data!");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  
@@ -84,38 +81,33 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getmyAds - myAdSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
             List<myads> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
-                
                 // query myads
                 theApplications = session.createQuery("from myads").getResultList();
                 log.info ("session.createQuery passed");
                 // For logging what is in the List
                 displaymyAds(theApplications);
-                session.close();    
                 log.info("myads queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
             }     
+            finally{
+                session.close();    
+            }
+          
             return theApplications;
        }  
     }
@@ -126,52 +118,50 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
      * @param id
      * @return advertisement
      * @throws java.lang.ClassNotFoundException
-     */ /*
+     */ 
     public List<myads> getAmyAds(int id) throws myAdsException, ClassNotFoundException {
         
         {
-            
-            int i = id;
-            // myads c = new myads();
-            
-            
-            // boolean status = true;
+            int i = id;  
+            List<myads> theApplications = null;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
 
             log.info ("getAmyAds - myAdSvcHibernateImpl.java");
  
-            Transaction tx = null;
+            // Use the Hibernate factory to get a session
             
-            List<myads> theApplications = null;
-            
-            try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
-                log.info ("beginTransaction");
-                theApplications = session.createQuery("SELECT * FROM myads WHERE consumerID = id").setParameter("id", id).getResultList();
-                // c = session.get(myads.class, i);
-                session.close();   
-                
-            }
-            catch(Exception e)
-            {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
+            Session session = fetchSession();
+            log.info ("fetched session");
 
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
-            return theApplications;
-            // return c;
-       }  
-    }
-    */
+            try {
+                session.beginTransaction();
+                log.info ("beginTransaction");          
+                String hql = "from myads where consumerID = :id";   
+                System.out.println(hql);
+                Query query = session.createQuery(hql);
+                query.setParameter("id", i);
+                List result = query.list();
+
+                System.out.println("resultset:"+result);
+                
+                theApplications = result;
+                
+            } catch (Exception e) {
+        
+                if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+    
+            } finally {
+                session.close();
+            }    
+          return theApplications;        
+        }   
+    }            
+    
   /**
   * Updates myads object received from GUI and put in database
   * @param myads
@@ -180,11 +170,11 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
   @Override
   public boolean updatemyAds(myads myads)
         {
-          boolean status = true;
+            
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("updatemyAds - myAdSvcHibernateImpl.java");
  
             // updateApplication takes in an application object
@@ -194,13 +184,13 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             // create a new application object.  This is where the current application object gets stored and 
             // will be used to make updates and store back in the db
             myads appnew = null;
-            Transaction tx = null;
+            
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction, Getting myads with IDentifier:" + appdb.getIDentifier());
                 
                 // retrieve the current application object from the database
@@ -219,30 +209,22 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
                 appnew.setCouponDescription(appdb.getCouponDescription());
                 appnew.setCouponValue(appdb.getCouponValue());
                 appnew.setAdCampID(appdb.getAdCampID());
-	
 		System.out.println("Updating myads...");
-
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);
-                
-		// commit the transaction
-		session.getTransaction().commit();
-                
-                // tx.commit();
-                session.close();                                                 // added this line to fix session closing
-
                 log.info("advertisement updated. Check database for data!");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
             }
+            
+            }finally 
+            {
+                session.close();
+            }       
             return status;
        }  
      /**
@@ -256,35 +238,29 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("deletemyAds - myAdSvcHibernateImpl.java");
- 
             myads appdb  = myads;
-            Transaction tx = null;
-            
+            Session session = fetchSession();
+            log.info ("fetched session");
+
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(myads passed in)");
-                session.getTransaction().commit();                               // added this line to fix session closing
-                // tx.commit();
                 log.info("myads deleted. Check database for data not there!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                
+              } 
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  

@@ -12,6 +12,7 @@ import com.canopyaudience.model.domain.adimpression;
 import com.canopyaudience.model.domain.myads;
 import com.canopyaudience.model.services.exception.AdImpressionException;
 import com.canopyaudience.model.services.exception.myAdsException;
+import java.util.List;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
@@ -72,16 +73,17 @@ public class myAdSvcHibernateImplTest extends TestCase{
      * Test of test2GetAmyAds method, of class myAdSvcHibernateImplTest.
      * @throws java.lang.ClassNotFoundException
      */
-    /*
+    
     @Test
     public void test2GetAmyAds() throws myAdsException, ClassNotFoundException {
         log.info ("myAdSvcHibernateImplTest - test2GetAmyAds");
         myAdSvcHibernateImpl instance = new myAdSvcHibernateImpl();
-        myads c = instance.getAmyAds(myads1.getIDentifier());
+        List<myads> c = instance.getAmyAds(myads1.getIDentifier());
         log.info(c.toString());
-        assertEquals(c.getIDentifier(), myads1.getIDentifier());   
+        int expResult = 1;
+        assertEquals(expResult, myads1.getIDentifier());   
     }
-    */
+    
     /**
      * Test of test3UpdatemyAds method, of class myAdSvcHibernateImplTest.
      */

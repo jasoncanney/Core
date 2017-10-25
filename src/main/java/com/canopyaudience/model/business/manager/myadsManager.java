@@ -51,12 +51,12 @@ public class myadsManager extends ManagerSuperType
          * @param id
 	 @return myads
         * @throws java.lang.ClassNotFoundException
-	*/ /*
+	*/ 
 	public final List<myads> GetA(int id) throws myAdsException, ClassNotFoundException
 	{
 		return consSvc.getAmyAds(id);
 	}
-        */
+        
 	/** 
 	 Business use case for "update myads"
 	 S

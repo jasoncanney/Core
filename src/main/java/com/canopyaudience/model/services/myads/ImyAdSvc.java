@@ -39,9 +39,9 @@ public interface ImyAdSvc extends IService
         * @param id
         * @return myads
         * @throws java.lang.ClassNotFoundException
-        */ /*
+        */ 
         public List<myads> getAmyAds(int id) throws myAdsException, ClassNotFoundException;
-        */
+        
         /** 
 	 Updates a myads
 	 The updatemyAds takes in a myads object as input and will pass it to the myAdsSvcImpl 
