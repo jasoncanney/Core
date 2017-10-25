@@ -126,7 +126,7 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
      * @param id
      * @return advertisement
      * @throws java.lang.ClassNotFoundException
-     */
+     */ /*
     public List<myads> getAmyAds(int id) throws myAdsException, ClassNotFoundException {
         
         {
@@ -171,7 +171,7 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             // return c;
        }  
     }
-    
+    */
   /**
   * Updates myads object received from GUI and put in database
   * @param myads

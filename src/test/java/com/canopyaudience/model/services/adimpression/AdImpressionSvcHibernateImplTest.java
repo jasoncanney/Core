@@ -70,7 +70,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     
     /**
      * Test of getaConsumer method, of class AdImpressionSvcHibernateImpl.
-     */
+     */ /*
     @Test
     public void test2GetAAdImpression() throws AdImpressionException, ClassNotFoundException {
         log.info ("AdImpressionSvcHibernateImplTest - test2GetAAdImpression");
@@ -79,7 +79,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
         c = instance.getAAdImpression(adimpression1.getConsumerID());
         assertEquals(c.getConsumerID(), adimpression1.getConsumerID());   
     }
-    
+    */
     /**
      * Test of updateAdImpression method, of class AdImpressionSvcHibernateImpl.
      */
