@@ -71,15 +71,17 @@ CREATE TABLE `log` (
 DROP TABLE IF EXISTS `genadx`.`preference`;
 
 CREATE TABLE `preference` (
-  `preferenceID` int(11) DEFAULT NULL,
+  `preferenceID` int(11) NOT NULL AUTO_INCREMENT,
   `preferenceGsSegment` int(11) DEFAULT NULL,
   `preferenceCaTypeCode` int(11) DEFAULT NULL,
   `preferenceCaValueCode` int(11) DEFAULT NULL,
   `preferencePcc` int(11) DEFAULT NULL,
   `preferenceBrandOwner` varchar(50) DEFAULT NULL,
   `preferenceProductDesc` varchar(50) DEFAULT NULL,
-  `preferenceDate` varchar(50) DEFAULT NULL,
-  `consumerID` int(11) DEFAULT NULL
+  `preferenceDate` DATETIME NOT NULL,
+  `consumerID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`preferenceID`),
+  UNIQUE KEY `preferenceID` (`preferenceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `genadx`.`adimpression`;
@@ -106,6 +108,26 @@ CREATE TABLE `adimpression` (
   PRIMARY KEY (`ConsumerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `genadx`.`myads`;
+
+CREATE TABLE `myads` (
+  `IDentifier` int(11) NOT NULL AUTO_INCREMENT,
+  `consumerID` int(11) NOT NULL,
+  `adID` int(11) DEFAULT NULL,
+  `adurl` varchar(50) NOT NULL,
+  `adpcc` varchar(50) NOT NULL,
+  `adtitle` varchar(50) NOT NULL,
+  `addescription` varchar(50) NOT NULL,
+  `adowner` varchar(50) NOT NULL,
+  `couponID` int(11) DEFAULT NULL,
+  `couponURL` varchar(50) NOT NULL,
+  `couponTitle` varchar(50) NOT NULL,
+  `couponDescription` varchar(50) NOT NULL,
+  `couponValue` varchar(50) NOT NULL,
+  `adcampid` varchar(50) NOT NULL,
+    PRIMARY KEY (`IDentifier`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+ 
 DROP TABLE IF EXISTS `genadx`.`login`;
 
 CREATE TABLE `genadx`.`login` (

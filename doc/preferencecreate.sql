@@ -1,38 +1,38 @@
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (1, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/20/2017",6);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-01 23:58:01",6);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (2, 2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - XSeries", "01/21/2017",6);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - XSeries", "2017-01-02 23:58:01",6);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (3, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/21/2017",6);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-03 23:58:01",6);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (4, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/22/2017",9);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-04 23:58:01",9);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (5, 2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "01/21/2017",9);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "2017-01-05 23:58:01",9);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (6, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/21/2017",9);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-06 23:58:01",9);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (7, 2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "01/20/2017",9);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "2017-01-07 23:58:01",9);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (8, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/20/2017",10);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-08 23:58:01",10);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (9, 2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "01/20/2017",10);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "2017-01-09 23:58:01",10);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (10, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/21/2017",10);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-10 23:58:01",10);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (12, 2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "01/21/2017",10);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "Lexus", "Lexus Summer Sales Event - 3Series", "2017-01-11 23:58:01",10);
 
-INSERT INTO genadx.preference (preferenceId,preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
-VALUES (11, 2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "01/22/2017",10);
+INSERT INTO genadx.preference (preferenceGsSegment,preferenceCaTypeCode,preferenceCaValueCode,preferencePcc,preferenceBrandOwner,preferenceProductDesc,preferenceDate,consumerID)
+VALUES (2, 3, 4, 5, "BMW", "BMW Summer Sales Event - 3Series", "2017-01-12 23:58:01",10);
 
 
 
