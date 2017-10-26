@@ -6,7 +6,6 @@
 package com.canopyaudience.model.services.preferenceservice;
 
 import com.canopyaudience.model.domain.preference;
-import java.util.List;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;

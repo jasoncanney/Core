@@ -6,13 +6,11 @@
 package com.canopyaudience.model.services.preferenceservice;
 
 import com.canopyaudience.model.domain.preference;
-import com.canopyaudience.model.services.exception.CouponException;
 import com.canopyaudience.model.services.exception.PreferenceException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
