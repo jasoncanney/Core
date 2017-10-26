@@ -6,6 +6,7 @@
 package com.canopyaudience.model.services.preferenceservice;
 
 import com.canopyaudience.model.domain.preference;
+import java.util.List;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
@@ -59,12 +60,18 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
     }
 
     /**
-     * Test of getPreference method, of class PreferenceSvcHibernateImpl.
-     *//*
+     * Test of getAPreference method, of class PreferenceSvcHibernateImpl.
+     */
     @Test
-    public void test2GetPreference() throws Exception {
+    public void test2GetAPreference() throws Exception {
+        log.info ("PreferenceSvcHibernateImplTest - test2GetAPreference");
+        PreferenceSvcHibernateImpl instance = new PreferenceSvcHibernateImpl();
+        preference c = instance.getAPreference(preference1.getConsumerId());
+        log.info(c.toString());
+        int expResult = 1;
+        assertEquals(expResult, preference1.getConsumerId());   
     }
-*/
+    
     /**
      * Test of updatePreference method, of class PreferenceSvcHibernateImpl.
      */

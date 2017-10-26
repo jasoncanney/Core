@@ -49,13 +49,7 @@ public class myAdSvcHibernateImplTest extends TestCase{
 	 */
         static Logger log = Logger.getLogger(myAdSvcHibernateImplTest.class);
   
-    /**
-     * Test of getAdImpression method, of class AdImpressionSvcHibernateImpl.
-     *//*
-    @Test
-    public void testGetAdImpression() throws Exception {
-    }
-*/ 
+    
      /**
      * Test of test1StoremyAds method, of class myAdSvcHibernateImplTest.
      */

@@ -38,35 +38,30 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("storePreference - PreferenceSvcHibernateImpl.java");
- 
             preference appdb  = preference;
-            Transaction tx = null;
-            
+            Session session = fetchSession();
+            log.info ("fetched session");
+                  
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+            {    
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                session.getTransaction().commit();    
                 log.info("preference saved. Check database for data!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+               if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
             }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            
             return status;
        }  
 
@@ -83,35 +78,30 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getPreference - PreferenceSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
             List<preference> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
-                
                 // query students
                 theApplications = session.createQuery("from preference").getResultList();
                 log.info ("session.createQuery passed");
-                session.close();                  log.info("preference queried and put into List.");
+                log.info("preference queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return theApplications;
        }  
     }
@@ -128,33 +118,28 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getPreference - PreferenceSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
-           int i = id;
+            int i = id;
             preference c = new preference();
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+            { 
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(preference.class, i);
-                session.close();   
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return c;
        }  
     }
@@ -170,24 +155,20 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("updatePreference - PreferenceSvcHibernateImpl.java");
- 
             // updateApplication takes in an application object
             // this object includes the updates received and that need to be stored in the db
             preference appdb  = preference;
             // create a new application object.  This is where the current application object gets stored and 
             // will be used to make updates and store back in the db
             preference appnew = null;
-            Transaction tx = null;
-            
+            Session session = fetchSession();
+            log.info ("fetched session");
+                
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction, Getting preference with preferenceID:" + appdb.getPreferenceId());
-                
                 // retrieve the current application object from the database
                 appnew = session.get(preference.class, appdb.getPreferenceId());
                 // update all fields in the current advertisement object except the PK of consumerID  
@@ -199,27 +180,20 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
                 appnew.setPreferenceProductDesc(appdb.getPreferenceProductDesc());
                 appnew.setPreferenceDate(appdb.getPreferenceDate());
                 appnew.setConsumerId(appdb.getConsumerId());
-
 		System.out.println("Updating preference...");
-
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);
-                
-		// commit the transaction
-		session.getTransaction().commit();
                 log.info("preference updated. Check database for data!");
-                                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  
@@ -235,34 +209,28 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("deletePreference - PreferenceSvcHibernateImpl.java");
- 
             preference appdb  = preference;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(preference passed in)");
-                session.getTransaction().commit();                               // added this line to fix session closing
                 log.info("preference deleted. Check database for data not there!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  
