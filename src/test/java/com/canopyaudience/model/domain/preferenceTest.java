@@ -5,6 +5,7 @@
  */
 package com.canopyaudience.model.domain;
 
+import java.util.Date;
 import junit.framework.TestCase;
 import java.util.Random;
 import org.junit.Before;
@@ -32,31 +33,17 @@ public class preferenceTest extends TestCase {
 	 */
 	@Before	
 	public void setUp() throws Exception {
-
-        preference1 = new preference (1, 2, 3, 4, 5, "01", "02", "03",1);    
-        preference2 = new preference (1, 2, 3, 5, 6, "01", "02", "03",1);
+            
+        Date d1;
+        d1 = new Date (2017, 00, 01, 23, 58,01);
+        
+        Date d2;
+        d2 = new Date (2017, 00, 01, 23, 59,01);
+            
+        preference1 = new preference (67,1,d1,6,7,8675);    
+        preference2 = new preference (68,0,d2,6,7,8675);
 	}
         
-    /**
-     * Test of validate method, of class preference.
-     */
-    @Test
-    public void testValidatepreference1() {
-        log.info("starting testValidatepreference1()");
-	assertTrue ("preference validates", preference1.validate());
-	log.info("testValidatepreference PASSED");
-    }
-
-    /**
-     * Test of validate method, of class preference.
-     */
-    @Test
-    public void testValidatepreference2() {
-        log.info("starting testValidatepreference2()");
-	assertTrue ("preference validates", preference2.validate());
-	log.info("testValidatepreference PASSED");
-    }
-    
     /**
      * Test of equals method, of class preference.
      */
@@ -64,6 +51,8 @@ public class preferenceTest extends TestCase {
     public void testEqualspreference() {
         log.info("starting testEqualspreference()");
 	assertFalse ("preference1 NOT equal preference2", preference1.equals(preference2));
+        log.info(preference1.toString());
+        log.info(preference2.toString());
 	log.info ("testNOTEqualspreference PASSED");		
     }
     

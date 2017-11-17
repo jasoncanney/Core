@@ -10,7 +10,11 @@ import com.canopyaudience.model.services.exception.PreferenceException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -104,6 +108,53 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
        }  
     }
     
+                
+
+    /**
+     * Pulls data from database through hibernate interface
+     * @return <list> of preference
+     * @throws java.lang.ClassNotFoundException
+     * @throws org.apache.mahout.cf.taste.common.TasteException
+     */
+    @Override
+    public AbstractJDBCDataModel getMahoutPreference() throws PreferenceException, ClassNotFoundException, TasteException {
+        {
+            // boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+            log.info ("getMahoutPreference - PreferenceSvcHibernateImpl.java");
+           //  List<preference> theApplications = null;
+            AbstractJDBCDataModel theApplications = new MySQLJDBCDataModel();
+            
+            Session session = fetchSession();
+            log.info ("fetched session");
+            try 
+            {
+                session.beginTransaction();
+                log.info ("beginTransaction");
+                // query students
+                
+                // need to change the database to include a preference value 1 or 0
+                // need to update this session.createQuery to only pull the three columns consumerID, prefVal (new), and PCC value
+                theApplications = (AbstractJDBCDataModel) session.createQuery("consumerID, preferenceChoice, advertisementID from preference").getResultList();
+                log.info ("session.createQuery passed");
+                log.info("preference queried and put into List.");
+            }
+            catch(Exception e)
+            {
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            return theApplications;
+       }  
+    }
+   
     /**
      * Pulls single preference from database through hibernate interface
      * @return preference
@@ -161,26 +212,28 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             // will be used to make updates and store back in the db
             preference appnew = null;
             Session session = fetchSession();
+            
             log.info ("fetched session");
-                
+            
             try 
             {
-                session.beginTransaction();
+                Transaction tx = session.beginTransaction();
+                log.info(appdb.toString());
                 log.info ("beginTransaction, Getting preference with preferenceID:" + appdb.getPreferenceId());
                 // retrieve the current application object from the database
                 appnew = session.get(preference.class, appdb.getPreferenceId());
                 // update all fields in the current advertisement object except the PK of consumerID  
-                appnew.setPreferenceGsSegment(appdb.getPreferenceGsSegment());
-                appnew.setPreferenceCaTypeCode(appdb.getPreferenceCaTypeCode());
-                appnew.setPreferenceCaValueCode(appdb.getPreferenceCaValueCode());
-                appnew.setPreferencePcc(appdb.getPreferencePcc());
-                appnew.setPreferenceBrandOwner(appdb.getPreferenceBrandOwner());
-                appnew.setPreferenceProductDesc(appdb.getPreferenceProductDesc());
+                appnew.setPreferenceChoice(appdb.getPreferenceChoice());
                 appnew.setPreferenceDate(appdb.getPreferenceDate());
+                appnew.setAdvertisementID(appdb.getAdvertisementID());
+                appnew.setCouponID(appdb.getCouponID());
                 appnew.setConsumerId(appdb.getConsumerId());
+                log.info(appnew.toString());
 		System.out.println("Updating preference...");
                 // application object is updated in the db based on the Primary Key that was unchanged
-                session.update(appnew);
+                session.saveOrUpdate(appnew);
+                tx.commit();
+                //session.update(appnew);
                 log.info("preference updated. Check database for data!");
             }
             catch(Exception e)
@@ -214,11 +267,12 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             
             try 
             {
-                session.beginTransaction();
+                Transaction tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(preference passed in)");
                 log.info("preference deleted. Check database for data not there!");
+                tx.commit();
             }
             catch(Exception e)
             {
@@ -228,7 +282,9 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
                 }
             }
             finally{
-                session.close();                                                 // added this line to fix session closing
+                session.close(); 
+                // tx.commit;
+                // added this line to fix session closing
             }
             return status;
        }  

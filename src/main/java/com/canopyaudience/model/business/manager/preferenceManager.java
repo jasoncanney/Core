@@ -4,6 +4,8 @@ import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.exception.PreferenceException;
 import com.canopyaudience.model.services.preferenceservice.IPreferenceSvc;
 import java.util.List;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -33,13 +35,31 @@ public class preferenceManager extends ManagerSuperType
 	 @param id
 	 @return Set<preference> 
 	*/
+	public final AbstractJDBCDataModel getMahoutPref() throws PreferenceException, ClassNotFoundException, TasteException
+	{
+		// Factory factory = Factory.getInstance();
+		// IPreferenceSvc prefsSvc = (IPreferenceSvc)factory.getService("IPreferenceSvc");
+		return prefsSvc.getMahoutPreference();
+	}
+	
+        /** 
+	 Business use case for retrieving Mahout preference list
+	 
+	 @param id
+	 @return Set<preference> 
+	*/
 	public final List<preference>  Get() throws PreferenceException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// IPreferenceSvc prefsSvc = (IPreferenceSvc)factory.getService("IPreferenceSvc");
 		return prefsSvc.getPreference();
 	}
-	
+        
+        
+        
+        
+        
+        
         /** 
 	 Business use case for "retrieve single preference"
          * @param id

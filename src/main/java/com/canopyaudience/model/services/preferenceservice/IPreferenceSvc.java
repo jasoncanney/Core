@@ -4,6 +4,8 @@ import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.PreferenceException;
 import java.util.List;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
 
 /** 
  This interface defines methods for storing and retrieving Preferences
@@ -25,14 +27,23 @@ public interface IPreferenceSvc extends IService
 
 	/** 
 	 Retrieves a Preference 
-	 @param Preference The unique Preference for the Preference to be retrieved 
 	 @return  The Preference object matching Preference 
+        * @throws java.lang.ClassNotFoundException 
 	 
 	*/
 	public List<preference> getPreference()throws PreferenceException, ClassNotFoundException;
+       
+        /** 
+	 Retrieves Preference set in Mahout DataModel format 
+	 @return  The Preference object matching Preference
+        * @throws java.lang.ClassNotFoundException
+        * @throws org.apache.mahout.cf.taste.common.TasteException
+	*/
+        public AbstractJDBCDataModel getMahoutPreference() throws PreferenceException, ClassNotFoundException, TasteException;
 
         /**
         * Pulls single preference from database through hibernate interface
+        * @param id
         * @return preference
         * @throws java.lang.ClassNotFoundException
         */

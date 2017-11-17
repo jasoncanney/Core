@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.util.Objects;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 /** 
  @author Jason Canney
  Domain preference class 
@@ -46,49 +48,31 @@ public class preference implements Serializable
 	*/
 	private int preferenceId;
 
-        @Column(name = "preferenceGsSegment")
+        @Column(name = "preferenceChoice")
 	/** 
-	 The CDE utilizes the gs1.org spec for product categorization
-	 All values are compliant with the gs1 spec at date of implementation
-	 @param - preferenceGsSegment is the Segment value that the preference is part of
+	 Preference Choice
 	*/
-	private int preferenceGsSegment;
-
-        @Column(name = "preferenceCaTypeCode")
-	/** 
-	 @param preferenceCaTypeCode is a gs1 category classification code
-	*/
-	private int preferenceCaTypeCode;
-
-        @Column(name = "preferenceCaValueCode")
-	/** 
-	 @param - preferenceCaValueCode is a gs1 category classification code
-	*/
-	private int preferenceCaValueCode;
-
-        @Column(name = "preferencePcc")
-        /** 
-	 @param - preferencePcc is a Nielsen Ad View category classification code
-	*/
-	private int preferencePcc;
-
-        @Column(name = "preferenceBrandOwner", nullable = false, length = 50)
-	/** 
-	 @param - product brand owner is the owner of the product.  ex. Ford or Target
-	*/
-	private String preferenceBrandOwner;
-
-        @Column(name = "preferenceProductDesc", nullable = false, length = 50)
-	/** 
-	 @param - product description
-	*/
-	private String preferenceProductDesc;
-
+	private int preferenceChoice;
+        
         @Column(name = "preferenceDate", nullable = false, length = 50)
 	/** 
 	 @param - preferenceDate is the date the preference was stored by the mobile app
 	*/
-	private String preferenceDate;
+	// private String preferenceDate;
+        @Temporal(javax.persistence.TemporalType.DATE)
+        private Date preferenceDate;
+        
+        @Column(name = "advertisementID")
+	/** 
+	 Advertisement ID
+	*/
+	private int advertisementID;
+
+        @Column(name = "couponID")
+	/** 
+	 Coupon ID
+	*/
+	private int couponID;
 
         @Column(name = "consumerID")
 	/** 
@@ -109,214 +93,121 @@ public class preference implements Serializable
 
 	}
 
-	/** 
-	 Overloaded Constructor
-	 @param preferenceId 
-	 @param preferenceGsSegment 
-	 @param preferenceCaTypeCode 
-	 @param preferenceCaValueCode
-         @param preferencePcc
-	 @param prferenceBrandOwner
-	 @param preferenceProductDesc
-	 @param preferenceDate
-	 @param consumerId
+        /** 
+	  Overloaded Constructor
+             * @param preferenceId
+             * @param preferenceChoice
+             * @param preferenceDate
+             * @param advertisementID
+             * @param couponID
+             * @param consumerId
 	*/
-
-	public preference(int preferenceId, int preferenceGsSegment, int preferenceCaTypeCode, int preferenceCaValueCode, int preferencePcc, String preferenceBrandOwner, String preferenceProductDesc, String preferenceDate, int consumerId)
-	{
-		super();
-		this.preferenceId = preferenceId;
-		this.preferenceGsSegment = preferenceGsSegment;
-		this.preferenceCaTypeCode = preferenceCaTypeCode;
-		this.preferenceCaValueCode = preferenceCaValueCode;
-                this.preferencePcc = preferencePcc;
-		this.preferenceBrandOwner = preferenceBrandOwner;
-		this.preferenceProductDesc = preferenceProductDesc;
-		this.preferenceDate = preferenceDate;
-		this.consumerId = consumerId;
-	}
-
-	// getters and setters
-
-        public int getPreferenceId() {
-            return preferenceId;
-        }
-
-        public void setPreferenceId(int preferenceId) {
+        public preference(int preferenceId, int preferenceChoice, Date preferenceDate, int advertisementID, int couponID, int consumerId) {
             this.preferenceId = preferenceId;
-        }
-
-        public int getPreferenceGsSegment() {
-            return preferenceGsSegment;
-        }
-
-        public void setPreferenceGsSegment(int preferenceGsSegment) {
-            this.preferenceGsSegment = preferenceGsSegment;
-        }
-
-        public int getPreferenceCaTypeCode() {
-            return preferenceCaTypeCode;
-        }
-
-        public void setPreferenceCaTypeCode(int preferenceCaTypeCode) {
-            this.preferenceCaTypeCode = preferenceCaTypeCode;
-        }
-
-        public int getPreferenceCaValueCode() {
-            return preferenceCaValueCode;
-        }
-
-        public void setPreferenceCaValueCode(int preferenceCaValueCode) {
-            this.preferenceCaValueCode = preferenceCaValueCode;
-        }
-
-        public int getPreferencePcc() {
-            return preferencePcc;
-        }
-
-        public void setPreferencePcc(int preferencePcc) {
-            this.preferencePcc = preferencePcc;
-        }
-
-        public String getPreferenceBrandOwner() {
-            return preferenceBrandOwner;
-        }
-
-        public void setPreferenceBrandOwner(String preferenceBrandOwner) {
-            this.preferenceBrandOwner = preferenceBrandOwner;
-        }
-
-        public String getPreferenceProductDesc() {
-            return preferenceProductDesc;
-        }
-
-        public void setPreferenceProductDesc(String preferenceProductDesc) {
-            this.preferenceProductDesc = preferenceProductDesc;
-        }
-
-        public String getPreferenceDate() {
-            return preferenceDate;
-        }
-
-        public void setPreferenceDate(String preferenceDate) {
+            this.preferenceChoice = preferenceChoice;
             this.preferenceDate = preferenceDate;
-        }
-
-        public int getConsumerId() {
-            return consumerId;
-        }
-
-        public void setConsumerId(int consumerId) {
+            this.advertisementID = advertisementID;
+            this.couponID = couponID;
             this.consumerId = consumerId;
         }
 
-	
-	/** 
-	 Validate if the instance variables are valid
-	 
-	 @return  boolean - true if instance variables are valid, else false 
-	*/
-	public boolean validate()
-	{
-/*
-		if (preferenceId == null)
-		{
-			return false;
-		}
-		if (preferenceGsSegment == null)
-		{
-			return false;
-		}
-		if (preferenceCaTypeCode == null)
-		{
-			return false;
-		}
-		if (preferenceCaValueCode == null)
-		{
-			return false;
-		}*/
-		if (preferenceBrandOwner == null)
-		{
-			return false;
-		}
-		if (preferenceProductDesc == null)
-		{
-			return false;
-		}
+    public int getPreferenceId() {
+        return preferenceId;
+    }
 
-		if (preferenceDate == null)
-		{
-			return false;
-		}/*
-		if (consumerId == null)
-		{
-			return false;
-		}*/
+    public void setPreferenceId(int preferenceId) {
+        this.preferenceId = preferenceId;
+    }
 
-		return true;
-	}
+    public int getPreferenceChoice() {
+        return preferenceChoice;
+    }
 
-        @Override
-        public String toString() {
-            return "preference{" + "preferenceId=" + preferenceId + ", preferenceGsSegment=" + preferenceGsSegment + ", preferenceCaTypeCode=" + preferenceCaTypeCode + ", preferenceCaValueCode=" + preferenceCaValueCode + ", preferencePcc=" + preferencePcc + ", preferenceBrandOwner=" + preferenceBrandOwner + ", preferenceProductDesc=" + preferenceProductDesc + ", preferenceDate=" + preferenceDate + ", consumerId=" + consumerId + '}';
-        }
+    public void setPreferenceChoice(int preferenceChoice) {
+        this.preferenceChoice = preferenceChoice;
+    }
 
-        @Override
-        public int hashCode() {
-            int hash = 5;
-            hash = 83 * hash + this.preferenceId;
-            hash = 83 * hash + this.preferenceGsSegment;
-            hash = 83 * hash + this.preferenceCaTypeCode;
-            hash = 83 * hash + this.preferenceCaValueCode;
-            hash = 83 * hash + this.preferencePcc;
-            hash = 83 * hash + Objects.hashCode(this.preferenceBrandOwner);
-            hash = 83 * hash + Objects.hashCode(this.preferenceProductDesc);
-            hash = 83 * hash + Objects.hashCode(this.preferenceDate);
-            hash = 83 * hash + this.consumerId;
-            return hash;
-        }
+    public Date getPreferenceDate() {
+        return preferenceDate;
+    }
 
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final preference other = (preference) obj;
-            if (this.preferenceId != other.preferenceId) {
-                return false;
-            }
-            if (this.preferenceGsSegment != other.preferenceGsSegment) {
-                return false;
-            }
-            if (this.preferenceCaTypeCode != other.preferenceCaTypeCode) {
-                return false;
-            }
-            if (this.preferenceCaValueCode != other.preferenceCaValueCode) {
-                return false;
-            }
-            if (this.preferencePcc != other.preferencePcc) {
-                return false;
-            }
-            if (this.consumerId != other.consumerId) {
-                return false;
-            }
-            if (!Objects.equals(this.preferenceBrandOwner, other.preferenceBrandOwner)) {
-                return false;
-            }
-            if (!Objects.equals(this.preferenceProductDesc, other.preferenceProductDesc)) {
-                return false;
-            }
-            if (!Objects.equals(this.preferenceDate, other.preferenceDate)) {
-                return false;
-            }
+    public void setPreferenceDate(Date preferenceDate) {
+        this.preferenceDate = preferenceDate;
+    }
+
+    public int getAdvertisementID() {
+        return advertisementID;
+    }
+
+    public void setAdvertisementID(int advertisementID) {
+        this.advertisementID = advertisementID;
+    }
+
+    public int getCouponID() {
+        return couponID;
+    }
+
+    public void setCouponID(int couponID) {
+        this.couponID = couponID;
+    }
+
+    public int getConsumerId() {
+        return consumerId;
+    }
+
+    public void setConsumerId(int consumerId) {
+        this.consumerId = consumerId;
+    }
+
+    @Override
+    public String toString() {
+        return "preference{" + "preferenceId=" + preferenceId + ", preferenceChoice=" + preferenceChoice + ", preferenceDate=" + preferenceDate + ", advertisementID=" + advertisementID + ", couponID=" + couponID + ", consumerId=" + consumerId + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.preferenceId;
+        hash = 89 * hash + this.preferenceChoice;
+        hash = 89 * hash + Objects.hashCode(this.preferenceDate);
+        hash = 89 * hash + this.advertisementID;
+        hash = 89 * hash + this.couponID;
+        hash = 89 * hash + this.consumerId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-	
-
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final preference other = (preference) obj;
+        if (this.preferenceId != other.preferenceId) {
+            return false;
+        }
+        if (this.preferenceChoice != other.preferenceChoice) {
+            return false;
+        }
+        if (this.advertisementID != other.advertisementID) {
+            return false;
+        }
+        if (this.couponID != other.couponID) {
+            return false;
+        }
+        if (this.consumerId != other.consumerId) {
+            return false;
+        }
+        if (!Objects.equals(this.preferenceDate, other.preferenceDate)) {
+            return false;
+        }
+        return true;
+    }
 }
+
+       
