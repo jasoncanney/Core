@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.springframework.format.annotation.DateTimeFormat;
 /** 
  @author Jason Canney
  Domain preference class 
@@ -59,6 +60,7 @@ public class preference implements Serializable
 	 @param - preferenceDate is the date the preference was stored by the mobile app
 	*/
 	// private String preferenceDate;
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @Temporal(javax.persistence.TemporalType.DATE)
         private Date preferenceDate;
         
