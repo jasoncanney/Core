@@ -8,6 +8,7 @@ import com.canopyaudience.model.domain.coupon;
 import com.canopyaudience.model.domain.login;
 import com.canopyaudience.model.domain.myads;
 import com.canopyaudience.model.domain.preference;
+import com.canopyaudience.model.domain.recommendation;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -78,6 +79,7 @@ public class HibernateFactory {
                     cfg.addAnnotatedClass(login.class);
                     cfg.addAnnotatedClass(preference.class);
                     cfg.addAnnotatedClass(myads.class);
+                    cfg.addAnnotatedClass(recommendation.class);
 
                     log.info ("addAnnotatedClass: myads.class ------ If you see this log info, make sure you updated HibernateFactory.java with appropriate annotation");
                     // cfg.addAnnotatedClass(adimpression.class);

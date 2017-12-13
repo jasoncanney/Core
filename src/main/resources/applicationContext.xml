@@ -15,5 +15,6 @@
         <bean id="ILoginSvc" class="com.canopyaudience.model.services.loginservice.LoginSvcHibernateImpl"></bean>
         <bean id="IPreferenceSvc" class="com.canopyaudience.model.services.preferenceservice.PreferenceSvcHibernateImpl"></bean>
         <bean id="ImyAdSvc" class="com.canopyaudience.model.services.myads.myAdSvcHibernateImpl"></bean> 
+        <bean id="IRecoSvc" class="com.canopyaudience.model.services.recoservice.RecoSvcHibernateImpl"></bean>
        
 </beans>

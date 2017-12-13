@@ -3,59 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.canopyaudience.model.services.myads;
+package com.canopyaudience.model.services.recoservice;
 
-import com.canopyaudience.model.domain.myads;
-import com.canopyaudience.model.services.exception.myAdsException;
+import com.canopyaudience.model.domain.recommendation;
+import com.canopyaudience.model.services.exception.RecoException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 /**
  *
  * @author Jason
  */
-public class myAdSvcHibernateImpl implements ImyAdSvc
+public class RecoSvcHibernateImpl implements IRecoSvc
 {
 	/*
 	* Category set in config/log4j.properties as
 	* log4j.category.com.classexercise=DEBUG, A1
 	*/
-        static Logger log = Logger.getLogger("myAdSvcHibernateImpl.class");
+        static Logger log = Logger.getLogger("RecoSvcHibernateImpl.class");
 	
  /**
-  * Set myads data received from GUI and put in database
+  * Set preference data received from GUI and put in database
   * @return boolean
   */
  
-  @Override
-  public boolean storemyAds(myads myads)
+  public boolean storeReco(recommendation recommendation)
         {
           boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
-            log.info ("storemyAds - myAdSvcHibernateImpl.java");
- 
-            myads appdb  = myads;
+            log.info ("storeReco - RecoSvcHibernateImpl.java");
+            recommendation appdb  = recommendation;
             Session session = fetchSession();
             log.info ("fetched session");
-            
+                  
             try 
-            {
-                log.info(appdb.toString());               
+            {    
                 session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                log.info("myads saved. Check database for data!");
+                log.info("recommendation saved. Check database for data!");
             }
             catch(Exception e)
             {
-              if (session.getTransaction() != null) {
+               if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
                 log.error (e.getClass() + ": " + e.getMessage(), e);
                 }
@@ -63,26 +60,24 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             finally{
                 session.close();                                                 // added this line to fix session closing
             }
+            
             return status;
        }  
-         
-	
-    
+
     /**
      * Pulls data from database through hibernate interface
-     * @return <list> of myads
+     * @return <list> of preference
      * @throws java.lang.ClassNotFoundException
      */
-    @Override
-    public List<myads> getmyAds() throws myAdsException, ClassNotFoundException {
+    public List<recommendation> getReco() throws RecoException, ClassNotFoundException {
         
         {
             // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-            log.info ("getmyAds - myAdSvcHibernateImpl.java");
-            List<myads> theApplications = null;
+            log.info ("getReco - RecoSvcHibernateImpl.java");
+            List<recommendation> theApplications = null;
             Session session = fetchSession();
             log.info ("fetched session");
             
@@ -90,12 +85,9 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
             {
                 session.beginTransaction();
                 log.info ("beginTransaction");
-                // query myads
-                theApplications = session.createQuery("from myads").getResultList();
+                theApplications = session.createQuery("from recommendation").getResultList();
                 log.info ("session.createQuery passed");
-                // For logging what is in the List
-                displaymyAds(theApplications);
-                log.info("myads queried and put into List.");
+                log.info("recommendation queried and put into List.");
             }
             catch(Exception e)
             {
@@ -103,161 +95,156 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
                 session.getTransaction().rollback();
                 log.error (e.getClass() + ": " + e.getMessage(), e);
                 }
-            }     
-            finally{
-                session.close();    
             }
-          
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return theApplications;
        }  
     }
-    
-    
+   
     /**
-     * Pulls an all myads for a single consumerID from database through hibernate interface
-     * @param id
-     * @return advertisement
+     * Pulls single recommendation from database through hibernate interface
+     * @return recommendation
      * @throws java.lang.ClassNotFoundException
-     */ 
-    public List<myads> getAmyAds(int id) throws myAdsException, ClassNotFoundException {
+     */
+    public List<recommendation> getAReco(int id) throws RecoException, ClassNotFoundException {
         
         {
-            int i = id;  
-            List<myads> theApplications = null;
+            int i = id;
+            List<recommendation> theApplications = null;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-            log.info ("getAmyAds - myAdSvcHibernateImpl.java");
-            // Use the Hibernate factory to get a session
-            Session session = fetchSession();
-            log.info ("fetched session");
-
-            try {
-                session.beginTransaction();
-                log.info ("beginTransaction");          
-                String hql = "from myads where consumerID = :id";   
-                System.out.println(hql);
-                Query query = session.createQuery(hql);
-                query.setParameter("id", i);
-                List result = query.list();
-
-                System.out.println("resultset:"+result);
-                
-                theApplications = result;
-                
-            } catch (Exception e) {
-        
-                if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
-                log.error (e.getClass() + ": " + e.getMessage(), e);
-                }
-    
-            } finally {
-                session.close();
-            }    
-          return theApplications;        
-        }   
-    }            
-    
-  /**
-  * Updates myads object received from GUI and put in database
-  * @param myads
-  * @return boolean
-  */
-  @Override
-  public boolean updatemyAds(myads myads)
-        {
-            
-            boolean status = true;
-            log.info("-------------------------------");
-            log.info("Using Hibernate Implementation");
-            log.info("-------------------------------");
-            log.info ("updatemyAds - myAdSvcHibernateImpl.java");
- 
-            // updateApplication takes in an application object
-            // this object includes the updates received and that need to be stored in the db
-            myads appdb  = myads;
-
-            // create a new application object.  This is where the current application object gets stored and 
-            // will be used to make updates and store back in the db
-            myads appnew = null;
-            
+            log.info ("getAReco - RecoSvcHibernateImpl.java");
             Session session = fetchSession();
             log.info ("fetched session");
             
             try 
-            {
+            { 
                 session.beginTransaction();
-                log.info ("beginTransaction, Getting myads with IDentifier:" + appdb.getIDentifier());
-                
-                // retrieve the current application object from the database
-                appnew = session.get(myads.class, appdb.getIDentifier());
-                // update all fields in the current advertisement object except the PK of consumerID  
-                appnew.setConsumerID(appdb.getConsumerID());
-                appnew.setAdID(appdb.getAdID());
-                appnew.setAdURL(appdb.getAdURL());
-                appnew.setAdPCC(appdb.getAdPCC());
-                appnew.setAdtitle(appdb.getAdtitle());
-                appnew.setAddescription(appdb.getAddescription());
-                appnew.setAdowner(appdb.getAdowner());
-                appnew.setCouponID(appdb.getCouponID());
-                appnew.setCouponURL(appdb.getCouponURL());
-                appnew.setCouponTitle(appdb.getCouponTitle());
-                appnew.setCouponDescription(appdb.getCouponDescription());
-                appnew.setCouponValue(appdb.getCouponValue());
-                appnew.setAdCampID(appdb.getAdCampID());
-		System.out.println("Updating myads...");
-                // application object is updated in the db based on the Primary Key that was unchanged
-                session.update(appnew);
-                log.info("advertisement updated. Check database for data!");
+                log.info ("beginTransaction");
+                String hql = "from recommendation where consumerID = :id";   
+                System.out.println(hql);
+                Query query = session.createQuery(hql);
+                query.setParameter("id", i);
+                List result = query.list();
+                System.out.println("resultset:"+result);
+                theApplications = result;
             }
             catch(Exception e)
             {
               if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
                 log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
             }
-            
-            }finally 
-            {
-                session.close();
-            }       
-            return status;
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            return theApplications;
        }  
-     /**
-     * Deletes data from database through hibernate interface
-     * @return boolean of applications
-     */
-    @Override
-    public boolean deletemyAds(myads myads)
+    }
+    
+    /**
+    * Updates recommendation object received from GUI and put in database
+    * @return boolean
+    */
+  public boolean updateReco(recommendation recommendation)
         {
           boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-            log.info ("deletemyAds - myAdSvcHibernateImpl.java");
-            myads appdb  = myads;
-            Session session = fetchSession();
+            log.info ("updateReco - RecoSvcHibernateImpl.java");
+            // updateApplication takes in an application object
+            // this object includes the updates received and that need to be stored in the db
+            recommendation appdb  = recommendation;
+            // create a new recommendation object.  This is where the current recommendation object gets stored and 
+            // will be used to make updates and store back in the db
+            recommendation appnew = null;
+            Session session = fetchSession();  
             log.info ("fetched session");
-
+            
             try 
             {
-                session.beginTransaction();
-                log.info ("beginTransaction");
-                session.delete(appdb);
-                log.info ("session.delete(myads passed in)");
-                log.info("myads deleted. Check database for data not there!");
+                Transaction tx = session.beginTransaction();
+                log.info(appdb.toString());
+                log.info ("beginTransaction, Getting recommendation with consumerID:" + appdb.getConsumerId());
+                // retrieve the current recommendation object from the database
+                appnew = session.get(recommendation.class, appdb.getConsumerId());
+                // update all fields in the current recommendation object except the PK of consumerID  
+                
+                appnew.setRecoDate(appdb.getRecoDate());
+                appnew.setRecoWeight(appdb.getRecoWeight());
+                appnew.setConsumerId(appdb.getConsumerId());
+                appnew.setProviderId(appdb.getProviderId());
+                appnew.setProviderName(appdb.getProviderName());
+                appnew.setLocationZip(appdb.getLocationZip());
+                appnew.setDemographic(appdb.getDemographic());
+                appnew.setAdID(appdb.getAdID());
+                appnew.setAdURL(appdb.getAdURL());
+                appnew.setAdPCC(appdb.getAdPCC());
+                appnew.setAdOwner(appdb.getAdOwner());
+
+                log.info(appnew.toString());
+		System.out.println("Updating recommendation...");
+                // recommendation object is updated in the db based on the Primary Key that was unchanged
+                session.saveOrUpdate(appnew);
+                tx.commit();
+                //session.update(appnew);
+                log.info("recommendation updated. Check database for data!");
             }
             catch(Exception e)
             {
               if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
                 log.error (e.getClass() + ": " + e.getMessage(), e);
-                
-              } 
+                }
             }
             finally{
                 session.close();                                                 // added this line to fix session closing
+            }
+            return status;
+       } 
+  
+  
+     /**
+     * Deletes data from database through hibernate interface
+     * @param recommendation
+     * @return boolean of recommendation
+     */
+    public boolean deleteReco(recommendation recommendation)
+        {
+          boolean status = true;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+            log.info ("deleteReco - RecoSvcHibernateImpl.java");
+            recommendation appdb  = recommendation;
+            Session session = fetchSession();
+            log.info ("fetched session");
+            
+            try 
+            {
+                Transaction tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                session.delete(appdb);
+                log.info ("session.delete(recommendation passed in)");
+                log.info("recommendation deleted. Check database for data not there!");
+                tx.commit();
+            }
+            catch(Exception e)
+            {
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close(); 
+                // tx.commit;
+                // added this line to fix session closing
             }
             return status;
        }  
@@ -276,11 +263,5 @@ public class myAdSvcHibernateImpl implements ImyAdSvc
 			return session;
 	    
 	} //end fetchConnection
-        
-        private static void displaymyAds(List<myads> theAdvertisements) {
-            theAdvertisements.forEach((tempAdvertisement) -> {
-                log.info(tempAdvertisement);
-            });
-	}
 
 }// end class AdImpressionSvcHibernateImpl
