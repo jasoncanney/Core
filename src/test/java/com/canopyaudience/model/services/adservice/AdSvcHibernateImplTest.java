@@ -75,7 +75,7 @@ public class AdSvcHibernateImplTest extends TestCase{
     */
     /**
      * Test of updateAdvertisement method, of class AdSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test3UpdateAdvertisement() {
         log.info ("AdSvcHibernateImplTest - test3UpdateAdvertisement");
@@ -83,11 +83,11 @@ public class AdSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.updateAdvertisement(advertisement2);  // advertisement2 is a pre-updated advertisement object for advertisement1
         assertEquals(expResult, result);    
-    }
+    }*/
 
     /**
      * Test of deleteAdvertisement method, of class AdSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test4DeleteAdvertisement() {
         log.info ("AdSvcHibernateImplTest - test4DeleteAdvertisement");
@@ -95,6 +95,6 @@ public class AdSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.deleteAdvertisement(advertisement1);
         assertEquals(expResult, result); 
-}
+}*/
     
 }

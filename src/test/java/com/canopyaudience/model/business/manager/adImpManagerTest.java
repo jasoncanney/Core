@@ -67,14 +67,14 @@ public class adImpManagerTest extends TestCase{
 
     /**
      * Test of Get method, of class adImpManager.
-     */
+     *//*
     @Test
     public void test2AdImpManagerCreateGetA() throws Exception {
         log.info ("adImpManagerTest - test2AdImpManagerCreateGetA");
         adImpManager instance = new adImpManager();
         adimpression c = instance.GetA(adimpression1.getConsumerID());
         assertEquals(c.getConsumerID(), adimpression1.getConsumerID());   
-    }
+    }*/
     
     /**
      * Test of Update method, of class adImpManager.

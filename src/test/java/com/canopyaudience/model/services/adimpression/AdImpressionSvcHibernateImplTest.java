@@ -89,7 +89,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     */
     /**
      * Test of updateAdImpression method, of class AdImpressionSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test3UpdateAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testUpdateAdImpression");
@@ -98,10 +98,10 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
         boolean result = instance.updateAdImpression(adimpression2);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);    
     }
-  
+  */
     /**
      * Test of deleteAdImpression method, of class AdImpressionSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test4DeleteAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testDeleteAdImpression");
@@ -110,6 +110,6 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
         boolean result = instance.deleteAdImpression(adimpression1);
         assertEquals(expResult, result); 
 
-    }
+    }*/
     
 }
