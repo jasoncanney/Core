@@ -1,17 +1,15 @@
 package com.canopyaudience.model.domain;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.util.Objects;
 import java.io.Serializable;
-import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-
+import javax.persistence.Temporal;
+import org.springframework.format.annotation.DateTimeFormat;
 /** 
  @author Jason Canney  
  Domain AdImpression class 
@@ -19,6 +17,7 @@ import javax.persistence.Table;
  be received by the CDE from advertisers and then stored in a data store
  by the CDE
 */
+@JsonAutoDetect
 
 @Entity
 @Table(name = "adimpression")
@@ -41,35 +40,23 @@ public class adimpression implements Serializable
 	*/
 	private int consumerID;
 
-        @Column(name = "SessionID", nullable = false, length = 50)
+        @Column(name = "SessionID")
 	/** 
 	 AdImpression session id
 	*/
-	private String sessionID;
+	private int sessionID;
         
-        @Column(name = "ServiceID", nullable = false, length = 50)
+        @Column(name = "ServiceID")
         /** 
 	 AdImpression service id
 	*/
-	private String serviceID;
+	private int serviceID;
         
-        @Column(name = "ContentID", nullable = false, length = 50)
+        @Column(name = "ContentID")
 	/** 
 	 AdImpression content id
 	*/
-	private String contentID;
-        
-        @Column(name = "Duration", nullable = false, length = 50)
-        /** 
-	 AdImpression duration
-	*/
-	private String duration;
-        
-        @Column(name = "CurrentDateTime", nullable = false, length = 50)
-        /** 
-	 AdImpression currentDateTime
-	*/
-	private String currentDateTime;
+	private int contentID;
         
         @Column(name = "TerminalID", nullable = false, length = 50)
         /** 
@@ -77,29 +64,29 @@ public class adimpression implements Serializable
 	*/
 	private String terminalID;
         
-        @Column(name = "OppType", nullable = false, length = 50)
+        @Column(name = "OppType")
         /** 
 	 AdImpression oppType
 	*/
-	private String oppType;
+	private int oppType;
         
-        @Column(name = "OppNum", nullable = false, length = 50)
+        @Column(name = "OppNum")
         /** 
 	 AdImpression oppNum
 	*/
-	private String oppNum;
+	private int oppNum;
         
-        @Column(name = "OppDuration", nullable = false, length = 50)
+        @Column(name = "OppDuration")
         /** 
 	 AdImpression oppDuration
 	*/
-	private String oppDuration;
+	private int oppDuration;
         
-        @Column(name = "PCCCode", nullable = false, length = 50)
+        @Column(name = "AdPCC", nullable = false, length = 50)
         /** 
 	 AdImpression pccCode
 	*/
-	private String pccCode;
+	private String adPCC;
         
         @Column(name = "AdCampID", nullable = false, length = 50)
         /** 
@@ -107,35 +94,39 @@ public class adimpression implements Serializable
 	*/
 	private String adCampID;
         
-        @Column(name = "AssetID", nullable = false, length = 50)
+        @Column(name = "AssetID")
         /** 
 	 AdImpression assetID
 	*/
-	private String assetID;
+	private int assetID;
         
-        @Column(name = "AssetProviderID", nullable = false, length = 50)
+        @Column(name = "AssetProviderID")
         /** 
 	 AdImpression assetProviderID
 	*/
-	private String assetProviderID;
+	private int assetProviderID;
         
         @Column(name = "ViewStartTime", nullable = false, length = 50)
         /** 
 	 AdImpression viewStartTime
 	*/
-	private String viewStartTime;
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @Temporal(javax.persistence.TemporalType.DATE)
+	private Date viewStartTime;
         
         @Column(name = "ViewEndTime", nullable = false, length = 50)
         /** 
 	 AdImpression viewEndTime
 	*/
-	private String viewEndTime;
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @Temporal(javax.persistence.TemporalType.DATE)
+	private Date viewEndTime;
         
-        @Column(name = "LocationID", nullable = false, length = 50)
+        @Column(name = "LocationID")
         /** 
 	 AdImpression locationID
 	*/
-	private String locationID;
+	private int locationID;
         
         @Column(name = "LocationZip", nullable = false, length = 50)
         /** 
@@ -151,18 +142,16 @@ public class adimpression implements Serializable
 
 	}
 
-    public adimpression(int consumerID, String sessionID, String serviceID, String contentID, String duration, String currentDateTime, String terminalID, String oppType, String oppNum, String oppDuration, String pccCode, String adCampID, String assetID, String assetProviderID, String viewStartTime, String viewEndTime, String locationID, String locationZip) {
+    public adimpression(int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, Date viewStartTime, Date viewEndTime, int locationID, String locationZip) {
         this.consumerID = consumerID;
         this.sessionID = sessionID;
         this.serviceID = serviceID;
         this.contentID = contentID;
-        this.duration = duration;
-        this.currentDateTime = currentDateTime;
         this.terminalID = terminalID;
         this.oppType = oppType;
         this.oppNum = oppNum;
         this.oppDuration = oppDuration;
-        this.pccCode = pccCode;
+        this.adPCC = adPCC;
         this.adCampID = adCampID;
         this.assetID = assetID;
         this.assetProviderID = assetProviderID;
@@ -180,44 +169,28 @@ public class adimpression implements Serializable
         this.consumerID = consumerID;
     }
 
-    public String getSessionID() {
+    public int getSessionID() {
         return sessionID;
     }
 
-    public void setSessionID(String sessionID) {
+    public void setSessionID(int sessionID) {
         this.sessionID = sessionID;
     }
 
-    public String getServiceID() {
+    public int getServiceID() {
         return serviceID;
     }
 
-    public void setServiceID(String serviceID) {
+    public void setServiceID(int serviceID) {
         this.serviceID = serviceID;
     }
-    
-    public String getContentID() {
+
+    public int getContentID() {
         return contentID;
     }
 
-    public void setContentID(String contentID) {
+    public void setContentID(int contentID) {
         this.contentID = contentID;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getCurrentDateTime() {
-        return currentDateTime;
-    }
-
-    public void setCurrentDateTime(String currentDateTime) {
-        this.currentDateTime = currentDateTime;
     }
 
     public String getTerminalID() {
@@ -228,36 +201,36 @@ public class adimpression implements Serializable
         this.terminalID = terminalID;
     }
 
-    public String getOppType() {
+    public int getOppType() {
         return oppType;
     }
 
-    public void setOppType(String oppType) {
+    public void setOppType(int oppType) {
         this.oppType = oppType;
     }
 
-    public String getOppNum() {
+    public int getOppNum() {
         return oppNum;
     }
 
-    public void setOppNum(String oppNum) {
+    public void setOppNum(int oppNum) {
         this.oppNum = oppNum;
     }
 
-    public String getOppDuration() {
+    public int getOppDuration() {
         return oppDuration;
     }
 
-    public void setOppDuration(String oppDuration) {
+    public void setOppDuration(int oppDuration) {
         this.oppDuration = oppDuration;
     }
 
-    public String getPccCode() {
-        return pccCode;
+    public String getAdPCC() {
+        return adPCC;
     }
 
-    public void setPccCode(String pccCode) {
-        this.pccCode = pccCode;
+    public void setAdPCC(String adPCC) {
+        this.adPCC = adPCC;
     }
 
     public String getAdCampID() {
@@ -268,43 +241,43 @@ public class adimpression implements Serializable
         this.adCampID = adCampID;
     }
 
-    public String getAssetID() {
+    public int getAssetID() {
         return assetID;
     }
 
-    public void setAssetID(String assetID) {
+    public void setAssetID(int assetID) {
         this.assetID = assetID;
     }
 
-    public String getAssetProviderID() {
+    public int getAssetProviderID() {
         return assetProviderID;
     }
 
-    public void setAssetProviderID(String assetProviderID) {
+    public void setAssetProviderID(int assetProviderID) {
         this.assetProviderID = assetProviderID;
     }
 
-    public String getViewStartTime() {
+    public Date getViewStartTime() {
         return viewStartTime;
     }
 
-    public void setViewStartTime(String viewStartTime) {
+    public void setViewStartTime(Date viewStartTime) {
         this.viewStartTime = viewStartTime;
     }
 
-    public String getViewEndTime() {
+    public Date getViewEndTime() {
         return viewEndTime;
     }
 
-    public void setViewEndTime(String viewEndTime) {
+    public void setViewEndTime(Date viewEndTime) {
         this.viewEndTime = viewEndTime;
     }
 
-    public String getLocationID() {
+    public int getLocationID() {
         return locationID;
     }
 
-    public void setLocationID(String locationID) {
+    public void setLocationID(int locationID) {
         this.locationID = locationID;
     }
 
@@ -319,24 +292,22 @@ public class adimpression implements Serializable
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 47 * hash + this.consumerID;
-        hash = 47 * hash + Objects.hashCode(this.sessionID);
-        hash = 47 * hash + Objects.hashCode(this.serviceID);
-        hash = 47 * hash + Objects.hashCode(this.contentID);
-        hash = 47 * hash + Objects.hashCode(this.duration);
-        hash = 47 * hash + Objects.hashCode(this.currentDateTime);
-        hash = 47 * hash + Objects.hashCode(this.terminalID);
-        hash = 47 * hash + Objects.hashCode(this.oppType);
-        hash = 47 * hash + Objects.hashCode(this.oppNum);
-        hash = 47 * hash + Objects.hashCode(this.oppDuration);
-        hash = 47 * hash + Objects.hashCode(this.pccCode);
-        hash = 47 * hash + Objects.hashCode(this.adCampID);
-        hash = 47 * hash + Objects.hashCode(this.assetID);
-        hash = 47 * hash + Objects.hashCode(this.assetProviderID);
-        hash = 47 * hash + Objects.hashCode(this.viewStartTime);
-        hash = 47 * hash + Objects.hashCode(this.viewEndTime);
-        hash = 47 * hash + Objects.hashCode(this.locationID);
-        hash = 47 * hash + Objects.hashCode(this.locationZip);
+        hash = 29 * hash + this.consumerID;
+        hash = 29 * hash + this.sessionID;
+        hash = 29 * hash + this.serviceID;
+        hash = 29 * hash + this.contentID;
+        hash = 29 * hash + Objects.hashCode(this.terminalID);
+        hash = 29 * hash + this.oppType;
+        hash = 29 * hash + this.oppNum;
+        hash = 29 * hash + this.oppDuration;
+        hash = 29 * hash + Objects.hashCode(this.adPCC);
+        hash = 29 * hash + Objects.hashCode(this.adCampID);
+        hash = 29 * hash + this.assetID;
+        hash = 29 * hash + this.assetProviderID;
+        hash = 29 * hash + Objects.hashCode(this.viewStartTime);
+        hash = 29 * hash + Objects.hashCode(this.viewEndTime);
+        hash = 29 * hash + this.locationID;
+        hash = 29 * hash + Objects.hashCode(this.locationZip);
         return hash;
     }
 
@@ -355,43 +326,43 @@ public class adimpression implements Serializable
         if (this.consumerID != other.consumerID) {
             return false;
         }
-        if (!Objects.equals(this.sessionID, other.sessionID)) {
+        if (this.sessionID != other.sessionID) {
             return false;
         }
-        if (!Objects.equals(this.serviceID, other.serviceID)) {
+        if (this.serviceID != other.serviceID) {
             return false;
         }
-        if (!Objects.equals(this.contentID, other.contentID)) {
+        if (this.contentID != other.contentID) {
             return false;
         }
-        if (!Objects.equals(this.duration, other.duration)) {
+        if (this.oppType != other.oppType) {
             return false;
         }
-        if (!Objects.equals(this.currentDateTime, other.currentDateTime)) {
+        if (this.oppNum != other.oppNum) {
+            return false;
+        }
+        if (this.oppDuration != other.oppDuration) {
+            return false;
+        }
+        if (this.assetID != other.assetID) {
+            return false;
+        }
+        if (this.assetProviderID != other.assetProviderID) {
+            return false;
+        }
+        if (this.locationID != other.locationID) {
             return false;
         }
         if (!Objects.equals(this.terminalID, other.terminalID)) {
             return false;
         }
-        if (!Objects.equals(this.oppType, other.oppType)) {
-            return false;
-        }
-        if (!Objects.equals(this.oppNum, other.oppNum)) {
-            return false;
-        }
-        if (!Objects.equals(this.oppDuration, other.oppDuration)) {
-            return false;
-        }
-        if (!Objects.equals(this.pccCode, other.pccCode)) {
+        if (!Objects.equals(this.adPCC, other.adPCC)) {
             return false;
         }
         if (!Objects.equals(this.adCampID, other.adCampID)) {
             return false;
         }
-        if (!Objects.equals(this.assetID, other.assetID)) {
-            return false;
-        }
-        if (!Objects.equals(this.assetProviderID, other.assetProviderID)) {
+        if (!Objects.equals(this.locationZip, other.locationZip)) {
             return false;
         }
         if (!Objects.equals(this.viewStartTime, other.viewStartTime)) {
@@ -400,19 +371,16 @@ public class adimpression implements Serializable
         if (!Objects.equals(this.viewEndTime, other.viewEndTime)) {
             return false;
         }
-        if (!Objects.equals(this.locationID, other.locationID)) {
-            return false;
-        }
-        if (!Objects.equals(this.locationZip, other.locationZip)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "adimpression{" + "consumerID=" + consumerID + ", sessionID=" + sessionID + ", serviceID=" + serviceID + ", contentID=" + contentID + ", duration=" + duration + ", currentDateTime=" + currentDateTime + ", terminalID=" + terminalID + ", oppType=" + oppType + ", oppNum=" + oppNum + ", oppDuration=" + oppDuration + ", pccCode=" + pccCode + ", adCampID=" + adCampID + ", assetID=" + assetID + ", assetProviderID=" + assetProviderID + ", viewStartTime=" + viewStartTime + ", viewEndTime=" + viewEndTime + ", locationID=" + locationID + ", locationZip=" + locationZip + '}';
+        return "adimpression{" + "consumerID=" + consumerID + ", sessionID=" + sessionID + ", serviceID=" + serviceID + ", contentID=" + contentID + ", terminalID=" + terminalID + ", oppType=" + oppType + ", oppNum=" + oppNum + ", oppDuration=" + oppDuration + ", adPCC=" + adPCC + ", adCampID=" + adCampID + ", assetID=" + assetID + ", assetProviderID=" + assetProviderID + ", viewStartTime=" + viewStartTime + ", viewEndTime=" + viewEndTime + ", locationID=" + locationID + ", locationZip=" + locationZip + '}';
     }
+
+    
+
     
 }
 

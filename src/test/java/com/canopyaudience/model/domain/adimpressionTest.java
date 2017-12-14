@@ -18,9 +18,9 @@ import org.junit.Before;
  *
  * @author Jason
  */
-public class recommendationTest extends TestCase {
+public class adimpressionTest extends TestCase {
     
-    private recommendation recommendation1, recommendation2;
+    private adimpression adimpression1, adimpression2;
      
      Random randomNumbers = new Random();  // object to create for a new random number for the appID
 	
@@ -28,7 +28,7 @@ public class recommendationTest extends TestCase {
 	 * Category set in config/log4j.properties as
 	 * log4j.category.com.classexercise=DEBUG, A1
 	 */
-        static Logger log = Logger.getLogger(recommendationTest.class);
+        static Logger log = Logger.getLogger(adimpressionTest.class);
         
 	/**
 	 * @throws java.lang.Exception
@@ -43,21 +43,20 @@ public class recommendationTest extends TestCase {
         Date d2;
         d2 = new Date (2017, 00, 01, 23, 59,01);
 
-        recommendation1 = new recommendation(d1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
-        recommendation2 = new recommendation(d2,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
+        adimpression1 = new adimpression(8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
+        adimpression2 = new adimpression(8675310,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
 	}
         
     /**
      * Test of equals method, of class preference.
      */
     @Test
-    public void testEqualsrecommendation() {
-        log.info("starting testEqualsrecommendation()");
-	assertFalse ("recommendation1 NOT equal recommendation2", recommendation1.equals(recommendation2));
-        log.info(recommendation1.toString());
-        log.info(recommendation2.toString());
-	log.info ("testNOTEqualsrecommendation PASSED");		
+    public void testEqualsadimpression() {
+        log.info("starting testEqualsadimpression()");
+	assertFalse ("adimpression1 NOT equal adimpression2", adimpression1.equals(adimpression2));
+        log.info(adimpression1.toString());
+        log.info(adimpression2.toString());
+	log.info ("testNOTEqualsadimpression PASSED");		
     }
-    
     
 }
