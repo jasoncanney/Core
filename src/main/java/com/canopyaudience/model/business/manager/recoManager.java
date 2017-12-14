@@ -27,6 +27,23 @@ public class recoManager extends ManagerSuperType
 	}
 	
         /** 
+	 Business use case for "store a LIST of recommendations"
+	 @param c
+        * @return 
+	*/
+	public final boolean StoreAllRecos(List<recommendation> c)
+	{
+            int i = 0;
+        
+            while (i < c.size()) {
+            recoSvc.storeReco(c.get(i));
+            i++;
+            }
+	
+            return true;
+	}
+        
+        /** 
 	 Business use case for retrieving Mahout preference list
 	 
 	 @return Set<recommendation> 
