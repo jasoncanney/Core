@@ -36,7 +36,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
 	protected void setUp() throws Exception {
 		
 		super.setUp();
-                Date d1;
+        Date d1;
         d1 = new Date (2017, 00, 01, 23, 58,01);
         
         Date d2;

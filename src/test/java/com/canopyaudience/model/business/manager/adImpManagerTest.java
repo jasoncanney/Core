@@ -6,6 +6,7 @@
 package com.canopyaudience.model.business.manager;
 
 import com.canopyaudience.model.domain.adimpression;
+import java.util.Date;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -32,10 +33,15 @@ public class adImpManagerTest extends TestCase{
 	protected void setUp() throws Exception {
 		
 		super.setUp();
-                // Factory factory = Factory.getInstance();
-		adimpression1 = new adimpression (8675330,"Store", "OCAP","1239876","A987654321","OCAP Stack","http://www.adobe.com/ocap","Hans Bender","8","9","10","11","12","13","14","15","16","17");                
-                adimpression2 = new adimpression (8675330,"Updated30", "OCAP","1239876","A987654321","OCAP Stack","http://www.adobe.com/ocap","Hans Bender","8","9","10","11","12","13","14","15","16","17");              
-                adimpression3 = new adimpression (8675328,"Update", "OCAP","1239876","A987654321","OCAP Stack","http://www.adobe.com/ocap","Hans Bender","8","9","10","11","12","13","14","15","16","17");              
+        Date d1;
+        d1 = new Date (2017, 00, 01, 23, 58,01);
+        
+        Date d2;
+        d2 = new Date (2017, 00, 01, 23, 59,01);
+
+        adimpression1 = new adimpression(8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
+        adimpression2 = new adimpression(8675310,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
+        adimpression3 = new adimpression(8675311,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
 
         }
         /*
