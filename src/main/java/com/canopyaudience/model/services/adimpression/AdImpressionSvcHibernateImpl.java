@@ -34,38 +34,35 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
   public boolean storeAdImpression(adimpression adimpression)
         {
           boolean status = true;
+          adimpression appdb  = adimpression;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("storeAdImpression - AdImpressionSvcHibernateImpl.java");
- 
-            adimpression appdb  = adimpression;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                session.getTransaction().commit();                               // added this line to fix session closing
+                // session.getTransaction().commit();                               // added this line to fix session closing
                 log.info("adimpression saved. Check database for data!");
-                session.close();                                                 // added this line to fix session closing
+      
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                   //  tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
             }
-         
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            
             return status;
        }  
          
@@ -80,40 +77,33 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     public List<adimpression> getAdImpression() throws AdImpressionException, ClassNotFoundException {
         
         {
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getAdImpression - AdImpressionSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
             List<adimpression> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
-                
                 // query students
                 theApplications = session.createQuery("from adimpression").getResultList();
                 log.info ("session.createQuery passed");
-                session.close();    
                 log.info("adimpressions queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return theApplications;
        }  
     }
@@ -129,35 +119,29 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
         {
             int i = id;
             adimpression c = new adimpression();
-            
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getAdImpression - AdImpressionSvcHibernateImpl.java");
- 
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
                         
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(adimpression.class, i);
-                session.close();   
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return c;
        }  
     }
@@ -170,43 +154,32 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
   @Override
   public boolean updateAdImpression(adimpression adimpression)
         {
-          boolean status = true;
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("updateAdImpression - AdImpressionSvcHibernateImpl.java");
- 
-            // updateApplication takes in an application object
-            // this object includes the updates received and that need to be stored in the db
             adimpression appdb  = adimpression;
-            
-            // create a new application object.  This is where the current application object gets stored and 
-            // will be used to make updates and store back in the db
             adimpression appnew = null;
-            Transaction tx=null;
+            Session session = fetchSession();
+            log.info ("fetched session");     
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");            
-                tx = session.beginTransaction();
+                       
+                session.beginTransaction();
                 log.info ("beginTransaction, Getting adimpression with consumerid:" + appdb.getConsumerID());
-                // log.info (appdb.toString());
-                // retrieve the current application object from the database
+                // retrieve the current adimpression object from the database
                 appnew = session.get(adimpression.class, appdb.getConsumerID());
-                // log.info (appnew.toString());
                 // update all fields in the current adimpression object except the PK of consumerID   
                 appnew.setSessionID(appdb.getSessionID());
                 appnew.setServiceID(appdb.getServiceID()); // check domain object, think this is missing
                 appnew.setContentID(appdb.getContentID());
-                appnew.setDuration(appdb.getDuration());
-                appnew.setCurrentDateTime(appdb.getCurrentDateTime());
                 appnew.setTerminalID(appdb.getTerminalID());
                 appnew.setOppType(appdb.getOppType());
                 appnew.setOppNum(appdb.getOppNum());
                 appnew.setOppDuration(appdb.getOppDuration());
-                appnew.setPccCode(appdb.getPccCode());
+                appnew.setAdPCC(appdb.getAdPCC());
                 appnew.setAdCampID(appdb.getAdCampID());
                 appnew.setAssetID(appdb.getAssetID());
                 appnew.setAssetProviderID(appdb.getAssetProviderID());
@@ -214,33 +187,19 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                 appnew.setViewEndTime(appdb.getViewEndTime());
                 appnew.setLocationID(appdb.getLocationID());
                 appnew.setLocationZip(appdb.getLocationZip());
-                
-                // log.info (appnew.toString());
-
-	
 		System.out.println("Updating adimpression...");
-
-                // application object is updated in the db based on the Primary Key that was unchanged
-                session.update(appnew);
-                
-		// commit the transaction
-		session.getTransaction().commit();
-                
-                // tx.commit();
+                session.saveOrUpdate(appnew);
                 log.info("Application updated. Check database for data!");
-                
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  
@@ -251,39 +210,33 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     @Override
     public boolean deleteAdImpression(adimpression adimpression)
         {
-          boolean status = true;
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("deleteAdImpression - AdImpressionSvcHibernateImpl.java");
- 
             adimpression appdb  = adimpression;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
-                tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(adimpression passed in)");
-                session.getTransaction().commit();                               // added this line to fix session closing
-                //tx.commit();
                 log.info("adimpression deleted. Check database for data not there!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close(); 
+            
             }
             return status;
        }  

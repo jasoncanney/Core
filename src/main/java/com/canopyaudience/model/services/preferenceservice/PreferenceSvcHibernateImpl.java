@@ -76,7 +76,6 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
     public List<preference> getPreference() throws PreferenceException, ClassNotFoundException {
         
         {
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -107,9 +106,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             return theApplications;
        }  
     }
-    
-                
-
+   
     /**
      * Pulls data from database through hibernate interface
      * @return <list> of preference
@@ -163,7 +160,6 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
     public preference getAPreference(int id) throws PreferenceException, ClassNotFoundException {
         
         {
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -212,12 +208,11 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             // will be used to make updates and store back in the db
             preference appnew = null;
             Session session = fetchSession();
-            
             log.info ("fetched session");
             
             try 
             {
-                Transaction tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info(appdb.toString());
                 log.info ("beginTransaction, Getting preference with preferenceID:" + appdb.getPreferenceId());
                 // retrieve the current application object from the database
@@ -232,8 +227,6 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
 		System.out.println("Updating preference...");
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.saveOrUpdate(appnew);
-                tx.commit();
-                //session.update(appnew);
                 log.info("preference updated. Check database for data!");
             }
             catch(Exception e)
@@ -267,12 +260,11 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             
             try 
             {
-                Transaction tx = session.beginTransaction();
+                session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(preference passed in)");
                 log.info("preference deleted. Check database for data not there!");
-                tx.commit();
             }
             catch(Exception e)
             {
@@ -283,8 +275,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             }
             finally{
                 session.close(); 
-                // tx.commit;
-                // added this line to fix session closing
+            
             }
             return status;
        }  
