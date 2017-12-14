@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,6 +33,14 @@ public class recommendation implements Serializable
 	*/
 
 	private static final long serialVersionUID = 4349382150030819494L;
+        
+        @Id
+        // @GeneratedValue(strategy=GenerationType.IDENTITY)
+        @Column(name = "RecoID")
+	/** 
+        Identifier used as PK within the database
+        */
+	private int recoID;
 
         @Column(name = "RecoDate", nullable = false, length = 50)
 	/** 
@@ -110,21 +120,23 @@ public class recommendation implements Serializable
 	{
 
 	}
-        
-         /** 
-	  Overloaded Constructor
-             * @param recoDate
-            * @param consumerId
-            * @param providerId
-            * @param providerName
-            * @param locationZip
-            * @param demographic
-            * @param recoWeight
-            * @param adID
-            * @param adURL
-            * @param adPCC
-            * @param adOwner
-	*/
+
+    public recommendation(int recoID, Date recoDate, int recoWeight, int consumerId, int providerId, String providerName, String locationZip, int demographic, int adID, String adURL, String adPCC, String adOwner) {
+        this.recoID = recoID;
+        this.recoDate = recoDate;
+        this.recoWeight = recoWeight;
+        this.consumerId = consumerId;
+        this.providerId = providerId;
+        this.providerName = providerName;
+        this.locationZip = locationZip;
+        this.demographic = demographic;
+        this.adID = adID;
+        this.adURL = adURL;
+        this.adPCC = adPCC;
+        this.adOwner = adOwner;
+    }
+
+    // Constructor without the PK unique identifier that is set by the DB
     public recommendation(Date recoDate, int recoWeight, int consumerId, int providerId, String providerName, String locationZip, int demographic, int adID, String adURL, String adPCC, String adOwner) {
         this.recoDate = recoDate;
         this.recoWeight = recoWeight;
@@ -137,6 +149,15 @@ public class recommendation implements Serializable
         this.adURL = adURL;
         this.adPCC = adPCC;
         this.adOwner = adOwner;
+    }
+
+
+    public int getRecoID() {
+        return recoID;
+    }
+
+    public void setRecoID(int recoID) {
+        this.recoID = recoID;
     }
 
     public Date getRecoDate() {
@@ -228,24 +249,20 @@ public class recommendation implements Serializable
     }
 
     @Override
-    public String toString() {
-        return "recommendation{" + "recoDate=" + recoDate + ", recoWeight=" + recoWeight + ", consumerId=" + consumerId + ", providerId=" + providerId + ", providerName=" + providerName + ", locationZip=" + locationZip + ", demographic=" + demographic + ", adID=" + adID + ", adURL=" + adURL + ", adPCC=" + adPCC + ", adOwner=" + adOwner + '}';
-    }
-
-    @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.recoDate);
-        hash = 37 * hash + this.recoWeight;
-        hash = 37 * hash + this.consumerId;
-        hash = 37 * hash + this.providerId;
-        hash = 37 * hash + Objects.hashCode(this.providerName);
-        hash = 37 * hash + Objects.hashCode(this.locationZip);
-        hash = 37 * hash + this.demographic;
-        hash = 37 * hash + this.adID;
-        hash = 37 * hash + Objects.hashCode(this.adURL);
-        hash = 37 * hash + Objects.hashCode(this.adPCC);
-        hash = 37 * hash + Objects.hashCode(this.adOwner);
+        int hash = 5;
+        hash = 83 * hash + this.recoID;
+        hash = 83 * hash + Objects.hashCode(this.recoDate);
+        hash = 83 * hash + this.recoWeight;
+        hash = 83 * hash + this.consumerId;
+        hash = 83 * hash + this.providerId;
+        hash = 83 * hash + Objects.hashCode(this.providerName);
+        hash = 83 * hash + Objects.hashCode(this.locationZip);
+        hash = 83 * hash + this.demographic;
+        hash = 83 * hash + this.adID;
+        hash = 83 * hash + Objects.hashCode(this.adURL);
+        hash = 83 * hash + Objects.hashCode(this.adPCC);
+        hash = 83 * hash + Objects.hashCode(this.adOwner);
         return hash;
     }
 
@@ -261,6 +278,9 @@ public class recommendation implements Serializable
             return false;
         }
         final recommendation other = (recommendation) obj;
+        if (this.recoID != other.recoID) {
+            return false;
+        }
         if (this.recoWeight != other.recoWeight) {
             return false;
         }
@@ -297,10 +317,12 @@ public class recommendation implements Serializable
         return true;
     }
 
-       
+    @Override
+    public String toString() {
+        return "recommendation{" + "recoID=" + recoID + ", recoDate=" + recoDate + ", recoWeight=" + recoWeight + ", consumerId=" + consumerId + ", providerId=" + providerId + ", providerName=" + providerName + ", locationZip=" + locationZip + ", demographic=" + demographic + ", adID=" + adID + ", adURL=" + adURL + ", adPCC=" + adPCC + ", adOwner=" + adOwner + '}';
+    }
+        
+    }
 
-    
-
-}
-
-       
+        
+        

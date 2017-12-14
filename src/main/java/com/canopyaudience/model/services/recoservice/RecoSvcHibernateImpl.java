@@ -45,6 +45,7 @@ public class RecoSvcHibernateImpl implements IRecoSvc
             try 
             {    
                 session.beginTransaction();
+                log.info(appdb.toString());
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
@@ -170,10 +171,10 @@ public class RecoSvcHibernateImpl implements IRecoSvc
             {
                 Transaction tx = session.beginTransaction();
                 log.info(appdb.toString());
-                log.info ("beginTransaction, Getting recommendation with consumerID:" + appdb.getConsumerId());
+                log.info ("beginTransaction, Getting recommendation with recoID:" + appdb.getRecoID());
                 // retrieve the current recommendation object from the database
-                appnew = session.get(recommendation.class, appdb.getConsumerId());
-                // update all fields in the current recommendation object except the PK of consumerID  
+                appnew = session.get(recommendation.class, appdb.getRecoID());
+                // update all fields in the current recommendation object except the PK of RecoID  
                 
                 appnew.setRecoDate(appdb.getRecoDate());
                 appnew.setRecoWeight(appdb.getRecoWeight());

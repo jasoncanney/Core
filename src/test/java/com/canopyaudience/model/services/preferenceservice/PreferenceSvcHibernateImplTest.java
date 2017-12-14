@@ -42,9 +42,9 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
         Date d2;
         d2 = new Date (2017, 01, 02, 23, 59,01);
             
-        preference1 = new preference (17,1,d1,6,7,8675);
-        preference2 = new preference (18,1,d1,12,69,8675);
-        preference3 = new preference (68,0,d2,6,7,8675);      
+        preference1 = new preference (27,1,d1,6,7,8675);
+        preference2 = new preference (28,1,d1,12,69,8675);
+        preference3 = new preference (88,0,d2,6,7,8675);      
 
         }
         /*

@@ -43,7 +43,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
         d2 = new Date (2017, 00, 01, 23, 59,01);
 
         adimpression1 = new adimpression(8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
-        adimpression2 = new adimpression(8675310,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
+        adimpression2 = new adimpression(8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
         adimpression3 = new adimpression(8675311,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
 
 
@@ -69,7 +69,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     log.info ("AdImpressionSvcHibernateImplTest - testStoreAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
         boolean expResult = true;
-        boolean result = instance.storeAdImpression(adimpression1);
+        boolean result = instance.storeAdImpression(adimpression3);
         assertEquals(expResult, result);
     
     }
@@ -102,7 +102,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
      * Test of deleteAdImpression method, of class AdImpressionSvcHibernateImpl.
      */
     @Test
-    public void test3DeleteAdImpression() {
+    public void test4DeleteAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testDeleteAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
         boolean expResult = true;

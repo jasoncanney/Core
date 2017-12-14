@@ -81,7 +81,7 @@ public class HibernateFactory {
                     cfg.addAnnotatedClass(myads.class);
                     cfg.addAnnotatedClass(recommendation.class);
 
-                    log.info ("addAnnotatedClass: myads.class ------ If you see this log info, make sure you updated HibernateFactory.java with appropriate annotation");
+                    log.info ("addAnnotatedClass: recommendation.class ------ If you see this log info, make sure you updated HibernateFactory.java with appropriate annotation");
                     // cfg.addAnnotatedClass(adimpression.class);
 	
          // updated with the update to Hibernate 5.  The previous ServiceRegistryBuilder was deprecated in Hibernate4           
