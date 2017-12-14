@@ -34,6 +34,14 @@ public class adimpression implements Serializable
 
         @Id
         // @GeneratedValue(strategy=GenerationType.IDENTITY)
+        @Column(name = "ImpID")
+	/** 
+        Identifier used as PK within the database
+        */
+	private int impID;
+        
+        @Id
+        // @GeneratedValue(strategy=GenerationType.IDENTITY)
         @Column(name = "ConsumerID")
 	/** 
 	 AdImpression Consumer ID
@@ -142,6 +150,26 @@ public class adimpression implements Serializable
 
 	}
 
+    public adimpression(int impID, int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, Date viewStartTime, Date viewEndTime, int locationID, String locationZip) {
+        this.impID = impID;
+        this.consumerID = consumerID;
+        this.sessionID = sessionID;
+        this.serviceID = serviceID;
+        this.contentID = contentID;
+        this.terminalID = terminalID;
+        this.oppType = oppType;
+        this.oppNum = oppNum;
+        this.oppDuration = oppDuration;
+        this.adPCC = adPCC;
+        this.adCampID = adCampID;
+        this.assetID = assetID;
+        this.assetProviderID = assetProviderID;
+        this.viewStartTime = viewStartTime;
+        this.viewEndTime = viewEndTime;
+        this.locationID = locationID;
+        this.locationZip = locationZip;
+    }
+
     public adimpression(int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, Date viewStartTime, Date viewEndTime, int locationID, String locationZip) {
         this.consumerID = consumerID;
         this.sessionID = sessionID;
@@ -159,6 +187,14 @@ public class adimpression implements Serializable
         this.viewEndTime = viewEndTime;
         this.locationID = locationID;
         this.locationZip = locationZip;
+    }
+
+    public int getImpID() {
+        return impID;
+    }
+
+    public void setImpID(int impID) {
+        this.impID = impID;
     }
 
     public int getConsumerID() {
@@ -291,7 +327,8 @@ public class adimpression implements Serializable
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
+        hash = 29 * hash + this.impID;
         hash = 29 * hash + this.consumerID;
         hash = 29 * hash + this.sessionID;
         hash = 29 * hash + this.serviceID;
@@ -323,6 +360,9 @@ public class adimpression implements Serializable
             return false;
         }
         final adimpression other = (adimpression) obj;
+        if (this.impID != other.impID) {
+            return false;
+        }
         if (this.consumerID != other.consumerID) {
             return false;
         }
@@ -376,20 +416,8 @@ public class adimpression implements Serializable
 
     @Override
     public String toString() {
-        return "adimpression{" + "consumerID=" + consumerID + ", sessionID=" + sessionID + ", serviceID=" + serviceID + ", contentID=" + contentID + ", terminalID=" + terminalID + ", oppType=" + oppType + ", oppNum=" + oppNum + ", oppDuration=" + oppDuration + ", adPCC=" + adPCC + ", adCampID=" + adCampID + ", assetID=" + assetID + ", assetProviderID=" + assetProviderID + ", viewStartTime=" + viewStartTime + ", viewEndTime=" + viewEndTime + ", locationID=" + locationID + ", locationZip=" + locationZip + '}';
+        return "adimpression{" + "impID=" + impID + ", consumerID=" + consumerID + ", sessionID=" + sessionID + ", serviceID=" + serviceID + ", contentID=" + contentID + ", terminalID=" + terminalID + ", oppType=" + oppType + ", oppNum=" + oppNum + ", oppDuration=" + oppDuration + ", adPCC=" + adPCC + ", adCampID=" + adCampID + ", assetID=" + assetID + ", assetProviderID=" + assetProviderID + ", viewStartTime=" + viewStartTime + ", viewEndTime=" + viewEndTime + ", locationID=" + locationID + ", locationZip=" + locationZip + '}';
     }
 
-    
-
-    
+        
 }
-
-        
-
-
-        
-        
-        
-        
-        
-	

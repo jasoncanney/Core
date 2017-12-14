@@ -5,6 +5,7 @@
  */
 package com.canopyaudience.model.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import junit.framework.TestCase;
@@ -37,11 +38,11 @@ public class adimpressionTest extends TestCase {
     @Override
 	public void setUp() throws Exception {
             
-        Date d1;
-        d1 = new Date (2017, 00, 01, 23, 58,01);
-        
-        Date d2;
-        d2 = new Date (2017, 00, 01, 23, 59,01);
+        String date_1 = "2011-01-18 23:59:01.0"; 
+        String date_2 = "2017-01-18 23:59:01.0";
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss"); 
+        Date d1 = dt.parse(date_1);
+        Date d2 = dt.parse(date_2);
 
         adimpression1 = new adimpression(8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
         adimpression2 = new adimpression(8675310,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");

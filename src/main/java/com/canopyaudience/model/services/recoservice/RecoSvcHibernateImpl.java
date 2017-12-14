@@ -34,6 +34,7 @@ public class RecoSvcHibernateImpl implements IRecoSvc
   public boolean storeReco(recommendation recommendation)
         {
           boolean status = true;
+          Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -44,11 +45,12 @@ public class RecoSvcHibernateImpl implements IRecoSvc
                   
             try 
             {    
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info(appdb.toString());
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
+                tx.commit();
                 log.info("recommendation saved. Check database for data!");
             }
             catch(Exception e)
@@ -74,6 +76,7 @@ public class RecoSvcHibernateImpl implements IRecoSvc
         
         {
             // boolean status = true;
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -84,10 +87,11 @@ public class RecoSvcHibernateImpl implements IRecoSvc
             
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 theApplications = session.createQuery("from recommendation").getResultList();
                 log.info ("session.createQuery passed");
+                tx.commit();
                 log.info("recommendation queried and put into List.");
             }
             catch(Exception e)
@@ -114,6 +118,7 @@ public class RecoSvcHibernateImpl implements IRecoSvc
         {
             int i = id;
             List<recommendation> theApplications = null;
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -123,13 +128,14 @@ public class RecoSvcHibernateImpl implements IRecoSvc
             
             try 
             { 
-                session.beginTransaction();
+                tx=session.beginTransaction();
                 log.info ("beginTransaction");
                 String hql = "from recommendation where consumerID = :id";   
                 System.out.println(hql);
                 Query query = session.createQuery(hql);
                 query.setParameter("id", i);
                 List result = query.list();
+                tx.commit();
                 System.out.println("resultset:"+result);
                 theApplications = result;
             }

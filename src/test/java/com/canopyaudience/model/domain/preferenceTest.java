@@ -5,6 +5,7 @@
  */
 package com.canopyaudience.model.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import junit.framework.TestCase;
 import java.util.Random;
@@ -34,11 +35,11 @@ public class preferenceTest extends TestCase {
 	@Before	
 	public void setUp() throws Exception {
             
-        Date d1;
-        d1 = new Date (2017, 00, 01, 23, 58,01);
-        
-        Date d2;
-        d2 = new Date (2017, 00, 01, 23, 59,01);
+        String date_1 = "2011-01-18 23:59:01.0"; 
+        String date_2 = "2017-01-18 23:59:01.0";
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss"); 
+        Date d1 = dt.parse(date_1);
+        Date d2 = dt.parse(date_2);
             
         preference1 = new preference (67,1,d1,6,7,8675);    
         preference2 = new preference (68,0,d2,6,7,8675);

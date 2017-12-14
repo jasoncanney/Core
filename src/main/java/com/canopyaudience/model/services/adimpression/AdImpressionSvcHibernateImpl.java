@@ -35,6 +35,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
         {
           boolean status = true;
           adimpression appdb  = adimpression;
+          Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -44,11 +45,11 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                // session.getTransaction().commit();                               // added this line to fix session closing
+                tx.commit();                               // added this line to fix session closing
                 log.info("adimpression saved. Check database for data!");
       
             }
@@ -77,6 +78,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     public List<adimpression> getAdImpression() throws AdImpressionException, ClassNotFoundException {
         
         {
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -87,10 +89,11 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 // query students
                 theApplications = session.createQuery("from adimpression").getResultList();
+                tx.commit();
                 log.info ("session.createQuery passed");
                 log.info("adimpressions queried and put into List.");
             }
@@ -117,6 +120,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     public adimpression getAAdImpression(int id) throws AdImpressionException, ClassNotFoundException {
         
         {
+            Transaction tx;
             int i = id;
             adimpression c = new adimpression();
             log.info("-------------------------------");
@@ -128,9 +132,10 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                         
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(adimpression.class, i);
+                tx.commit();
             }
             catch(Exception e)
             {
@@ -154,6 +159,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
   @Override
   public boolean updateAdImpression(adimpression adimpression)
         {
+            Transaction tx;
             boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
@@ -167,11 +173,11 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             try 
             {
                        
-                session.beginTransaction();
-                log.info ("beginTransaction, Getting adimpression with consumerid:" + appdb.getConsumerID());
+                tx = session.beginTransaction();
+                log.info ("beginTransaction, Getting adimpression with impression id:" + appdb.getImpID());
                 // retrieve the current adimpression object from the database
-                appnew = session.get(adimpression.class, appdb.getConsumerID());
                 // update all fields in the current adimpression object except the PK of consumerID   
+                appnew.setConsumerID(appdb.getConsumerID());
                 appnew.setSessionID(appdb.getSessionID());
                 appnew.setServiceID(appdb.getServiceID()); // check domain object, think this is missing
                 appnew.setContentID(appdb.getContentID());
@@ -189,6 +195,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                 appnew.setLocationZip(appdb.getLocationZip());
 		System.out.println("Updating adimpression...");
                 session.saveOrUpdate(appnew);
+                tx.commit();
                 log.info("Application updated. Check database for data!");
             }
             catch(Exception e)
@@ -210,6 +217,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     @Override
     public boolean deleteAdImpression(adimpression adimpression)
         {
+            Transaction tx;
             boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
@@ -221,10 +229,11 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(adimpression passed in)");
+                tx.commit();
                 log.info("adimpression deleted. Check database for data not there!");
             }
             catch(Exception e)

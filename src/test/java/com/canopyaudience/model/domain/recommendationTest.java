@@ -5,6 +5,7 @@
  */
 package com.canopyaudience.model.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import junit.framework.TestCase;
@@ -37,11 +38,11 @@ public class recommendationTest extends TestCase {
     @Override
 	public void setUp() throws Exception {
             
-        Date d1;
-        d1 = new Date (2017, 00, 01, 23, 58,01);
-        
-        Date d2;
-        d2 = new Date (2017, 00, 01, 23, 59,01);
+        String date_1 = "2011-01-18 23:59:01.0"; 
+        String date_2 = "2017-01-18 23:59:01.0";
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss"); 
+        Date d1 = dt.parse(date_1);
+        Date d2 = dt.parse(date_2);
 
         recommendation1 = new recommendation(d1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
         recommendation2 = new recommendation(d2,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
