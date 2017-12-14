@@ -22,8 +22,6 @@ public class adImpManager extends ManagerSuperType
 	*/
 	public final boolean Create(adimpression a)
 	{
-		// Factory factory = Factory.getInstance();
-		// IAdImpressionSvc adSvc = (IAdImpressionSvc)factory.getService("IAdImpressionSvc");
                 adSvc.storeAdImpression(a);
 		return true;
 
@@ -36,8 +34,6 @@ public class adImpManager extends ManagerSuperType
 	*/
 	public final List<adimpression>  Get() throws AdImpressionException, ClassNotFoundException
 	{
-		// Factory factory = Factory.getInstance();
-		// IAdImpressionSvc adSvc = (IAdImpressionSvc)factory.getService("IAdImpressionSvc");
 		return adSvc.getAdImpression();
 	}
         
@@ -49,8 +45,6 @@ public class adImpManager extends ManagerSuperType
         */
 	public final adimpression GetA(int id) throws AdImpressionException, ClassNotFoundException
 	{
-		// Factory factory = Factory.getInstance();
-		// IConsumerSvc consSvc = (IConsumerSvc)factory.getService("IConsumerSvc");
 		return adSvc.getAAdImpression(id);
 	}
         
@@ -62,8 +56,6 @@ public class adImpManager extends ManagerSuperType
 	*/
 	public final boolean Update(adimpression c)
 	{
-		// Factory factory = Factory.getInstance();
-		// IAdImpressionSvc adSvc = (IAdImpressionSvc)factory.getService("IAdImpressionSvc");
 		adSvc.updateAdImpression(c);
 		return true;
 
@@ -77,8 +69,6 @@ public class adImpManager extends ManagerSuperType
 	*/
 	public final boolean Delete(adimpression c)
 	{
-		// Factory factory = Factory.getInstance();
-		// IAdImpressionSvc adSvc = (IAdImpressionSvc)factory.getService("IAdImpressionSvc");
 		adSvc.deleteAdImpression(c);
 		return true;
 	}
