@@ -38,6 +38,13 @@ public interface IAdImpressionSvc extends IService {
 	public List<adimpression> getAdImpression() throws AdImpressionException,
 			ClassNotFoundException;
  
+         /**
+        * Pulls data from database through hibernate interface
+        * @return <list> of adimpression for single ConsumerID
+        * @throws java.lang.ClassNotFoundException
+        */
+        public List<adimpression> getAdImpList(int id) throws AdImpressionException, ClassNotFoundException;
+        
         /**
         * Pulls one ad impression from database through hibernate interface
         * @param id

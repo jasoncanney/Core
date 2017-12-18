@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -93,6 +94,53 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                 log.info ("beginTransaction");
                 // query students
                 theApplications = session.createQuery("from adimpression").getResultList();
+                tx.commit();
+                log.info ("session.createQuery passed");
+                log.info("adimpressions queried and put into List.");
+            }
+            catch(Exception e)
+            {
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            return theApplications;
+       }  
+    }
+    
+     /**
+     * Pulls data from database through hibernate interface
+     * @return <list> of adimpression for single ConsumerID
+     * @throws java.lang.ClassNotFoundException
+     */
+    public List<adimpression> getAdImpList(int id) throws AdImpressionException, ClassNotFoundException {
+        
+        {
+            int i = id;  
+            Transaction tx;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+            log.info ("getAdImpression - AdImpressionSvcHibernateImpl.java");
+            List<adimpression> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
+            
+            try 
+            {
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                String hql = "from adimpression where ConsumerID = :id";   
+                System.out.println(hql);
+                Query query = session.createQuery(hql);
+                query.setParameter("id", i);
+                List result = query.list();
+                // System.out.println("resultset:"+result);
+                theApplications = result;
                 tx.commit();
                 log.info ("session.createQuery passed");
                 log.info("adimpressions queried and put into List.");

@@ -38,6 +38,17 @@ public class adImpManager extends ManagerSuperType
 	}
         
         /** 
+	 Business use case for retrieve adimpression list a single UID set of adimpressions
+	 
+	 @return Set<adimpression> 
+        * @throws java.lang.ClassNotFoundException 
+	*/
+	public final List<adimpression>  GetAList(int id) throws AdImpressionException, ClassNotFoundException
+	{
+		return adSvc.getAdImpList(id);
+	}
+        
+        /** 
 	 Business use case for "retrieve single adimpression"
          * @param id
 	 @return adimpression
