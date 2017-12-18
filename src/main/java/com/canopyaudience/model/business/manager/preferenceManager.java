@@ -43,22 +43,27 @@ public class preferenceManager extends ManagerSuperType
 	}
 	
         /** 
+	 Business use case for retrieving a single UID set of preferences 
+	 @param id
+	 @return Set<preference> 
+	*/
+	public final List<preference> GetAList(int id) throws PreferenceException, ClassNotFoundException
+	{
+		return prefsSvc.getAPrefList(id);
+	}
+        
+        /** 
 	 Business use case for retrieving Mahout preference list
 	 
 	 @param id
 	 @return Set<preference> 
 	*/
-	public final List<preference>  Get() throws PreferenceException, ClassNotFoundException
+	public final List<preference> Get() throws PreferenceException, ClassNotFoundException
 	{
 		// Factory factory = Factory.getInstance();
 		// IPreferenceSvc prefsSvc = (IPreferenceSvc)factory.getService("IPreferenceSvc");
 		return prefsSvc.getPreference();
 	}
-        
-        
-        
-        
-        
         
         /** 
 	 Business use case for "retrieve single preference"

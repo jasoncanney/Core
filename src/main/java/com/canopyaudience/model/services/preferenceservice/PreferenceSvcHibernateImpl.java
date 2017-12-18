@@ -15,6 +15,7 @@ import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -67,6 +68,53 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             return status;
        }  
 
+    /**
+     * Pulls data from database through hibernate interface
+     * @return <list> of preference for a single user
+     * @throws java.lang.ClassNotFoundException
+     */
+  
+    @Override
+    public List<preference> getAPrefList(int id) throws PreferenceException, ClassNotFoundException {
+        
+        {
+            int i = id;  
+            Transaction tx;
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+            log.info ("getPreference - PreferenceSvcHibernateImpl.java");
+            List<preference> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
+            
+            try 
+            {
+                tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                String hql = "from preference where consumerID = :id";   
+                // System.out.println(hql);
+                Query query = session.createQuery(hql);
+                query.setParameter("id", i);
+                List result = query.list();
+                // System.out.println("resultset:"+result);
+                theApplications = result;
+                tx.commit();
+            }
+            catch(Exception e)
+            {
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            return theApplications;
+       }  
+    }
+  
     /**
      * Pulls data from database through hibernate interface
      * @return <list> of preference

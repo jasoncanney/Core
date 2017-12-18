@@ -25,6 +25,14 @@ public interface IPreferenceSvc extends IService
 	*/
 	public boolean storePreference(preference preference);
 
+        /** 
+	 Retrieves a Preference for a Single User
+	 @return  The Preference object matching Preference 
+        * @throws java.lang.ClassNotFoundException 
+	 
+	*/
+        public List<preference> getAPrefList(int id) throws PreferenceException, ClassNotFoundException;
+        
 	/** 
 	 Retrieves a Preference 
 	 @return  The Preference object matching Preference 
