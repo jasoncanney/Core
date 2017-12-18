@@ -55,8 +55,43 @@ public class RecoBuilder {
                 log.info (theRecommendations);
                 
                 int count = 0;
-        
+                int weight = 0;
+                preference p = new preference();
+                recommendation r = new recommendation();
+                adimpression a = new adimpression();
+                
+                
+                
+                
                 while (count < thePreferences.size()) {
+              
+                   // pull out current preference for using in algorithm 
+                   p = thePreferences.get(count);
+                   if (p.getPreferenceChoice()==1){                                      // If current preference is positive then
+                       if (theRecommendations.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
+                           r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
+                           weight =  r.getRecoWeight();                                 // get current weight of recommendation
+                           weight++;                                                    // increment recommendation weight +1
+                           r.setRecoWeight(weight);                                     // store the weight back in the recommendation object
+                           theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation
+                       }
+                       if(p.getPreferenceChoice()==0){
+                           
+                           // update this section to match algorithm
+                           r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
+                           weight =  r.getRecoWeight();                                 // get current weight of recommendation
+                           weight++;                                                    // increment recommendation weight +1
+                           r.setRecoWeight(weight);                                     // store the weight back in the recommendation object
+                           theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation
+                           
+                           
+                           
+                       } else {
+                          // if (p.)   // put logic here to see if there is a matching ad impression to the AdID / AdPCC in adimpressions data set
+                           
+                       }
+                   } 
+                    
                 
                     // Is thePreference[count] positive or negative
                     // Does thePreferences[count] exist in theRecommendations list

@@ -131,11 +131,12 @@ public class RecoSvcHibernateImpl implements IRecoSvc
                 tx=session.beginTransaction();
                 log.info ("beginTransaction");
                 String hql = "from recommendation where consumerID = :id";   
-                System.out.println(hql);
+                // System.out.println(hql);
                 Query query = session.createQuery(hql);
                 query.setParameter("id", i);
                 List result = query.list();
                 tx.commit();
+                log.info("outputting the resultset to system.out.println");
                 System.out.println("resultset:"+result);
                 theApplications = result;
             }
