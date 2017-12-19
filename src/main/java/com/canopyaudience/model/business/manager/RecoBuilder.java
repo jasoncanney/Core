@@ -93,8 +93,25 @@ public class RecoBuilder {
                             }  
                         }
                        else {
-                           // Add logic here to create a new recommendation
-                       }
+                           
+                        // Build the Recommendation to Create
+                        
+                           r.setRecoDate(/*set to current data and time*/);
+                           r.setRecoWeight(1);
+                           r.setConsumerId(p.getConsumerId());
+                           r.setProviderId(/*need to put this in one of the above tables*/);
+                           r.setProviderName(/*need to put this in one of the above tables*/);
+                           r.setLocationZip(/*need to put this in preference object*/);
+                           r.setDemographic(/*put this value in one of the above tables?*/);
+                           r.setAdID(advert.getAdID());
+                           r.setAdPCC(advert.getAdPCC());
+                           r.setAdURL(advert.getAdURL());
+                           r.setAdOwner(advert.getAdowner());
+                           
+                        // Add the Recommendation to the List
+                        
+                           theRecommendations.add(r);
+                        }
                     }
                        if(p.getPreferenceChoice()==0){                                  // If current preference is negative then
                            if (theRecommendations.contains(p.getAdvertisementID())){    // if current Recommendations list contains preference AdID then
@@ -113,10 +130,28 @@ public class RecoBuilder {
                                theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation 
                        } 
                        else {
-                            // put logic here to create a new recommendation with a negative value
+                            // Build the Recommendation to Create
+                        
+                           r.setRecoDate(/*set to current data and time*/);
+                           r.setRecoWeight(-1);
+                           r.setConsumerId(p.getConsumerId());
+                           r.setProviderId(/*need to put this in one of the above tables*/);
+                           r.setProviderName(/*need to put this in one of the above tables*/);
+                           r.setLocationZip(/*need to put this in preference object*/);
+                           r.setDemographic(/*put this value in one of the above tables?*/);
+                           r.setAdID(advert.getAdID());
+                           r.setAdPCC(advert.getAdPCC());
+                           r.setAdURL(advert.getAdURL());
+                           r.setAdOwner(advert.getAdowner());
+                           
+                        // Add the Recommendation to the List
+                        
+                           theRecommendations.add(r);
                        }
                    } 
-                    // put in logic here for error handling and logging to identify that a choice was not either 1 or 0
+                    // Todo: put in logic here for error handling and logging to identify that a choice was not either 1 or 0
+                    // Todo: Build a "Finally" block that adds the list back into the recommendation table.  leverages the business layer to loop through the list
+                    
                     count++;
                 }
             }
