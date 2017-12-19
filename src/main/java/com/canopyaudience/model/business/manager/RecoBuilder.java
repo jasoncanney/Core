@@ -55,7 +55,8 @@ public class RecoBuilder {
                 log.info (thePreferences);
                 theAdImpressions = admgr.GetAList(id);
                 log.info (theAdImpressions);
-                theRecommendations = recmgr.GetA(id);
+                theRecommendations = recmgr.GetA(id);                                   // Retrieve all recommendations for this user from the database
+                recmgr.DeleteAllRecos(theRecommendations);                              // Delete current recommendations for this user from the database Note: List still exists and will be restored to the DB at the end of this class
                 log.info (theRecommendations);
                 theAdvertisements = advertmgr.Get();
                 
@@ -70,11 +71,9 @@ public class RecoBuilder {
                 while (count < thePreferences.size()) {                                 // start of main canopy audience recommendation weighting loop - patent logic
                    
                    p = thePreferences.get(count);                                       // pull out current preference for using in algorithm 
-                   advert = theAdvertisements.get(p.getAdvertisementID());      // pull advertisement object from list to get to PCC value
-                   adPCC = advert.getAdPCC();                                   // store PCC value 
-                   
-                   // Need to put these two loops into separate functions and pass in the choice and +/- value to increment or decrement
-                   
+                   advert = theAdvertisements.get(p.getAdvertisementID());              // pull advertisement object from list to get to PCC value
+                   adPCC = advert.getAdPCC();                                           // store PCC value 
+                                      
                    if (p.getPreferenceChoice()==1){                                     // If current preference is positive then
                        if (theRecommendations.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
                            r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
@@ -85,17 +84,15 @@ public class RecoBuilder {
                     
                            // adimpression logic check section
                            if (theAdImpressions.contains(adPCC)){
-                               r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
-                               weight =  r.getRecoWeight();                                 // get current weight of recommendation
-                               weight++;                                                    // increment recommendation weight +1
-                               r.setRecoWeight(weight);                                     // store the weight back in the recommendation object
-                               theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation
+                               r = theRecommendations.get(p.getAdvertisementID());      // pull that recommendation with the matching AdID into a recommendation domain object
+                               weight =  r.getRecoWeight();                             // get current weight of recommendation
+                               weight++;                                                // increment recommendation weight +1
+                               r.setRecoWeight(weight);                                 // store the weight back in the recommendation object
+                               theRecommendations.set(count, r);                        // replace the previous recommendation with the updated weighted recommendation
                             }  
                         }
                        else {
-                           
-                        // Build the Recommendation to Create
-                        
+                           // Build the Recommendation to Create
                            r.setRecoDate(/*set to current data and time*/);
                            r.setRecoWeight(1);
                            r.setConsumerId(p.getConsumerId());
@@ -107,31 +104,28 @@ public class RecoBuilder {
                            r.setAdPCC(advert.getAdPCC());
                            r.setAdURL(advert.getAdURL());
                            r.setAdOwner(advert.getAdowner());
-                           
-                        // Add the Recommendation to the List
-                        
+                           // Add the Recommendation to the List
                            theRecommendations.add(r);
                         }
                     }
-                       if(p.getPreferenceChoice()==0){                                  // If current preference is negative then
-                           if (theRecommendations.contains(p.getAdvertisementID())){    // if current Recommendations list contains preference AdID then
-                               r = theRecommendations.get(p.getAdvertisementID());      // pull that recommendation with the matching AdID into a recommendation domain object
-                               weight =  r.getRecoWeight();                             // get current weight of recommendation
-                               weight--;                                                // decrement recommendation weight -1
-                               r.setRecoWeight(weight);                                 // store the weight back in the recommendation object
-                               theRecommendations.set(count, r);                        // replace the previous recommendation with the updated weighted recommendation
-                           
-                           // adimpression logic check section
-                           if (theAdImpressions.contains(adPCC)){
-                               r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
-                               weight =  r.getRecoWeight();                                 // get current weight of recommendation
-                               weight = weight -2;                                          // decrementcrement recommendation weight -2 
-                               r.setRecoWeight(weight);                                     // store the weight back in the recommendation object
-                               theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation 
-                       } 
-                       else {
-                            // Build the Recommendation to Create
-                        
+                   if(p.getPreferenceChoice()==0){                                      // If current preference is negative then
+                       if (theRecommendations.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
+                           r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
+                           weight =  r.getRecoWeight();                                 // get current weight of recommendation
+                           weight--;                                                    // decrement recommendation weight -1
+                           r.setRecoWeight(weight);                                     // store the weight back in the recommendation object
+                           theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation
+
+                       // adimpression logic check section
+                       if (theAdImpressions.contains(adPCC)){
+                           r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
+                           weight =  r.getRecoWeight();                                 // get current weight of recommendation
+                           weight = weight -2;                                          // decrementcrement recommendation weight -2 
+                           r.setRecoWeight(weight);                                     // store the weight back in the recommendation object
+                           theRecommendations.set(count, r);                            // replace the previous recommendation with the updated weighted recommendation 
+                        } 
+                        else {
+                           // Build the Recommendation to Create
                            r.setRecoDate(/*set to current data and time*/);
                            r.setRecoWeight(-1);
                            r.setConsumerId(p.getConsumerId());
@@ -143,19 +137,19 @@ public class RecoBuilder {
                            r.setAdPCC(advert.getAdPCC());
                            r.setAdURL(advert.getAdURL());
                            r.setAdOwner(advert.getAdowner());
-                           
-                        // Add the Recommendation to the List
-                        
+                           // Add the Recommendation to the List
                            theRecommendations.add(r);
-                       }
-                   } 
+                            }
+                        } 
                     // Todo: put in logic here for error handling and logging to identify that a choice was not either 1 or 0
-                    // Todo: Build a "Finally" block that adds the list back into the recommendation table.  leverages the business layer to loop through the list
-                    
-                    count++;
-                }
+                    }
+                count++;
             }
-	return true;
+            
+                // Store all recommendations back into the list
+                recmgr.StoreAllRecos(theRecommendations);                               // Note: original recommendations for this user were deleted from the DB above.  there will be no update conflict
+            
+            return true;
                     // Is thePreference[count] positive or negative
                     // Does thePreferences[count] exist in theRecommendations list
                     // If yes and If preference positive, increment theRecommendations weight value +1
