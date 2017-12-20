@@ -10,6 +10,8 @@ import com.canopyaudience.model.domain.advertisement;
 import com.canopyaudience.model.domain.preference;
 import com.canopyaudience.model.domain.recommendation;
 import com.canopyaudience.model.services.exception.PreferenceException;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -75,6 +77,10 @@ public class RecoBuilder {
                    adPCC = advert.getAdPCC();                                           // store PCC value 
                                       
                    if (p.getPreferenceChoice()==1){                                     // If current preference is positive then
+                       
+                       
+                       // start of function.  Pass in weight value of 1, 1.  For next function you'll pass in weight of -1 and -2 
+                       
                        if (theRecommendations.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
                            r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
                            weight =  r.getRecoWeight();                                 // get current weight of recommendation
@@ -93,13 +99,16 @@ public class RecoBuilder {
                         }
                        else {
                            // Build the Recommendation to Create
-                           r.setRecoDate(/*set to current data and time*/);
+                           // ZonedDateTime now = ZonedDateTime.now( ZoneOffset.UTC );
+                           // Instant instant = Instant.now();
+                           ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
+                           r.setRecoDate(now);
                            r.setRecoWeight(1);
                            r.setConsumerId(p.getConsumerId());
-                           r.setProviderId(/*need to put this in one of the above tables*/);
-                           r.setProviderName(/*need to put this in one of the above tables*/);
-                           r.setLocationZip(/*need to put this in preference object*/);
-                           r.setDemographic(/*put this value in one of the above tables?*/);
+                           r.setProviderId(/*need to put this in one of the above tables*/);        // create a provider table with id and name.  put provider ID in consumer domain layer
+                           r.setProviderName(/*need to put this in one of the above tables*/);      // same as above
+                           r.setLocationZip(/*need to put this in preference object*/);              // put this in preference database / domain layer
+                           r.setDemographic(/*put this value in one of the above tables?*/);        // create a demographic table.  put demographic ID in consumer table
                            r.setAdID(advert.getAdID());
                            r.setAdPCC(advert.getAdPCC());
                            r.setAdURL(advert.getAdURL());
@@ -107,7 +116,13 @@ public class RecoBuilder {
                            // Add the Recommendation to the List
                            theRecommendations.add(r);
                         }
-                    }
+                    
+                   
+                   // end of function
+                   
+                   
+                   
+                   }
                    if(p.getPreferenceChoice()==0){                                      // If current preference is negative then
                        if (theRecommendations.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
                            r = theRecommendations.get(p.getAdvertisementID());          // pull that recommendation with the matching AdID into a recommendation domain object
