@@ -102,7 +102,7 @@ public class RecoBuilder {
                            // ZonedDateTime now = ZonedDateTime.now( ZoneOffset.UTC );
                            // Instant instant = Instant.now();
                            ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
-                           r.setRecoDate(now);
+                           r.setRecoDate(now);                                                      // fix date,,, what is format that setRecoDate expects?
                            r.setRecoWeight(1);
                            r.setConsumerId(p.getConsumerId());
                            r.setProviderId(/*need to put this in one of the above tables*/);        // create a provider table with id and name.  put provider ID in consumer domain layer
