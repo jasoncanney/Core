@@ -1,6 +1,7 @@
 package com.canopyaudience.model.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -95,6 +96,23 @@ public class consumer implements Serializable
 	*/
 	private String consumerSocEmail;
 
+        @Column(name = "DemoID")
+	/** 
+	 Demographic ID
+	*/
+	private int demoID;
+        
+        @Column(name = "DeviceLocID")
+	/** 
+	 Device Location ID
+	*/
+	private int deviceLocID;
+        
+        @Column(name = "ProviderID")
+	/** 
+	 Provider ID
+	*/
+	private int providerID;
 
 	/** 
 	  Default Constructor
@@ -105,348 +123,231 @@ public class consumer implements Serializable
 
 	}
 
-	/** 
-	 Overloaded Constructor
-	 @param consumerID
-	 @param consumerFirstName 
-	 @param consumerMiddleInitial 
-	 @param consumerLastName 
-	 @param consumerEmail
-	 @param consumerPhone
-	 @param consumerAddress
-	 @param consumerCity
-	 @param consumerState
-	 @param consumerZip
-	 @param consumerSocEmail
-	*/
+        
+        /*
+        Overloaded Constructor
+        *
+        */
+        public consumer(int consumerID, String consumerFirstName, String consumerMiddleInitial, String consumerLastName, String consumerEmail, String consumerPhone, String consumerAddress, String consumerCity, String consumerState, String consumerZip, String consumerSocEmail, int demoID, int deviceLocID, int providerID) {
+            this.consumerID = consumerID;
+            this.consumerFirstName = consumerFirstName;
+            this.consumerMiddleInitial = consumerMiddleInitial;
+            this.consumerLastName = consumerLastName;
+            this.consumerEmail = consumerEmail;
+            this.consumerPhone = consumerPhone;
+            this.consumerAddress = consumerAddress;
+            this.consumerCity = consumerCity;
+            this.consumerState = consumerState;
+            this.consumerZip = consumerZip;
+            this.consumerSocEmail = consumerSocEmail;
+            this.demoID = demoID;
+            this.deviceLocID = deviceLocID;
+            this.providerID = providerID;
+        }
 
-	public consumer(int consumerID, String consumerFirstName, String consumerMiddleInitial, String consumerLastName, String consumerEmail, String consumerPhone, String consumerAddress, String consumerCity, String consumerState, String consumerZip, String consumerSocEmail)
-	{
-		super();
-		this.consumerID = consumerID;
-		this.consumerFirstName = consumerFirstName;
-		this.consumerMiddleInitial = consumerMiddleInitial;
-		this.consumerLastName = consumerLastName;
-		this.consumerEmail = consumerEmail;
-		this.consumerPhone = consumerPhone;
-		this.consumerAddress = consumerAddress;
-		this.consumerCity = consumerCity;
-		this.consumerState = consumerState;
-		this.consumerZip = consumerZip;
-		this.consumerSocEmail = consumerSocEmail;
-	}
+    public int getConsumerID() {
+        return consumerID;
+    }
 
-	// getters and setters
+    public void setConsumerID(int consumerID) {
+        this.consumerID = consumerID;
+    }
 
-	/** @return  Returns the consumer's ID 
-	 <sets>Sets the consumer's ID</sets>
-	*/
+    public String getConsumerFirstName() {
+        return consumerFirstName;
+    }
 
-	public int getConsumerID()
-	{
-		return consumerID;
-	}
-	public void setConsumerID(int value)
-	{
-		this.consumerID = value;
-	}
+    public void setConsumerFirstName(String consumerFirstName) {
+        this.consumerFirstName = consumerFirstName;
+    }
 
-	/** @return  Returns the consumer's first name. 
-	 <sets>Sets the consumer's first name. </sets>
-	*/
+    public String getConsumerMiddleInitial() {
+        return consumerMiddleInitial;
+    }
 
-	public String getConsumerFirstName()
-	{
-		return consumerFirstName;
-	}
-	public void setConsumerFirstName(String value)
-	{
-		this.consumerFirstName = value;
-	}
+    public void setConsumerMiddleInitial(String consumerMiddleInitial) {
+        this.consumerMiddleInitial = consumerMiddleInitial;
+    }
 
+    public String getConsumerLastName() {
+        return consumerLastName;
+    }
 
+    public void setConsumerLastName(String consumerLastName) {
+        this.consumerLastName = consumerLastName;
+    }
 
-		/** @return  Returns the consumer's middle initial. 
-		 <sets>Sets the consumer's middle initial</sets>
-		*/
+    public String getConsumerEmail() {
+        return consumerEmail;
+    }
 
-		public String getConsumerMiddleInitial()
-		{
-			return consumerMiddleInitial;
-		}
-		public void setConsumerMiddleInitial(String value)
-		{
-			this.consumerMiddleInitial = value;
-		}
+    public void setConsumerEmail(String consumerEmail) {
+        this.consumerEmail = consumerEmail;
+    }
 
-		/** @return  Returns the consumer's last name. 
-		 <sets>Sets the consumer's last name</sets>
-		*/
+    public String getConsumerPhone() {
+        return consumerPhone;
+    }
 
-		public String getConsumerLastName()
-		{
-			return consumerLastName;
-		}
-		public void setConsumerLastName(String value)
-		{
-			this.consumerLastName = value;
-		}
+    public void setConsumerPhone(String consumerPhone) {
+        this.consumerPhone = consumerPhone;
+    }
 
-	/** @return  Returns the consumer's email. 
-	 <sets>Sets the consumer's email</sets>
-	*/
+    public String getConsumerAddress() {
+        return consumerAddress;
+    }
 
-	public String getConsumerEmail()
-	{
-		return consumerEmail;
-	}
-	public void setConsumerEmail(String value)
-	{
-		this.consumerEmail = value;
-	}
+    public void setConsumerAddress(String consumerAddress) {
+        this.consumerAddress = consumerAddress;
+    }
 
-	/** @return  Returns the consumer's Phone 
-	 <sets>Sets the consumer's phone</sets>
-	*/
+    public String getConsumerCity() {
+        return consumerCity;
+    }
 
-	public String getConsumerPhone()
-	{
-		return consumerPhone;
-	}
-	public void setConsumerPhone(String value)
-	{
-		this.consumerPhone = value;
-	}
+    public void setConsumerCity(String consumerCity) {
+        this.consumerCity = consumerCity;
+    }
 
-	/** @return  Returns the consumer's Address 
-	 <sets>Sets the consumer's address</sets>
-	*/
+    public String getConsumerState() {
+        return consumerState;
+    }
 
-	public String getConsumerAddress()
-	{
-		return consumerAddress;
-	}
-	public void setConsumerAddress(String value)
-	{
-		this.consumerAddress = value;
-	}
+    public void setConsumerState(String consumerState) {
+        this.consumerState = consumerState;
+    }
 
-	/** @return  Returns the consumer's city 
-	 <sets>Sets the consumer's city</sets>
-	*/
+    public String getConsumerZip() {
+        return consumerZip;
+    }
 
-	public String getConsumerCity()
-	{
-		return consumerCity;
-	}
-	public void setConsumerCity(String value)
-	{
-		this.consumerCity = value;
-	}
+    public void setConsumerZip(String consumerZip) {
+        this.consumerZip = consumerZip;
+    }
 
-	/** @return  Returns the consumer's State 
-	 <sets>Sets the consumer's State</sets>
-	*/
+    public String getConsumerSocEmail() {
+        return consumerSocEmail;
+    }
 
-	public String getConsumerState()
-	{
-		return consumerState;
-	}
-	public void setConsumerState(String value)
-	{
-		this.consumerState = value;
-	}
+    public void setConsumerSocEmail(String consumerSocEmail) {
+        this.consumerSocEmail = consumerSocEmail;
+    }
 
-	/** @return  Returns the consumer's zip 
-	 <sets>Sets the consumer's zip</sets>
-	*/
+    public int getDemoID() {
+        return demoID;
+    }
 
-	public String getConsumerZip()
-	{
-		return consumerZip;
-	}
-	public void setConsumerZip(String value)
-	{
-		this.consumerZip = value;
-	}
+    public void setDemoID(int demoID) {
+        this.demoID = demoID;
+    }
 
-	/** @return  Returns the consumer's Social Media Email 
-	 <sets>Sets the consumer's Social Media Email</sets>
-	*/
+    public int getDeviceLocID() {
+        return deviceLocID;
+    }
 
-	public String getConsumerSocEmail()
-	{
-		return consumerSocEmail;
-	}
-	public void setConsumerSocEmail(String value)
-	{
-		this.consumerSocEmail = value;
-	}
+    public void setDeviceLocID(int deviceLocID) {
+        this.deviceLocID = deviceLocID;
+    }
 
-	/** 
-	 Validate if the instance variables are valid
-	 
-	 @return  boolean - true if instance variables are valid, else false 
-	*/
-	public boolean validate()
-	{
-/*
-		if (consumerID == null)
-		{
-			return false;
-		} */
-		if (consumerFirstName == null)
-		{
-			 return false;
-		}
-		if (consumerMiddleInitial == null)
-		{
-			return false;
-		}
-		if (consumerLastName == null)
-		{
-			return false;
-		}
-		if (consumerEmail == null)
-		{
-			return false;
-		}
-		if (consumerPhone == null)
-		{
-			return false;
-		}
-		if (consumerAddress == null)
-		{
-			return false;
-		}
+    public int getProviderID() {
+        return providerID;
+    }
 
-		if (consumerCity == null)
-		{
-			return false;
-		}
-		if (consumerState == null)
-		{
-			return false;
-		}
-		if (consumerZip == null)
-		{
-			return false;
-		}
-		if (consumerSocEmail == null)
-		{
-			return false;
-		}
+    public void setProviderID(int providerID) {
+        this.providerID = providerID;
+    }
 
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.consumerID;
+        hash = 67 * hash + Objects.hashCode(this.consumerFirstName);
+        hash = 67 * hash + Objects.hashCode(this.consumerMiddleInitial);
+        hash = 67 * hash + Objects.hashCode(this.consumerLastName);
+        hash = 67 * hash + Objects.hashCode(this.consumerEmail);
+        hash = 67 * hash + Objects.hashCode(this.consumerPhone);
+        hash = 67 * hash + Objects.hashCode(this.consumerAddress);
+        hash = 67 * hash + Objects.hashCode(this.consumerCity);
+        hash = 67 * hash + Objects.hashCode(this.consumerState);
+        hash = 67 * hash + Objects.hashCode(this.consumerZip);
+        hash = 67 * hash + Objects.hashCode(this.consumerSocEmail);
+        hash = 67 * hash + this.demoID;
+        hash = 67 * hash + this.deviceLocID;
+        hash = 67 * hash + this.providerID;
+        return hash;
+    }
 
-	/** Equals Test Method
-	 @param consumerID
-	 @param consumerFirstName 
-	 @param consumerMiddleInitial 
-	 @param consumerLastName 
-	 @param consumerEmail
-	 @param consumerPhone
-	 @param consumerAddress
-	 @param consumerCity
-	 @param consumerState
-	 @param consumerZip
-	 @param consumerSocEmail
-	*/
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final consumer other = (consumer) obj;
+        if (this.consumerID != other.consumerID) {
+            return false;
+        }
+        if (this.demoID != other.demoID) {
+            return false;
+        }
+        if (this.deviceLocID != other.deviceLocID) {
+            return false;
+        }
+        if (this.providerID != other.providerID) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerFirstName, other.consumerFirstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerMiddleInitial, other.consumerMiddleInitial)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerLastName, other.consumerLastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerEmail, other.consumerEmail)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerPhone, other.consumerPhone)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerAddress, other.consumerAddress)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerCity, other.consumerCity)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerState, other.consumerState)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerZip, other.consumerZip)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerSocEmail, other.consumerSocEmail)) {
+            return false;
+        }
+        return true;
+    }
 
-	public boolean equals(consumer consumer)
+    @Override
+    public String toString() {
+        return "consumer{" + "consumerID=" + consumerID + ", consumerFirstName=" + consumerFirstName + ", consumerMiddleInitial=" + consumerMiddleInitial + ", consumerLastName=" + consumerLastName + ", consumerEmail=" + consumerEmail + ", consumerPhone=" + consumerPhone + ", consumerAddress=" + consumerAddress + ", consumerCity=" + consumerCity + ", consumerState=" + consumerState + ", consumerZip=" + consumerZip + ", consumerSocEmail=" + consumerSocEmail + ", demoID=" + demoID + ", deviceLocID=" + deviceLocID + ", providerID=" + providerID + '}';
+    }
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	{
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
 
-			if (!(new Integer(consumerID)).equals(consumer.consumerID))
-			{
-				return false;
-			}
-
-			if (!consumerFirstName.equals(consumer.consumerFirstName))
-			{
-				return false;
-			}
-			if (!consumerMiddleInitial.equals(consumer.consumerMiddleInitial))
-			{
-				return false;
-			}
-			if (!consumerLastName.equals(consumer.consumerLastName))
-			{
-				return false;
-			}
-
-			if (!consumerEmail.equals(consumer.consumerEmail))
-			{
-				return false;
-			}
-			if (!consumerPhone.equals(consumer.consumerPhone))
-			{
-				return false;
-			}
-			if (!consumerAddress.equals(consumer.consumerAddress))
-			{
-				return false;
-			}
-
-			if (!consumerCity.equals(consumer.consumerCity))
-			{
-				return false;
-			}
-			if (!consumerState.equals(consumer.consumerState))
-			{
-				return false;
-			}
-			if (!consumerZip.equals(consumer.consumerZip))
-			{
-				return false;
-			}
-			if (!consumerSocEmail.equals(consumer.consumerSocEmail))
-			{
-				return false;
-			}
-
-		return true;
-	}
-
-		/** 
-		 Constructs a <code>STring</code> with all attributes
-		 in name = value format
-		 
-		 @return a <code>String</code> representation
-		 of this object
-		 
-		*/
-
-		@Override
-		public String toString()
-		{
-			StringBuilder strBfr = new StringBuilder();
-			strBfr.append("consumerID:");
-			strBfr.append(consumerID);
-			strBfr.append("consumerFirstName:");
-			strBfr.append(consumerFirstName);
-			strBfr.append("\nconsumerMiddleInitial:");
-			strBfr.append(consumerMiddleInitial);
-			strBfr.append("\nconsumerLastName:");
-			strBfr.append(consumerLastName);
-			strBfr.append("\nconsumerEmail:");
-			strBfr.append(consumerEmail);
-			strBfr.append("\nconsumerPhone:");
-			strBfr.append(consumerPhone);
-			strBfr.append("\nconsumerAddress:");
-			strBfr.append(consumerAddress);
-			strBfr.append("\nconsumerCity:");
-			strBfr.append(consumerCity);
-			strBfr.append("\nconsumerState:");
-			strBfr.append(consumerState);
-			strBfr.append("\nconsumerZip:");
-			strBfr.append(consumerZip);
-			strBfr.append("\nconsumerSocEmail:");
-			strBfr.append(consumerSocEmail);
-
-		return strBfr.toString();
-		}
-
+        
 }

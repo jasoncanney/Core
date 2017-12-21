@@ -33,30 +33,10 @@ public class consumerTest extends TestCase {
 	@Before	
 	public void setUp() throws Exception {
 
-        consumer1 = new consumer (12345, "01", "02", "03","04","05","06","07","08","09","10");    
-        consumer2 = new consumer (12346, "01", "02", "03","04","05","06","07","08","09","10");
+        consumer1 = new consumer (12345, "01", "02", "03","04","05","06","07","08","09","10", 1, 2, 3);    
+        consumer2 = new consumer (12346, "01", "02", "03","04","05","06","07","08","09","10", 1, 2, 3);
 	}
         
-    /**
-     * Test of validate method, of class consumer.
-     */
-    @Test
-    public void testValidateconsumer1() {
-        log.info("starting testValidateconsumer1()");
-	assertTrue ("consumer validates", consumer1.validate());
-	log.info("testValidateconsumer PASSED");
-    }
-
-    /**
-     * Test of validate method, of class consumer.
-     */
-    @Test
-    public void testValidateconsumer2() {
-        log.info("starting testValidateconsumer2()");
-	assertTrue ("consumer validates", consumer2.validate());
-	log.info("testValidateconsumer PASSED");
-    }
-    
     /**
      * Test of equals method, of class advertisement.
      */

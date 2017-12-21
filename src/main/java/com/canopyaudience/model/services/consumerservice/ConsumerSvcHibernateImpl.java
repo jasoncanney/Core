@@ -34,38 +34,35 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
         @Override
   public boolean storeConsumer(consumer consumer)
         {
-          boolean status = true;
+          
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("storeConsumer - ConsumerSvcHibernateImpl.java");
- 
             consumer appdb  = consumer;
             Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
+            {    
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                session.getTransaction().commit();    
                 log.info("consumer saved. Check database for data!");
-                session.close();                                                 // added this line to fix session closing
-
+                tx.commit();
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  
@@ -79,41 +76,34 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
     public List<consumer> getConsumer() throws ConsumerException, ClassNotFoundException {
         
         {
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getConsumer - ConsumerSvcHibernateImpl.java");
- 
             Transaction tx = null;
-            
             List<consumer> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                
-                // query students
                 theApplications = session.createQuery("from consumer").getResultList();
                 log.info ("session.createQuery passed");
-                session.close();   
                 log.info("consumer queried and put into List.");
+                tx.commit();
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
-            // return (Set<consumer>) theApplications;
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return theApplications;
 
        }  
@@ -131,39 +121,32 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
             
             int i = id;
             consumer c = new consumer();
-            
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getConsumer - ConsumerSvcHibernateImpl.java");
- 
             Transaction tx = null;
-            
-            // List<consumer> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(consumer.class, i);
-                session.close();   
-
+                tx.commit();
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
-                return c;              
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            return c;              
        }  
     }
   
@@ -171,7 +154,7 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
   * Updates consumerHistory object received from GUI and put in database
   * @return boolean
   */
-        @Override
+  @Override
   public boolean updateConsumer(consumer consumer)
         {
           boolean status = true;
@@ -188,14 +171,13 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
             // will be used to make updates and store back in the db
             consumer appnew = null;
             Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
-                log.info ("beginTransaction, Getting consumer with consumerid:" + appdb.getConsumerID());
-                
+                log.info ("beginTransaction, Getting consumer with consumerid:" + appdb.getConsumerID());   
                 // retrieve the current application object from the database
                 appnew = session.get(consumer.class, appdb.getConsumerID());
                 // update all fields in the current advertisement object except the PK of consumerID  
@@ -209,28 +191,21 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
                 appnew.setConsumerState(appdb.getConsumerState());
                 appnew.setConsumerZip(appdb.getConsumerZip());
                 appnew.setConsumerSocEmail(appdb.getConsumerSocEmail());
-
 		System.out.println("Updating consumer...");
-
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);
-                
-		// commit the transaction
-		session.getTransaction().commit();
-                
                 log.info("consumer updated. Check database for data!");
-                session.close();                                                 // added this line to fix session closing
-
+                tx.commit();
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  
@@ -239,41 +214,37 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
      * @param consumer
      * @return boolean of applications
      */
-        @Override
+    @Override
     public boolean deleteConsumer(consumer consumer)
         {
           boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("deleteConsumer - ConsumerSvcHibernateImpl.java");
- 
             consumer appdb  = consumer;
             Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(consumer passed in)");
-                session.getTransaction().commit();                               // added this line to fix session closing
                 log.info("consumer deleted. Check database for data not there!");
-                session.close();                                                 // added this line to fix session closing
-
+                tx.commit();
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
             }
             return status;
        }  

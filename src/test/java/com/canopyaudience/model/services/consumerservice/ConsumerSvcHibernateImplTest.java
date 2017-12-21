@@ -6,7 +6,6 @@
 package com.canopyaudience.model.services.consumerservice;
 
 import com.canopyaudience.model.domain.consumer;
-import com.canopyaudience.model.services.exception.ConsumerException;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
@@ -34,9 +33,9 @@ public class ConsumerSvcHibernateImplTest extends TestCase{
 		
 		super.setUp();
                 // Factory factory = Factory.getInstance();
-		consumer1 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10");                
-                consumer2 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10");             
-                consumer3 = new consumer (86731, "1", "2", "3", "4", "5","6","7","8","9","10");           
+		consumer1 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10",1,2,3);                
+                consumer2 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10",1,2,3);             
+                consumer3 = new consumer (86731, "1", "2", "3", "4", "5","6","7","8","9","10",1,2,3);           
 
         }
         /*
