@@ -7,8 +7,10 @@ package com.canopyaudience.model.business.manager;
 
 import com.canopyaudience.model.domain.adimpression;
 import com.canopyaudience.model.domain.advertisement;
+import com.canopyaudience.model.domain.consumer;
 import com.canopyaudience.model.domain.preference;
 import com.canopyaudience.model.domain.recommendation;
+import com.canopyaudience.model.domain.provider;
 import com.canopyaudience.model.services.exception.PreferenceException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -32,6 +34,10 @@ public class RecoBuilder {
         recoManager recmgr = new recoManager();
         //create an instance of the advertisement business manager object
         adManager advertmgr = new adManager();
+        // create an instance of the consumer business manager object
+        consumerManager conmgr = new consumerManager();
+        // create an instance of the provider business manager object
+        providerManager provmgr = new providerManager();
         
         /*
 	* Category set in config/log4j.properties as
@@ -48,6 +54,16 @@ public class RecoBuilder {
 	public final boolean BuildNewRecsForAUser(int id) throws PreferenceException, ClassNotFoundException
 	{
                 int i = id;
+                int count = 0;                                                          // counter for main algorithm loop
+                int weight = 0;                                                         // weight counter for updating recommendation weights in main algorithm
+                String adPCC;
+                preference p = new preference();                                        // create new preference object
+                recommendation r = new recommendation();                                // create new recommendation object
+                adimpression a = new adimpression();                                    // create new adimpression object
+                advertisement advert = new advertisement();                             // create new advertisement object
+                consumer con = new consumer();                                          // create new consumer object
+                provider prov = new provider();                                         // create a new provider object
+                
                 List<preference> thePreferences = null;
                 List<adimpression> theAdImpressions = null;
                 List<recommendation> theRecommendations = null;
@@ -61,14 +77,12 @@ public class RecoBuilder {
                 recmgr.DeleteAllRecos(theRecommendations);                              // Delete current recommendations for this user from the database Note: List still exists and will be restored to the DB at the end of this class
                 log.info (theRecommendations);
                 theAdvertisements = advertmgr.Get();
+                con = conmgr.GetA(id);                                                  // Retrieve consumer object for this user from the database
+                prov = provmgr.GetA(id);                                                // Retrieve provider object for this user from the database
                 
-                int count = 0;                                                          // counter for main algorithm loop
-                int weight = 0;                                                         // weight counter for updating recommendation weights in main algorithm
-                String adPCC;
-                preference p = new preference();                                        // create new preference object
-                recommendation r = new recommendation();                                // create new recommendation object
-                adimpression a = new adimpression();                                    // create new adimpression object
-                advertisement advert = new advertisement();                             // create new advertisement object
+                // Start of main patent algorithm to build weighted recommendations
+                // Leverages preferences + machine learning to build intelligent recommendations
+                // for individual consumers
                 
                 while (count < thePreferences.size()) {                                 // start of main canopy audience recommendation weighting loop - patent logic
                    
@@ -99,16 +113,14 @@ public class RecoBuilder {
                         }
                        else {
                            // Build the Recommendation to Create
-                           // ZonedDateTime now = ZonedDateTime.now( ZoneOffset.UTC );
-                           // Instant instant = Instant.now();
                            ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
                            r.setRecoDate(now);                                                      // fix date,,, what is format that setRecoDate expects?
                            r.setRecoWeight(1);
                            r.setConsumerId(p.getConsumerId());
-                           r.setProviderId(/*need to put this in one of the above tables*/);        // create a provider table with id and name.  put provider ID in consumer domain layer
-                           r.setProviderName(/*need to put this in one of the above tables*/);      // same as above
-                           r.setLocationZip(/*need to put this in preference object*/);              // put this in preference database / domain layer
-                           r.setDemographic(/*put this value in one of the above tables?*/);        // create a demographic table.  put demographic ID in consumer table
+                           r.setProviderId(con.getProviderID());                                    // Retrieves Provider ID based on current consumer ID
+                           r.setProviderName(prov.getProviderName());                               // Retrieves Provider name based on individual consumer ID
+                           r.setLocationZip(con.getDeviceLocID());                                  // Retrieves Device Location ID stored in consumer object
+                           r.setDemographic(con.getDemoID());                                       // Retrieves demographic identifier stored in consumer object
                            r.setAdID(advert.getAdID());
                            r.setAdPCC(advert.getAdPCC());
                            r.setAdURL(advert.getAdURL());
@@ -141,13 +153,13 @@ public class RecoBuilder {
                         } 
                         else {
                            // Build the Recommendation to Create
-                           r.setRecoDate(/*set to current data and time*/);
-                           r.setRecoWeight(-1);
+                           ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);                   // move this above?
+                           r.setRecoDate(now);                                                      // fix date,,, what is format that setRecoDate expects?                           r.setRecoWeight(-1);
                            r.setConsumerId(p.getConsumerId());
-                           r.setProviderId(/*need to put this in one of the above tables*/);
-                           r.setProviderName(/*need to put this in one of the above tables*/);
-                           r.setLocationZip(/*need to put this in preference object*/);
-                           r.setDemographic(/*put this value in one of the above tables?*/);
+                           r.setProviderId(con.getProviderID());                                    // Retrieves Provider ID based on current consumer ID
+                           r.setProviderName(prov.getProviderName());                               // Retrieves Provider name based on individual consumer ID
+                           r.setLocationZip(con.getDeviceLocID());                                  // Retrieves Device Location ID stored in consumer object
+                           r.setDemographic(con.getDemoID());                                       // Retrieves demographic identifier stored in consumer object
                            r.setAdID(advert.getAdID());
                            r.setAdPCC(advert.getAdPCC());
                            r.setAdURL(advert.getAdURL());
