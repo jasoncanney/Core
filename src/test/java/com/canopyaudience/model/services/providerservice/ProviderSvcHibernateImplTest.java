@@ -5,15 +5,11 @@
  */
 package com.canopyaudience.model.services.providerservice;
 
-import com.canopyaudience.model.domain.consumer;
 import com.canopyaudience.model.domain.provider;
-import com.canopyaudience.model.services.consumerservice.ConsumerSvcHibernateImpl;
-import com.canopyaudience.model.services.consumerservice.ConsumerSvcHibernateImplTest;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
 
 /**
