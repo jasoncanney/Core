@@ -57,7 +57,7 @@ public class providerManagerTest extends TestCase{
 
     /**
      * Test of Get method, of class consumerManager.
-     */
+     *//*
     @Test
     public void test2GetA() throws Exception {
         log.info ("providerManagerTest - test2GetA");
@@ -65,10 +65,10 @@ public class providerManagerTest extends TestCase{
         provider c = instance.GetA(provider1.getProviderID());
         assertEquals(c.getProviderID(), provider1.getProviderID());   
     }
-    
+    */
     /**
      * Test of Update method, of class consumerManager.
-     */
+     *//*
     @Test
     public void test3Update() {
          log.info ("providerManagerTest - test3Update");
@@ -76,7 +76,7 @@ public class providerManagerTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.Update(provider1);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);        
-    }
+    }*/
 
     /**
      * Test of Delete method, of class consumerManager.
