@@ -78,6 +78,24 @@ public class recoManager extends ManagerSuperType
 
 	}
 
+        
+        /** 
+	 Business use case for "delete a LIST of recommendations"
+	 @param c
+        * @return 
+	*/
+	public final boolean DeleteAllRecos(List<recommendation> c)
+	{
+            int i = 0;
+        
+            while (i < c.size()) {
+            recoSvc.deleteReco(c.get(i));
+            i++;
+            }
+	
+            return true;
+	}
+                
 	/** 
 	 Business use case for "delete recommendation"
 	 

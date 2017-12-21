@@ -256,7 +256,7 @@ public class RecoSvcHibernateImpl implements IRecoSvc
             }
             return status;
        }  
-    /**
+        /**
 	 * Gets a hibernate session from HibernateFactory
 	 * 
 	 * @return org.hibernate.Session
