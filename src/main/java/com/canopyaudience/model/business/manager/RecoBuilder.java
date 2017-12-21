@@ -12,8 +12,10 @@ import com.canopyaudience.model.domain.preference;
 import com.canopyaudience.model.domain.recommendation;
 import com.canopyaudience.model.domain.provider;
 import com.canopyaudience.model.services.exception.PreferenceException;
+import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -112,9 +114,12 @@ public class RecoBuilder {
                             }  
                         }
                        else {
+                           
                            // Build the Recommendation to Create
-                           ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
-                           r.setRecoDate(now);                                                      // fix date,,, what is format that setRecoDate expects?
+                           
+                           // ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
+                           Date now = Date.from(Instant.MIN);
+                           r.setRecoDate(now);                                                      // Current date stamp
                            r.setRecoWeight(1);
                            r.setConsumerId(p.getConsumerId());
                            r.setProviderId(con.getProviderID());                                    // Retrieves Provider ID based on current consumer ID
@@ -153,8 +158,9 @@ public class RecoBuilder {
                         } 
                         else {
                            // Build the Recommendation to Create
-                           ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);                   // move this above?
-                           r.setRecoDate(now);                                                      // fix date,,, what is format that setRecoDate expects?                           r.setRecoWeight(-1);
+
+                           Date now = Date.from(Instant.MIN);
+                           r.setRecoDate(now);                                                      // Current date stamp                           
                            r.setConsumerId(p.getConsumerId());
                            r.setProviderId(con.getProviderID());                                    // Retrieves Provider ID based on current consumer ID
                            r.setProviderName(prov.getProviderName());                               // Retrieves Provider name based on individual consumer ID
