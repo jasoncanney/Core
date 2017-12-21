@@ -106,7 +106,7 @@ public class consumer implements Serializable
 	/** 
 	 Device Location ID
 	*/
-	private int deviceLocID;
+	private String deviceLocID;
         
         @Column(name = "ProviderID")
 	/** 
@@ -128,7 +128,7 @@ public class consumer implements Serializable
         Overloaded Constructor
         *
         */
-        public consumer(int consumerID, String consumerFirstName, String consumerMiddleInitial, String consumerLastName, String consumerEmail, String consumerPhone, String consumerAddress, String consumerCity, String consumerState, String consumerZip, String consumerSocEmail, int demoID, int deviceLocID, int providerID) {
+        public consumer(int consumerID, String consumerFirstName, String consumerMiddleInitial, String consumerLastName, String consumerEmail, String consumerPhone, String consumerAddress, String consumerCity, String consumerState, String consumerZip, String consumerSocEmail, int demoID, String deviceLocID, int providerID) {
             this.consumerID = consumerID;
             this.consumerFirstName = consumerFirstName;
             this.consumerMiddleInitial = consumerMiddleInitial;
@@ -241,11 +241,11 @@ public class consumer implements Serializable
         this.demoID = demoID;
     }
 
-    public int getDeviceLocID() {
+    public String getDeviceLocID() {
         return deviceLocID;
     }
 
-    public void setDeviceLocID(int deviceLocID) {
+    public void setDeviceLocID(String deviceLocID) {
         this.deviceLocID = deviceLocID;
     }
 
@@ -272,7 +272,7 @@ public class consumer implements Serializable
         hash = 67 * hash + Objects.hashCode(this.consumerZip);
         hash = 67 * hash + Objects.hashCode(this.consumerSocEmail);
         hash = 67 * hash + this.demoID;
-        hash = 67 * hash + this.deviceLocID;
+        hash = 67 * hash + Objects.hashCode(this.deviceLocID);
         hash = 67 * hash + this.providerID;
         return hash;
     }
@@ -295,7 +295,7 @@ public class consumer implements Serializable
         if (this.demoID != other.demoID) {
             return false;
         }
-        if (this.deviceLocID != other.deviceLocID) {
+        if (!Objects.equals(this.deviceLocID , other.deviceLocID)) {
             return false;
         }
         if (this.providerID != other.providerID) {
