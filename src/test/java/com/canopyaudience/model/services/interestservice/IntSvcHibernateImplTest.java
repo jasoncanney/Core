@@ -6,12 +6,15 @@
 package com.canopyaudience.model.services.interestservice;
 
 import com.canopyaudience.model.domain.interest;
+import com.canopyaudience.model.services.exception.IntException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -54,7 +57,7 @@ public class IntSvcHibernateImplTest extends TestCase{
     
     
     /**
-     * Test of storePreference method, of class PreferenceSvcHibernateImpl.
+     * Test of storeInterest method, of class IntSvcHibernateImpl.
      */
     @Test
     public void test1StoreInterest() {
@@ -65,5 +68,19 @@ public class IntSvcHibernateImplTest extends TestCase{
         assertEquals(expResult, result);   
     }
 
+    /**
+     * Test of storeInterest method, of class IntSvcHibernateImpl.
+     *//*
+    @Test
+    public void test2GetMahoutInterest() throws IntException, ClassNotFoundException, TasteException {
+        log.info ("IntSvcHibernateImplTest - test2GetMahoutInterest");
+        IntSvcHibernateImpl instance = new IntSvcHibernateImpl();
+        // boolean expResult = true;
+        AbstractJDBCDataModel result = instance.getMahoutInterest();
+        log.info(result);
+        assertNotNull(result);   
+    }*/
+    
+    
     
 }

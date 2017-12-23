@@ -10,6 +10,9 @@ import com.canopyaudience.model.services.exception.IntException;
 import com.canopyaudience.model.services.factory.HibernateFactory;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -153,13 +156,52 @@ public class IntSvcHibernateImpl implements IIntSvc
        }  
     }
     
+     /**
+     * Pulls data from database through hibernate interface
+     * @return <list> of interest
+     * @throws java.lang.ClassNotFoundException
+     * @throws org.apache.mahout.cf.taste.common.TasteException
+     */
+    @Override
+    public AbstractJDBCDataModel getMahoutInterest() throws IntException, ClassNotFoundException, TasteException {
+        {
+            log.info("-------------------------------");
+            log.info("Using Hibernate Implementation");
+            log.info("-------------------------------");
+            log.info ("getMahoutInterest - IntSvcHibernateImpl.java");
+            AbstractJDBCDataModel theApplications = new MySQLJDBCDataModel();
+            Session session = fetchSession();
+            log.info ("fetched session");
+            try 
+            {
+                Transaction tx = session.beginTransaction();
+                log.info ("beginTransaction");
+                theApplications = (AbstractJDBCDataModel) session.createQuery("ConsumerID, IntWeight, AdID from interest").getResultList();
+                log.info ("session.createQuery passed");
+                log.info("interest queried and put into List.");
+                tx.commit();
+            }
+            catch(Exception e)
+            {
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
+            return theApplications;
+       }  
+    }
+  
     /**
     * Updates interest object received from GUI and put in database
     * @return boolean
     */
   public boolean updateInt(interest interest)
         {
-          boolean status = true;
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");

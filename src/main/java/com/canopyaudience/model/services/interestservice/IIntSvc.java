@@ -4,6 +4,8 @@ import com.canopyaudience.model.domain.*;
 import com.canopyaudience.model.services.*;
 import com.canopyaudience.model.services.exception.IntException;
 import java.util.List;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.AbstractJDBCDataModel;
 
 /** 
  This interface defines methods for storing and retrieving interest
@@ -39,6 +41,14 @@ public interface IIntSvc extends IService
         */
         public List<interest> getAInt(int id) throws IntException, ClassNotFoundException;
         
+        /**
+         * Pulls data from database through hibernate interface
+         * @return <list> of interest
+         * @throws java.lang.ClassNotFoundException
+         * @throws org.apache.mahout.cf.taste.common.TasteException
+         */
+        public AbstractJDBCDataModel getMahoutInterest() throws IntException, ClassNotFoundException, TasteException;
+
 	/** 
 	 Updates a interest
 	 The updateReco takes in a interest object as input and will pass it to the recoSvcImpl 
