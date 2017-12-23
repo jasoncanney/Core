@@ -5,6 +5,7 @@ import com.canopyaudience.model.domain.adimpression;
 import com.canopyaudience.model.domain.consumer;
 import com.canopyaudience.model.domain.consumerHistory;
 import com.canopyaudience.model.domain.coupon;
+import com.canopyaudience.model.domain.interest;
 import com.canopyaudience.model.domain.login;
 import com.canopyaudience.model.domain.myads;
 import com.canopyaudience.model.domain.preference;
@@ -82,8 +83,9 @@ public class HibernateFactory {
                     cfg.addAnnotatedClass(myads.class);
                     cfg.addAnnotatedClass(recommendation.class);
                     cfg.addAnnotatedClass(provider.class);
+                    cfg.addAnnotatedClass(interest.class);
 
-                    log.info ("addAnnotatedClass: recommendation.class ------ If you see this log info, make sure you updated HibernateFactory.java with appropriate annotation");
+                    log.info ("addAnnotatedClass: If you see this log info, make sure you updated HibernateFactory.java with appropriate annotation");
                     // cfg.addAnnotatedClass(adimpression.class);
 	
          // updated with the update to Hibernate 5.  The previous ServiceRegistryBuilder was deprecated in Hibernate4           

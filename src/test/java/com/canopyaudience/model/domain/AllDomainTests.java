@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
  /** runs all domain level classes in this suite */
 @RunWith(Suite.class)
-@SuiteClasses({ providerTest.class, adimpressionTest.class, recommendationTest.class, advertisementTest.class, consumerTest.class, consumerHistoryTest.class, couponTest.class, loginTest.class, myadsTest.class, preferenceTest.class})
+@SuiteClasses({ providerTest.class, adimpressionTest.class, interestTest.class, advertisementTest.class, consumerTest.class, consumerHistoryTest.class, couponTest.class, loginTest.class, myadsTest.class, preferenceTest.class})
 public class AllDomainTests {
 
 }
