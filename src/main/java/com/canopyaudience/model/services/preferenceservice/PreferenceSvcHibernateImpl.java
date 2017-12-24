@@ -52,6 +52,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
+                log.info (appdb);
                 log.info("preference saved. Check database for data!");
             }
             catch(Exception e)
