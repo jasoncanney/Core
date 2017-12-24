@@ -169,14 +169,16 @@ public class IntSvcHibernateImpl implements IIntSvc
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
             log.info ("getMahoutInterest - IntSvcHibernateImpl.java");
-            AbstractJDBCDataModel theApplications = new MySQLJDBCDataModel();
+            MySQLJDBCDataModel theApplications = new MySQLJDBCDataModel();
+            // AbstractJDBCDataModel theApplications = new MySQLJDBCDataModel();
             Session session = fetchSession();
             log.info ("fetched session");
             try 
             {
                 Transaction tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                theApplications = (AbstractJDBCDataModel) session.createQuery("ConsumerID, IntWeight, AdID from interest").getResultList();
+                theApplications = (MySQLJDBCDataModel)session.createQuery("ConsumerID, IntWeight, AdID from interest").getResultList();
+                // theApplications = (AbstractJDBCDataModel) session.createQuery("ConsumerID, IntWeight, AdID from interest").getResultList();
                 log.info ("session.createQuery passed");
                 log.info("interest queried and put into List.");
                 tx.commit();
