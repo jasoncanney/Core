@@ -69,7 +69,7 @@ public class ProviderSvcHibernateImplTest extends TestCase{
     } */
     /**
      * Test of updateConsumer method, of class ConsumerSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test3UpdateProvider() {
           log.info ("ProviderSvcHibernateImplTest - test3UpdateProvider");
@@ -77,7 +77,7 @@ public class ProviderSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.updateProvider(provider1);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);    
-    }
+    }*/
 
     /**
      * Test of deleteConsumer method, of class ConsumerSvcHibernateImpl.

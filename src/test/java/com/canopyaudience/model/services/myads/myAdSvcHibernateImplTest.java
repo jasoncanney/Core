@@ -80,7 +80,7 @@ public class myAdSvcHibernateImplTest extends TestCase{
     
     /**
      * Test of test3UpdatemyAds method, of class myAdSvcHibernateImplTest.
-     */
+     *//*
     @Test
     public void test3UpdatemyAds() {
     log.info ("myAdSvcHibernateImplTest - test3UpdatemyAds");
@@ -88,7 +88,7 @@ public class myAdSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.updatemyAds(myads2); // myads2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);    
-    }
+    }*/
   
     /**
      * Test of test4DeletemyAds method, of class myAdSvcHibernateImplTest.

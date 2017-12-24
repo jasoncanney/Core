@@ -58,7 +58,7 @@ public class IntSvcHibernateImplTest extends TestCase{
     
     /**
      * Test of storeInterest method, of class IntSvcHibernateImpl.
-     *//*
+     */
     @Test
     public void test1StoreInterest() {
         log.info ("IntSvcHibernateImplTest - test1StoreInterest");
@@ -66,11 +66,11 @@ public class IntSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.storeInt(interest1);  
         assertEquals(expResult, result);   
-    }*/
+    }
 
     /**
      * Test of storeInterest method, of class IntSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test2GetMahoutInterest() throws IntException, ClassNotFoundException, TasteException {
         log.info ("IntSvcHibernateImplTest - test2GetMahoutInterest");
@@ -79,7 +79,7 @@ public class IntSvcHibernateImplTest extends TestCase{
         AbstractJDBCDataModel result = instance.getMahoutInterest();
         log.info(result);
         assertNotNull(result);   
-    }
+    }*/
     
     
     
