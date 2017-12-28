@@ -20,8 +20,11 @@ import java.util.Date;
  */
 class DateAndTimeDeserialize extends JsonDeserializer<Date> {
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(
-            "yyyy-MM-dd HH:mm:ss");
+    private final SimpleDateFormat dateFormat;
+
+    DateAndTimeDeserialize() {
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    }
 
     @Override
     public Date deserialize(JsonParser paramJsonParser,
