@@ -1,6 +1,7 @@
 package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 
 import java.io.Serializable;
@@ -47,6 +48,7 @@ public class recommendation implements Serializable
 	 @param - recoDate is the date the preference was stored by the mobile app
 	*/
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonDeserialize(using=DateAndTimeDeserialize.class)
         @Temporal(javax.persistence.TemporalType.DATE)
         private Date recoDate;
          

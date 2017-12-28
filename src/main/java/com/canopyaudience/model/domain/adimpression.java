@@ -1,6 +1,7 @@
 package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 import java.io.Serializable;
 import java.util.Date;
@@ -118,6 +119,7 @@ public class adimpression implements Serializable
         /** 
 	 AdImpression viewStartTime
 	*/
+        @JsonDeserialize(using=DateAndTimeDeserialize.class)
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date viewStartTime;
@@ -126,6 +128,7 @@ public class adimpression implements Serializable
         /** 
 	 AdImpression viewEndTime
 	*/
+        @JsonDeserialize(using=DateAndTimeDeserialize.class)
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date viewEndTime;
