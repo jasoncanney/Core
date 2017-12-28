@@ -82,22 +82,17 @@ public class InterestBuilder {
                 // for individual consumers
                 
                 while (count < thePreferences.size()) {                                 // start of main canopy audience interest weighting loop - patent logic
-                   
                    p = thePreferences.get(count);                                       // pull out current preference for using in algorithm 
                    advert = theAdvertisements.get(p.getAdvertisementID());              // pull advertisement object from list to get to PCC value
                    adPCC = advert.getAdPCC();                                           // store PCC value 
-                                      
                    if (p.getPreferenceChoice()==1){                                     // If current preference is positive then
-                       
                        // start of function.  Pass in weight value of 1, 1.  For next function you'll pass in weight of -1 and -2 
-                       
                        if (theInterests.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
                            r = theInterests.get(p.getAdvertisementID());          // pull that interest with the matching AdID into a interest domain object
                            weight =  r.getIntWeight();                                 // get current weight of interest
                            weight++;                                                    // increment interest weight +1
                            r.setIntWeight(weight);                                     // store the weight back in the interest object
                            theInterests.set(count, r);                            // replace the previous interest with the updated weighted interest
-                    
                            // adimpression logic check section
                            if (theAdImpressions.contains(adPCC)){
                                r = theInterests.get(p.getAdvertisementID());      // pull that interest with the matching AdID into a interest domain object
@@ -108,9 +103,7 @@ public class InterestBuilder {
                             }  
                         }
                        else {
-                           
                            // Build the Recommendation to Create
-                           
                            // ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
                            Date now = Date.from(Instant.MIN);
                            r.setIntDate(now);                                                      // Current date stamp
@@ -127,9 +120,7 @@ public class InterestBuilder {
                            // Add the Recommendation to the List
                            theInterests.add(r);
                         }
-                 
                    // end of function
-                  
                    }
                    if(p.getPreferenceChoice()==0){                                      // If current preference is negative then
                        if (theInterests.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
@@ -138,7 +129,6 @@ public class InterestBuilder {
                            weight--;                                                    // decrement interest weight -1
                            r.setIntWeight(weight);                                     // store the weight back in the interest object
                            theInterests.set(count, r);                            // replace the previous interest with the updated weighted interest
-
                        // adimpression logic check section
                        if (theAdImpressions.contains(adPCC)){
                            r = theInterests.get(p.getAdvertisementID());          // pull that interest with the matching AdID into a interest domain object
@@ -149,7 +139,6 @@ public class InterestBuilder {
                         } 
                         else {
                            // Build the Recommendation to Create
-
                            Date now = Date.from(Instant.MIN);
                            r.setIntDate(now);                                                      // Current date stamp                           
                            r.setConsumerId(p.getConsumerId());
@@ -165,7 +154,7 @@ public class InterestBuilder {
                            theInterests.add(r);
                             }
                         } 
-                    // Todo: put in logic here for error handling and logging to identify that a choice was not either 1 or 0
+                    // 
                     }
                 count++;
             }
