@@ -16,7 +16,7 @@ import com.canopyaudience.model.business.manager.*;
  */
 
 @RunWith(Suite.class)
-@SuiteClasses({ adImpManagerTest.class, adManagerTest.class, consumerHistoryManagerTest.class,consumerManagerTest.class, couponManagerTest.class,loginManagerTest.class,preferenceManagerTest.class,myadsManagerTest.class,intManagerTest.class})
+@SuiteClasses({ adImpManagerTest.class, adManagerTest.class, consumerHistoryManagerTest.class,consumerManagerTest.class, couponManagerTest.class,loginManagerTest.class,preferenceManagerTest.class,myadsManagerTest.class})
 public class AllBusinessTests {
 
 }

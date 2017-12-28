@@ -78,7 +78,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     /**
      * Test of getaConsumer method, of class AdImpressionSvcHibernateImpl.
      */ /*
-    @Test
+    //@Test
     public void test2GetAAdImpression() throws AdImpressionException, ClassNotFoundException {
         log.info ("AdImpressionSvcHibernateImplTest - test2GetAAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
@@ -90,7 +90,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     /**
      * Test of updateAdImpression method, of class AdImpressionSvcHibernateImpl.
      *//*
-    @Test
+    //@Test
     public void test3UpdateAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testUpdateAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
@@ -102,7 +102,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     /**
      * Test of deleteAdImpression method, of class AdImpressionSvcHibernateImpl.
      *//*
-    @Test
+    //@Test
     public void test4DeleteAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testDeleteAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();

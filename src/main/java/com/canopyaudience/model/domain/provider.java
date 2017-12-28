@@ -61,8 +61,15 @@ public class provider implements Serializable
         this.providerID = providerID;
         this.providerName = providerName;
     }
+
+    public provider(int identifier, int providerID, String providerName) {
+        this.identifier = identifier;
+        this.providerID = providerID;
+        this.providerName = providerName;
+    }
         
-        
+      
+    
 
     public int getIdentifier() {
         return identifier;

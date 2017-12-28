@@ -64,7 +64,7 @@ public class AdSvcHibernateImplTest extends TestCase{
     /**
      * Test of getAdvertisement method, of class AdSvcHibernateImpl.
      *//*
-    @Test
+    //@Test
     public void test2GetAAdvertisement() throws AdvertisementException, ClassNotFoundException {
         log.info ("AdSvcHibernateImplTest - test2GetAAdvertisement");
         AdSvcHibernateImpl instance = new AdSvcHibernateImpl();
@@ -76,7 +76,7 @@ public class AdSvcHibernateImplTest extends TestCase{
     /**
      * Test of updateAdvertisement method, of class AdSvcHibernateImpl.
      *//*
-    @Test
+    //@Test
     public void test3UpdateAdvertisement() {
         log.info ("AdSvcHibernateImplTest - test3UpdateAdvertisement");
         AdSvcHibernateImpl instance = new AdSvcHibernateImpl();
@@ -88,7 +88,7 @@ public class AdSvcHibernateImplTest extends TestCase{
     /**
      * Test of deleteAdvertisement method, of class AdSvcHibernateImpl.
      *//*
-    @Test
+    //@Test
     public void test4DeleteAdvertisement() {
         log.info ("AdSvcHibernateImplTest - test4DeleteAdvertisement");
         AdSvcHibernateImpl instance = new AdSvcHibernateImpl();

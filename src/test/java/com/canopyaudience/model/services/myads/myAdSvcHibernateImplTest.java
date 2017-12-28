@@ -81,7 +81,7 @@ public class myAdSvcHibernateImplTest extends TestCase{
     /**
      * Test of test3UpdatemyAds method, of class myAdSvcHibernateImplTest.
      *//*
-    @Test
+    //@Test
     public void test3UpdatemyAds() {
     log.info ("myAdSvcHibernateImplTest - test3UpdatemyAds");
         myAdSvcHibernateImpl instance = new myAdSvcHibernateImpl();
