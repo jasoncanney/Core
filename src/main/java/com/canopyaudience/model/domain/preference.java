@@ -62,7 +62,7 @@ public class preference implements Serializable
 	*/
 	// private String preferenceDate;
         @Column(name = "preferenceDate", nullable = false, length = 50)
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
         @JsonDeserialize(using=DateAndTimeDeserialize.class)
         @Temporal(javax.persistence.TemporalType.DATE)
         private Date preferenceDate;
