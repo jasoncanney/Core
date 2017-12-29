@@ -120,7 +120,7 @@ public class adimpression implements Serializable
 	 AdImpression viewStartTime
 	*/
         @JsonDeserialize(using=DateAndTimeDeserialize.class)
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date viewStartTime;
         
@@ -129,7 +129,7 @@ public class adimpression implements Serializable
 	 AdImpression viewEndTime
 	*/
         @JsonDeserialize(using=DateAndTimeDeserialize.class)
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date viewEndTime;
         

@@ -47,7 +47,7 @@ public class interest implements Serializable
 	/** 
 	 @param - recoDate is the date the preference was stored by the mobile app
 	*/
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @JsonDeserialize(using=DateAndTimeDeserialize.class)
         @Temporal(javax.persistence.TemporalType.DATE)
         private Date intDate;
