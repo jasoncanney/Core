@@ -1,7 +1,6 @@
 package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 
@@ -65,6 +64,7 @@ public class preference implements Serializable
         @Column(name = "preferenceDate", nullable = false, length = 50)
         // @JsonDeserialize(using=DateAndTimeDeserialize.class)
         // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         // NOTE: JSON external deserializer class configured on the setter class.
         @Temporal(TemporalType.DATE)
         private Date preferenceDate;
