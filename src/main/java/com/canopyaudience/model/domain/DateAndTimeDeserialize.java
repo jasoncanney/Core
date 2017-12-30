@@ -21,31 +21,31 @@ import org.apache.log4j.Logger;
  * @author Jason
  */
 class DateAndTimeDeserialize extends JsonDeserializer<Date> {
-
-    private final SimpleDateFormat dateFormat;
     
-    /*
+    private SimpleDateFormat dateFormat;
+    // private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        /*
 	* Category set in config/log4j.properties as
 	* log4j.category.com.classexercise=DEBUG, A1
 	*/
         static Logger log = Logger.getLogger("DateAndTimeDeserialize.class");
     
-
-    DateAndTimeDeserialize() {
-        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    public DateAndTimeDeserialize() {
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
     @Override
     public Date deserialize(JsonParser paramJsonParser, DeserializationContext paramDeserializationContext) throws IOException, JsonProcessingException {
         
-        String str = paramJsonParser.getText().trim();
+        String date = paramJsonParser.getText().trim();
         
         try {
-            return dateFormat.parse(str);
+            return dateFormat.parse(date);
         } catch (ParseException e) {
-            log.info ("Unable to deserialize timestamp: " + str, e);
+            log.info ("Unable to deserialize timestamp: " + date, e);
+            throw new RuntimeException(e); 
         }
-        return paramDeserializationContext.parseDate(str);
+        // return paramDeserializationContext.parseDate(str);
     }
 }

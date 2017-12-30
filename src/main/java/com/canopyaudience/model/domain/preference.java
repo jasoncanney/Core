@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 /** 
  @author Jason Canney
@@ -62,9 +63,10 @@ public class preference implements Serializable
 	*/
 	// private String preferenceDate;
         @Column(name = "preferenceDate", nullable = false, length = 50)
-        //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
-        @JsonDeserialize(using=DateAndTimeDeserialize.class)
-        @Temporal(javax.persistence.TemporalType.DATE)
+        // @JsonDeserialize(using=DateAndTimeDeserialize.class)
+        // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+        // NOTE: JSON external deserializer class configured on the setter class.
+        @Temporal(TemporalType.DATE)
         private Date preferenceDate;
         
         @Column(name = "advertisementID")
@@ -136,6 +138,7 @@ public class preference implements Serializable
         return preferenceDate;
     }
 
+    @JsonDeserialize(using=DateAndTimeDeserialize.class)
     public void setPreferenceDate(Date preferenceDate) {
         this.preferenceDate = preferenceDate;
     }
