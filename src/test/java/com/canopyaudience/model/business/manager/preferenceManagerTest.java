@@ -34,16 +34,12 @@ public class preferenceManagerTest extends TestCase{
 		
 		super.setUp();
                 
-                Date d1;
-                d1 = new Date (2017, 00, 01, 23, 58,01);
-        
-                Date d2;
-                d2 = new Date (2017, 01, 02, 23, 59,01);
-                
-                // Factory factory = Factory.getInstance();
-                preference1 = new preference (50,1,d1,6,7,8675);
-                preference2 = new preference (50,1,d1,12,69,8675);
-                preference3 = new preference (68,0,d2,6,7,8675);     
+        long date_1 = System.currentTimeMillis(); 
+        long date_2 = System.currentTimeMillis();
+            
+        preference1 = new preference (1,date_1,67501,6,8675);
+        preference2 = new preference (1,date_1,67501,12,8675);
+        preference3 = new preference (0,date_2,6,7,8675);      
 		     
         }
         /*

@@ -1,20 +1,14 @@
 package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Objects;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 /** 
  @author Jason Canney
  Domain preference class 
@@ -25,7 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat;
  
 */
 @JsonAutoDetect
-
 @Entity
 @Table(name = "preference")
 public class preference implements Serializable
@@ -61,13 +54,14 @@ public class preference implements Serializable
 	 @param - preferenceDate is the date the preference was stored by the mobile app
 	*/
 	// private String preferenceDate;
-        @Column(name = "preferenceDate", nullable = false, length = 50)
+        // @Column(name = "preferenceDate", nullable = false, length = 50)
         // @JsonDeserialize(using=DateAndTimeDeserialize.class)
         // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         // NOTE: JSON external deserializer class configured on the setter class.
-        @Temporal(TemporalType.DATE)
-        private Date preferenceDate;
+        // @Temporal(TemporalType.DATE)
+        @Column(name = "preferenceDate")
+        private long preferenceDate;
         
         @Column(name = "advertisementID")
 	/** 
@@ -109,7 +103,7 @@ public class preference implements Serializable
              * @param couponID
              * @param consumerId
 	*/
-        public preference(int preferenceId, int preferenceChoice, Date preferenceDate, int advertisementID, int couponID, int consumerId) {
+        public preference(int preferenceId, int preferenceChoice, long preferenceDate, int advertisementID, int couponID, int consumerId) {
             this.preferenceId = preferenceId;
             this.preferenceChoice = preferenceChoice;
             this.preferenceDate = preferenceDate;
@@ -118,6 +112,19 @@ public class preference implements Serializable
             this.consumerId = consumerId;
         }
 
+        
+        /*
+        Constructor without the preferenceID for testing and front end usage
+        */
+    public preference(int preferenceChoice, long preferenceDate, int advertisementID, int couponID, int consumerId) {
+        this.preferenceChoice = preferenceChoice;
+        this.preferenceDate = preferenceDate;
+        this.advertisementID = advertisementID;
+        this.couponID = couponID;
+        this.consumerId = consumerId;
+    }
+
+        
     public int getPreferenceId() {
         return preferenceId;
     }
@@ -134,12 +141,12 @@ public class preference implements Serializable
         this.preferenceChoice = preferenceChoice;
     }
 
-    public Date getPreferenceDate() {
+    public long getPreferenceDate() {
         return preferenceDate;
     }
 
-    @JsonDeserialize(using=DateAndTimeDeserialize.class)
-    public void setPreferenceDate(Date preferenceDate) {
+    // @JsonDeserialize(using=DateAndTimeDeserialize.class)
+    public void setPreferenceDate(long preferenceDate) {
         this.preferenceDate = preferenceDate;
     }
 
@@ -175,12 +182,12 @@ public class preference implements Serializable
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.preferenceId;
-        hash = 89 * hash + this.preferenceChoice;
-        hash = 89 * hash + Objects.hashCode(this.preferenceDate);
-        hash = 89 * hash + this.advertisementID;
-        hash = 89 * hash + this.couponID;
-        hash = 89 * hash + this.consumerId;
+        hash = 11 * hash + this.preferenceId;
+        hash = 11 * hash + this.preferenceChoice;
+        hash = 11 * hash + (int) (this.preferenceDate ^ (this.preferenceDate >>> 32));
+        hash = 11 * hash + this.advertisementID;
+        hash = 11 * hash + this.couponID;
+        hash = 11 * hash + this.consumerId;
         return hash;
     }
 
@@ -202,6 +209,9 @@ public class preference implements Serializable
         if (this.preferenceChoice != other.preferenceChoice) {
             return false;
         }
+        if (this.preferenceDate != other.preferenceDate) {
+            return false;
+        }
         if (this.advertisementID != other.advertisementID) {
             return false;
         }
@@ -211,11 +221,11 @@ public class preference implements Serializable
         if (this.consumerId != other.consumerId) {
             return false;
         }
-        if (!Objects.equals(this.preferenceDate, other.preferenceDate)) {
-            return false;
-        }
         return true;
     }
+
+    
+    
 }
 
        
