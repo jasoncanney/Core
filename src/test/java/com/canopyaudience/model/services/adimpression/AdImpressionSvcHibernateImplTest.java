@@ -8,8 +8,6 @@ package com.canopyaudience.model.services.adimpression;
 // import static org.junit.Assert.*;
 
 import com.canopyaudience.model.domain.adimpression;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
@@ -37,15 +35,12 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
 	protected void setUp() throws Exception {
 		
         super.setUp();
-        String date_1 = "2011-01-18 23:59:01.0"; 
-        String date_2 = "2017-01-18 23:59:01.0";
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss"); 
-        Date d1 = dt.parse(date_1);
-        Date d2 = dt.parse(date_2);
+        long date_1 = System.currentTimeMillis(); 
+        long date_2 = System.currentTimeMillis();
 
-        adimpression1 = new adimpression(33,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
-        adimpression2 = new adimpression(34,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
-        adimpression3 = new adimpression(8675312,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,d1,d2,1,"80126");
+        adimpression1 = new adimpression(33,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
+        adimpression2 = new adimpression(34,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
+        adimpression3 = new adimpression(8675312,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
 
 
         }
