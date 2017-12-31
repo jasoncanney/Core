@@ -70,8 +70,8 @@ public class InterestBuilder {
                 log.info (thePreferences);
                 theAdImpressions = admgr.GetAList(id);
                 log.info (theAdImpressions);
-                theInterests = intmgr.GetA(id);                                   // Retrieve all interests for this user from the database
-                intmgr.DeleteAllRecos(theInterests);                              // Delete current interests for this user from the database Note: List still exists and will be restored to the DB at the end of this class
+                theInterests = intmgr.GetA(id);                                         // Retrieve all interests for this user from the database
+                intmgr.DeleteAllRecos(theInterests);                                    // Delete current interests for this user from the database Note: List still exists and will be restored to the DB at the end of this class
                 log.info (theInterests);
                 theAdvertisements = advertmgr.Get();
                 con = conmgr.GetA(id);                                                  // Retrieve consumer object for this user from the database
@@ -87,26 +87,26 @@ public class InterestBuilder {
                    adPCC = advert.getAdPCC();                                           // store PCC value 
                    if (p.getPreferenceChoice()==1){                                     // If current preference is positive then
                        // start of function.  Pass in weight value of 1, 1.  For next function you'll pass in weight of -1 and -2 
-                       if (theInterests.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
-                           r = theInterests.get(p.getAdvertisementID());          // pull that interest with the matching AdID into a interest domain object
-                           weight =  r.getIntWeight();                                 // get current weight of interest
+                       if (theInterests.contains(p.getAdvertisementID())){              // if current Recommendations list contains preference AdID then
+                           r = theInterests.get(p.getAdvertisementID());                // pull that interest with the matching AdID into a interest domain object
+                           weight =  r.getIntWeight();                                  // get current weight of interest
                            weight++;                                                    // increment interest weight +1
-                           r.setIntWeight(weight);                                     // store the weight back in the interest object
-                           theInterests.set(count, r);                            // replace the previous interest with the updated weighted interest
+                           r.setIntWeight(weight);                                      // store the weight back in the interest object
+                           theInterests.set(count, r);                                  // replace the previous interest with the updated weighted interest
                            // adimpression logic check section
                            if (theAdImpressions.contains(adPCC)){
-                               r = theInterests.get(p.getAdvertisementID());      // pull that interest with the matching AdID into a interest domain object
-                               weight =  r.getIntWeight();                             // get current weight of interest
+                               r = theInterests.get(p.getAdvertisementID());            // pull that interest with the matching AdID into a interest domain object
+                               weight =  r.getIntWeight();                              // get current weight of interest
                                weight++;                                                // increment interest weight +1
-                               r.setIntWeight(weight);                                 // store the weight back in the interest object
-                               theInterests.set(count, r);                        // replace the previous interest with the updated weighted interest
+                               r.setIntWeight(weight);                                  // store the weight back in the interest object
+                               theInterests.set(count, r);                              // replace the previous interest with the updated weighted interest
                             }  
                         }
                        else {
                            // Build the Recommendation to Create
                            // ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
-                           Date now = Date.from(Instant.MIN);
-                           r.setIntDate(now);                                                      // Current date stamp
+                           // Date now = Date.from(Instant.MIN);
+                           r.setIntDate(System.currentTimeMillis());                                // Current date stamp
                            r.setIntWeight(1);
                            r.setConsumerId(p.getConsumerId());
                            r.setProviderId(con.getProviderID());                                    // Retrieves Provider ID based on current consumer ID
@@ -123,24 +123,24 @@ public class InterestBuilder {
                    // end of function
                    }
                    if(p.getPreferenceChoice()==0){                                      // If current preference is negative then
-                       if (theInterests.contains(p.getAdvertisementID())){        // if current Recommendations list contains preference AdID then
-                           r = theInterests.get(p.getAdvertisementID());          // pull that interest with the matching AdID into a interest domain object
-                           weight =  r.getIntWeight();                                 // get current weight of interest
+                       if (theInterests.contains(p.getAdvertisementID())){              // if current Recommendations list contains preference AdID then
+                           r = theInterests.get(p.getAdvertisementID());                // pull that interest with the matching AdID into a interest domain object
+                           weight =  r.getIntWeight();                                  // get current weight of interest
                            weight--;                                                    // decrement interest weight -1
-                           r.setIntWeight(weight);                                     // store the weight back in the interest object
-                           theInterests.set(count, r);                            // replace the previous interest with the updated weighted interest
+                           r.setIntWeight(weight);                                      // store the weight back in the interest object
+                           theInterests.set(count, r);                                  // replace the previous interest with the updated weighted interest
                        // adimpression logic check section
                        if (theAdImpressions.contains(adPCC)){
-                           r = theInterests.get(p.getAdvertisementID());          // pull that interest with the matching AdID into a interest domain object
-                           weight =  r.getIntWeight();                                 // get current weight of interest
+                           r = theInterests.get(p.getAdvertisementID());                // pull that interest with the matching AdID into a interest domain object
+                           weight =  r.getIntWeight();                                  // get current weight of interest
                            weight = weight -2;                                          // decrementcrement interest weight -2 
-                           r.setIntWeight(weight);                                     // store the weight back in the interest object
-                           theInterests.set(count, r);                            // replace the previous interest with the updated weighted interest 
+                           r.setIntWeight(weight);                                      // store the weight back in the interest object
+                           theInterests.set(count, r);                                  // replace the previous interest with the updated weighted interest 
                         } 
                         else {
                            // Build the Recommendation to Create
-                           Date now = Date.from(Instant.MIN);
-                           r.setIntDate(now);                                                      // Current date stamp                           
+                           // Date now = Date.from(Instant.MIN);
+                           r.setIntDate(System.currentTimeMillis());                                                      // Current date stamp                           
                            r.setConsumerId(p.getConsumerId());
                            r.setProviderId(con.getProviderID());                                    // Retrieves Provider ID based on current consumer ID
                            r.setProviderName(prov.getProviderName());                               // Retrieves Provider name based on individual consumer ID
