@@ -1,16 +1,12 @@
 package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import org.springframework.format.annotation.DateTimeFormat;
 /** 
  @author Jason Canney  
  Domain AdImpression class 
@@ -115,23 +111,23 @@ public class adimpression implements Serializable
 	*/
 	private int assetProviderID;
         
-        @Column(name = "ViewStartTime", nullable = false, length = 50)
+        @Column(name = "ViewStartTime")
         /** 
 	 AdImpression viewStartTime
 	*/
-        @JsonDeserialize(using=DateAndTimeDeserialize.class)
+        // @JsonDeserialize(using=DateAndTimeDeserialize.class)
         // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        @Temporal(javax.persistence.TemporalType.DATE)
-	private Date viewStartTime;
+        // @Temporal(javax.persistence.TemporalType.DATE)
+	private long viewStartTime;
         
-        @Column(name = "ViewEndTime", nullable = false, length = 50)
+        @Column(name = "ViewEndTime")
         /** 
 	 AdImpression viewEndTime
 	*/
-        @JsonDeserialize(using=DateAndTimeDeserialize.class)
+        // @JsonDeserialize(using=DateAndTimeDeserialize.class)
         // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        @Temporal(javax.persistence.TemporalType.DATE)
-	private Date viewEndTime;
+        // @Temporal(javax.persistence.TemporalType.DATE)
+	private long viewEndTime;
         
         @Column(name = "LocationID")
         /** 
@@ -153,7 +149,7 @@ public class adimpression implements Serializable
 
 	}
 
-    public adimpression(int impID, int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, Date viewStartTime, Date viewEndTime, int locationID, String locationZip) {
+    public adimpression(int impID, int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, long viewStartTime, long viewEndTime, int locationID, String locationZip) {
         this.impID = impID;
         this.consumerID = consumerID;
         this.sessionID = sessionID;
@@ -173,7 +169,7 @@ public class adimpression implements Serializable
         this.locationZip = locationZip;
     }
 
-    public adimpression(int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, Date viewStartTime, Date viewEndTime, int locationID, String locationZip) {
+    public adimpression(int consumerID, int sessionID, int serviceID, int contentID, String terminalID, int oppType, int oppNum, int oppDuration, String adPCC, String adCampID, int assetID, int assetProviderID, long viewStartTime, long viewEndTime, int locationID, String locationZip) {
         this.consumerID = consumerID;
         this.sessionID = sessionID;
         this.serviceID = serviceID;
@@ -296,19 +292,19 @@ public class adimpression implements Serializable
         this.assetProviderID = assetProviderID;
     }
 
-    public Date getViewStartTime() {
+    public long getViewStartTime() {
         return viewStartTime;
     }
 
-    public void setViewStartTime(Date viewStartTime) {
+    public void setViewStartTime(long viewStartTime) {
         this.viewStartTime = viewStartTime;
     }
 
-    public Date getViewEndTime() {
+    public long getViewEndTime() {
         return viewEndTime;
     }
 
-    public void setViewEndTime(Date viewEndTime) {
+    public void setViewEndTime(long viewEndTime) {
         this.viewEndTime = viewEndTime;
     }
 
@@ -330,24 +326,24 @@ public class adimpression implements Serializable
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.impID;
-        hash = 29 * hash + this.consumerID;
-        hash = 29 * hash + this.sessionID;
-        hash = 29 * hash + this.serviceID;
-        hash = 29 * hash + this.contentID;
-        hash = 29 * hash + Objects.hashCode(this.terminalID);
-        hash = 29 * hash + this.oppType;
-        hash = 29 * hash + this.oppNum;
-        hash = 29 * hash + this.oppDuration;
-        hash = 29 * hash + Objects.hashCode(this.adPCC);
-        hash = 29 * hash + Objects.hashCode(this.adCampID);
-        hash = 29 * hash + this.assetID;
-        hash = 29 * hash + this.assetProviderID;
-        hash = 29 * hash + Objects.hashCode(this.viewStartTime);
-        hash = 29 * hash + Objects.hashCode(this.viewEndTime);
-        hash = 29 * hash + this.locationID;
-        hash = 29 * hash + Objects.hashCode(this.locationZip);
+        int hash = 5;
+        hash = 97 * hash + this.impID;
+        hash = 97 * hash + this.consumerID;
+        hash = 97 * hash + this.sessionID;
+        hash = 97 * hash + this.serviceID;
+        hash = 97 * hash + this.contentID;
+        hash = 97 * hash + Objects.hashCode(this.terminalID);
+        hash = 97 * hash + this.oppType;
+        hash = 97 * hash + this.oppNum;
+        hash = 97 * hash + this.oppDuration;
+        hash = 97 * hash + Objects.hashCode(this.adPCC);
+        hash = 97 * hash + Objects.hashCode(this.adCampID);
+        hash = 97 * hash + this.assetID;
+        hash = 97 * hash + this.assetProviderID;
+        hash = 97 * hash + (int) (this.viewStartTime ^ (this.viewStartTime >>> 32));
+        hash = 97 * hash + (int) (this.viewEndTime ^ (this.viewEndTime >>> 32));
+        hash = 97 * hash + this.locationID;
+        hash = 97 * hash + Objects.hashCode(this.locationZip);
         return hash;
     }
 
@@ -393,6 +389,12 @@ public class adimpression implements Serializable
         if (this.assetProviderID != other.assetProviderID) {
             return false;
         }
+        if (this.viewStartTime != other.viewStartTime) {
+            return false;
+        }
+        if (this.viewEndTime != other.viewEndTime) {
+            return false;
+        }
         if (this.locationID != other.locationID) {
             return false;
         }
@@ -408,15 +410,10 @@ public class adimpression implements Serializable
         if (!Objects.equals(this.locationZip, other.locationZip)) {
             return false;
         }
-        if (!Objects.equals(this.viewStartTime, other.viewStartTime)) {
-            return false;
-        }
-        if (!Objects.equals(this.viewEndTime, other.viewEndTime)) {
-            return false;
-        }
         return true;
     }
 
+    
     @Override
     public String toString() {
         return "adimpression{" + "impID=" + impID + ", consumerID=" + consumerID + ", sessionID=" + sessionID + ", serviceID=" + serviceID + ", contentID=" + contentID + ", terminalID=" + terminalID + ", oppType=" + oppType + ", oppNum=" + oppNum + ", oppDuration=" + oppDuration + ", adPCC=" + adPCC + ", adCampID=" + adCampID + ", assetID=" + assetID + ", assetProviderID=" + assetProviderID + ", viewStartTime=" + viewStartTime + ", viewEndTime=" + viewEndTime + ", locationID=" + locationID + ", locationZip=" + locationZip + '}';
