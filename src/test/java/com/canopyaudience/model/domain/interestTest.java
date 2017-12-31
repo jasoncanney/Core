@@ -5,14 +5,11 @@
  */
 package com.canopyaudience.model.domain;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertFalse;
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
 
 /**
@@ -41,14 +38,11 @@ public class interestTest extends TestCase {
     @Override
 	public void setUp() throws Exception {
             
-        String date_1 = "2011-01-18 23:59:01.0"; 
-        String date_2 = "2017-01-18 23:59:01.0";
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss"); 
-        Date d1 = dt.parse(date_1);
-        Date d2 = dt.parse(date_2);
+        long date_1 = System.currentTimeMillis(); 
+        long date_2 = System.currentTimeMillis();
 
-        interest1 = new interest(d1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
-        interest2 = new interest(d2,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
+        interest1 = new interest(date_1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
+        interest2 = new interest(date_1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
 	}
         
     /**
@@ -57,10 +51,10 @@ public class interestTest extends TestCase {
     @Test
     public void testEqualsinterest() {
         log.info("starting testEqualsinterest()");
-	assertFalse ("interest1 NOT equal interest2", interest1.equals(interest2));
+	assertTrue ("interest1 equal interest2", interest1.equals(interest2));
         log.info(interest1.toString());
         log.info(interest2.toString());
-	log.info ("testNOTEqualsinterest PASSED");		
+	log.info ("testEqualsinterest PASSED");		
     }
     
     

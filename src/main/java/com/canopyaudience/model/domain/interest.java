@@ -1,19 +1,13 @@
 package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import org.springframework.format.annotation.DateTimeFormat;
 /** 
  @author Jason Canney
  Domain interest class 
@@ -43,14 +37,14 @@ public class interest implements Serializable
         */
 	private int intID;
 
-        @Column(name = "IntDate", nullable = false, length = 50)
+        @Column(name = "IntDate")
 	/** 
 	 @param - recoDate is the date the preference was stored by the mobile app
 	*/
         // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        @JsonDeserialize(using=DateAndTimeDeserialize.class)
-        @Temporal(javax.persistence.TemporalType.DATE)
-        private Date intDate;
+        // @JsonDeserialize(using=DateAndTimeDeserialize.class)
+        // @Temporal(javax.persistence.TemporalType.DATE)
+        private long intDate;
          
         @Column(name = "IntWeight")
 	/** 
@@ -123,7 +117,7 @@ public class interest implements Serializable
 
 	}
 
-    public interest(Date intDate, int intWeight, int consumerId, int providerId, String providerName, String locationZip, int demographic, int adID, String adURL, String adPCC, String adOwner) {
+    public interest(long intDate, int intWeight, int consumerId, int providerId, String providerName, String locationZip, int demographic, int adID, String adURL, String adPCC, String adOwner) {
         this.intDate = intDate;
         this.intWeight = intWeight;
         this.consumerId = consumerId;
@@ -138,7 +132,7 @@ public class interest implements Serializable
     }
 
       
-    public interest(int intID, Date intDate, int intWeight, int consumerId, int providerId, String providerName, String locationZip, int demographic, int adID, String adURL, String adPCC, String adOwner) {
+    public interest(int intID, long intDate, int intWeight, int consumerId, int providerId, String providerName, String locationZip, int demographic, int adID, String adURL, String adPCC, String adOwner) {
         this.intID = intID;
         this.intDate = intDate;
         this.intWeight = intWeight;
@@ -161,11 +155,11 @@ public class interest implements Serializable
         this.intID = intID;
     }
 
-    public Date getIntDate() {
+    public long getIntDate() {
         return intDate;
     }
 
-    public void setIntDate(Date intDate) {
+    public void setIntDate(long intDate) {
         this.intDate = intDate;
     }
 
@@ -252,18 +246,18 @@ public class interest implements Serializable
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.intID;
-        hash = 37 * hash + Objects.hashCode(this.intDate);
-        hash = 37 * hash + this.intWeight;
-        hash = 37 * hash + this.consumerId;
-        hash = 37 * hash + this.providerId;
-        hash = 37 * hash + Objects.hashCode(this.providerName);
-        hash = 37 * hash + Objects.hashCode(this.locationZip);
-        hash = 37 * hash + this.demographic;
-        hash = 37 * hash + this.adID;
-        hash = 37 * hash + Objects.hashCode(this.adURL);
-        hash = 37 * hash + Objects.hashCode(this.adPCC);
-        hash = 37 * hash + Objects.hashCode(this.adOwner);
+        hash = 97 * hash + this.intID;
+        hash = 97 * hash + (int) (this.intDate ^ (this.intDate >>> 32));
+        hash = 97 * hash + this.intWeight;
+        hash = 97 * hash + this.consumerId;
+        hash = 97 * hash + this.providerId;
+        hash = 97 * hash + Objects.hashCode(this.providerName);
+        hash = 97 * hash + Objects.hashCode(this.locationZip);
+        hash = 97 * hash + this.demographic;
+        hash = 97 * hash + this.adID;
+        hash = 97 * hash + Objects.hashCode(this.adURL);
+        hash = 97 * hash + Objects.hashCode(this.adPCC);
+        hash = 97 * hash + Objects.hashCode(this.adOwner);
         return hash;
     }
 
@@ -280,6 +274,9 @@ public class interest implements Serializable
         }
         final interest other = (interest) obj;
         if (this.intID != other.intID) {
+            return false;
+        }
+        if (this.intDate != other.intDate) {
             return false;
         }
         if (this.intWeight != other.intWeight) {
@@ -312,11 +309,10 @@ public class interest implements Serializable
         if (!Objects.equals(this.adOwner, other.adOwner)) {
             return false;
         }
-        if (!Objects.equals(this.intDate, other.intDate)) {
-            return false;
-        }
         return true;
     }
+
+   
 
     @Override
     public String toString() {
