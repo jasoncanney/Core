@@ -49,14 +49,10 @@ public class intManagerTest extends TestCase {
     public void setUp() throws Exception {
 
         
-    String date_1 = "2011-01-18 23:59:01.0"; 
-    String date_2 = "2017-01-18 23:59:01.0";
-    SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss"); 
-    Date d1 = dt.parse(date_1);
-    Date d2 = dt.parse(date_2);
-
-    interest1 = new interest(d1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
-    interest2 = new interest(d2,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
+    long date_1 = System.currentTimeMillis(); 
+    long date_2 = System.currentTimeMillis();
+    interest1 = new interest(date_1,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
+    interest2 = new interest(date_2,12,12345,1,"Hulu.com","80126",12,12,"http://www.bmw.com","123a","BMW");
     
     List<interest> theInterests = null;
 
