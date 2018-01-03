@@ -167,6 +167,23 @@ public class myads implements Serializable
 		this.adCampID = adCampID;
 	}
 
+    public myads(int consumerID, int adID, String AdURL, String adPCC, String adtitle, String addescription, String adowner, int couponID, String couponURL, String couponTitle, String couponDescription, String couponValue, String adCampID) {
+        this.consumerID = consumerID;
+        this.adID = adID;
+        this.AdURL = AdURL;
+        this.adPCC = adPCC;
+        this.adtitle = adtitle;
+        this.addescription = addescription;
+        this.adowner = adowner;
+        this.couponID = couponID;
+        this.couponURL = couponURL;
+        this.couponTitle = couponTitle;
+        this.couponDescription = couponDescription;
+        this.couponValue = couponValue;
+        this.adCampID = adCampID;
+    }
+        
+        
         public int getIDentifier() {
             return IDentifier;
         }

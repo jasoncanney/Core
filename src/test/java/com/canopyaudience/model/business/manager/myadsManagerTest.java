@@ -32,9 +32,9 @@ public class myadsManagerTest  extends TestCase {
 		
 		super.setUp();
                 // Factory factory = Factory.getInstance();
-		myads1 = new myads (1, 12345, 12354, "01", "02", "03","04","05",1235, "01", "02", "03","04","05");    
-                myads2 = new myads (1, 12345, 12354, "99", "02", "03","04","05",1235, "01", "02", "03","04","05");       
-                myads3 = new myads (3, 12346, 12354, "01", "02", "03","04","05",1235, "01", "02", "03","04","05");                
+		myads1 = new myads (209, 12345, 12354, "01", "02", "03","04","05",1235, "01", "02", "03","04","05");    
+                myads2 = new myads (77777, 12354, "99", "02", "03","04","05",1235, "01", "02", "03","04","05");       
+                myads3 = new myads (210, 66666, 12354, "01", "02", "03","04","05",1235, "01", "02", "03","04","05");                
         }
 
         /*
@@ -53,7 +53,7 @@ public class myadsManagerTest  extends TestCase {
         log.info ("myadsManagerTest - test1CreatemyAds");
         myadsManager instance = new myadsManager();
         boolean expResult = true;
-        boolean result = instance.Create(myads1);
+        boolean result = instance.Create(myads2);
         assertEquals(expResult, result);   
         
     }
@@ -78,7 +78,7 @@ public class myadsManagerTest  extends TestCase {
          log.info ("myadsManagerTest - test3Updatemyads");
         myadsManager instance = new myadsManager();
         boolean expResult = true;
-        boolean result = instance.Update(myads2);  // adimpression2 is a pre-updated adimpression object for adimpression1
+        boolean result = instance.Update(myads3);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);        
     }
 
