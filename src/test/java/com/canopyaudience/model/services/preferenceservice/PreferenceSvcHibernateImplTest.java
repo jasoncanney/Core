@@ -43,7 +43,7 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
             
         preference1 = new preference (1,date_1,67500,6,8675);
         preference2 = new preference (1,date_1,67500,12,8675);
-        preference3 = new preference (0,date_2,6,7,8675);      
+        preference3 = new preference (29,0,date_2,666,777,8675);      
 
         }
         /*
@@ -52,11 +52,9 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
 	 */
         static Logger log = Logger.getLogger(PreferenceSvcHibernateImplTest.class);
     
-    
-    
     /**
      * Test of storePreference method, of class PreferenceSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test1StorePreference() {
         log.info ("PreferenceSvcHibernateImplTest - test1StorePreference");
@@ -64,7 +62,7 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.storePreference(preference1);
         assertEquals(expResult, result);   
-    }
+    }*/
 
     /**
      * Test of getAPreference method, of class PreferenceSvcHibernateImpl.
@@ -88,11 +86,11 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
         log.info ("PreferenceSvcHibernateImplTest - test3UpdatePreference");
         PreferenceSvcHibernateImpl instance = new PreferenceSvcHibernateImpl();
         boolean expResult = true;
-        preference c = instance.getAPreference(preference1.getAdvertisementID());
-        c.setCouponID(preference2.getCouponID());
+        preference c = instance.getAPreference(preference3.getPreferenceId());
+        // c.setCouponID(preference2.getCouponID());
         boolean result = instance.updatePreference(c);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);    
-    }*?
+    }*/
     /**
      * Test of deletePreference method, of class PreferenceSvcHibernateImpl.
      *//*

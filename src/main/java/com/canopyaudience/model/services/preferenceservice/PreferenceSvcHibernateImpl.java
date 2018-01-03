@@ -37,7 +37,8 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
   @Override
   public boolean storePreference(preference preference)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -48,12 +49,13 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
                   
             try 
             {    
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
                 log.info (appdb);
                 log.info("preference saved. Check database for data!");
+                tx.commit();
             }
             catch(Exception e)
             {
@@ -125,6 +127,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
     public List<preference> getPreference() throws PreferenceException, ClassNotFoundException {
         
         {
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -135,12 +138,13 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 // query students
                 theApplications = session.createQuery("from preference").getResultList();
                 log.info ("session.createQuery passed");
                 log.info("preference queried and put into List.");
+                tx.commit();
             }
             catch(Exception e)
             {
@@ -166,6 +170,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
     public AbstractJDBCDataModel getMahoutPreference() throws PreferenceException, ClassNotFoundException, TasteException {
         {
             // boolean status = true;
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -177,15 +182,12 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             log.info ("fetched session");
             try 
             {
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                // query students
-                
-                // need to change the database to include a preference value 1 or 0
-                // need to update this session.createQuery to only pull the three columns consumerID, prefVal (new), and PCC value
                 theApplications = (AbstractJDBCDataModel) session.createQuery("consumerID, preferenceChoice, advertisementID from preference").getResultList();
                 log.info ("session.createQuery passed");
                 log.info("preference queried and put into List.");
+                tx.commit();
             }
             catch(Exception e)
             {
@@ -209,6 +211,7 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
     public preference getAPreference(int id) throws PreferenceException, ClassNotFoundException {
         
         {
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
@@ -220,9 +223,10 @@ public class PreferenceSvcHibernateImpl implements IPreferenceSvc
             
             try 
             { 
-                session.beginTransaction();
+                tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(preference.class, i);
+                tx.commit();
             }
             catch(Exception e)
             {

@@ -37,7 +37,7 @@ public class preferenceManagerTest extends TestCase{
             
         preference1 = new preference (1,date_1,67501,6,8675);
         preference2 = new preference (1,date_1,67501,12,8675);
-        preference3 = new preference (27,0,date_2,666,777,8675);      
+        preference3 = new preference (29,0,date_2,666,777,8675);      
 		     
         }
         /*
