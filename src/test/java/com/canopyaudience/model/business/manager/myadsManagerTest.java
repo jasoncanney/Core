@@ -72,7 +72,7 @@ public class myadsManagerTest  extends TestCase {
     */
     /**
      * Test of Update method, of class adManager.
-     */
+     *//*
     @Test
     public void test3Updatemyads() {
          log.info ("myadsManagerTest - test3Updatemyads");
@@ -80,11 +80,11 @@ public class myadsManagerTest  extends TestCase {
         boolean expResult = true;
         boolean result = instance.Update(myads3);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);        
-    }
+    }*/
 
     /**
      * Test of Delete method, of class adManager.
-     */
+     *//*
     @Test
     public void test4Deletemyads() {
         log.info ("myadsManagerTest - test4Deletemyads");
@@ -92,6 +92,6 @@ public class myadsManagerTest  extends TestCase {
         boolean expResult = true;
         boolean result = instance.Delete(myads1);
         assertEquals(expResult, result);  
-    }
+    }*/
     
 }
