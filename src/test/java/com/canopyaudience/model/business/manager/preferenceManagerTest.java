@@ -48,7 +48,7 @@ public class preferenceManagerTest extends TestCase{
         
     /**
      * Test of Create method, of class preferenceManager.
-     *//*
+     */
     @Test
     public void test1Create() {
         log.info ("preferenceManagerTest - test1Create");
@@ -56,7 +56,7 @@ public class preferenceManagerTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.Create(preference1);
         assertEquals(expResult, result);   
-    }*/
+    }
 
     // note - run these individually to test them out.  The preference ID is auto created so there is no way to uniquely run all four tests without it crashing
     

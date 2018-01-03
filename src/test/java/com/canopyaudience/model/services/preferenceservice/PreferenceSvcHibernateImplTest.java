@@ -6,10 +6,6 @@
 package com.canopyaudience.model.services.preferenceservice;
 
 import com.canopyaudience.model.domain.preference;
-import com.canopyaudience.model.services.exception.PreferenceException;
-import java.security.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import junit.framework.TestCase;
 import static junit.framework.TestCase.assertEquals;
 import org.apache.log4j.Logger;
@@ -54,7 +50,7 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
     
     /**
      * Test of storePreference method, of class PreferenceSvcHibernateImpl.
-     *//*
+     */
     @Test
     public void test1StorePreference() {
         log.info ("PreferenceSvcHibernateImplTest - test1StorePreference");
@@ -62,7 +58,7 @@ public class PreferenceSvcHibernateImplTest extends TestCase{
         boolean expResult = true;
         boolean result = instance.storePreference(preference1);
         assertEquals(expResult, result);   
-    }*/
+    }
 
     /**
      * Test of getAPreference method, of class PreferenceSvcHibernateImpl.
