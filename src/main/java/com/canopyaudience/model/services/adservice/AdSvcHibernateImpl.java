@@ -129,7 +129,6 @@ public class AdSvcHibernateImpl implements IAdSvc
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
             log.info ("getAdvertisement - AdSvcHibernateImpl.java");
-            List<advertisement> theApplications = null;
             Session session = fetchSession();
             log.info ("fetched session");
             
@@ -138,7 +137,7 @@ public class AdSvcHibernateImpl implements IAdSvc
                 
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                c = session.get(advertisement.class, c.getIdentifier());
+                c = session.get(advertisement.class, i);
                 tx.commit();
                 log.info("advertisement for one id queried and put into List.");
             }
