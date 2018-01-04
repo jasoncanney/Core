@@ -138,9 +138,9 @@ public class AdSvcHibernateImpl implements IAdSvc
                 
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                c = session.get(advertisement.class, i);
+                c = session.get(advertisement.class, c.getIdentifier());
                 tx.commit();
-                log.info("advertisement  for one id queried and put into List.");
+                log.info("advertisement for one id queried and put into List.");
             }
             catch(Exception e)
             {
@@ -182,10 +182,11 @@ public class AdSvcHibernateImpl implements IAdSvc
             try 
             { 
                 tx = session.beginTransaction();
-                log.info ("beginTransaction, Getting advertisement with adID:" + appdb.getAdID());   
+                log.info ("beginTransaction, Getting advertisement with adID:" + appdb.getIdentifier());   
                 // retrieve the current application object from the database
-                appnew = session.get(advertisement.class, appdb.getAdID());
-                // update all fields in the current advertisement object except the PK of consumerID  
+                appnew = session.get(advertisement.class, appdb.getIdentifier());
+                // update all fields in the current advertisement object except the PK of consumerID
+                appnew.setAdID(appdb.getAdID());
                 appnew.setAdtitle(appdb.getAdtitle());
                 appnew.setAddemo01(appdb.getAddemo01());
                 appnew.setAddemo02(appdb.getAddemo02());
