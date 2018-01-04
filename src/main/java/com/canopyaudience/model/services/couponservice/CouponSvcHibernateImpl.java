@@ -33,38 +33,34 @@ public class CouponSvcHibernateImpl implements ICouponSvc
   @Override
   public boolean storeCoupon(coupon coupon)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = false;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("storeCoupon - CouponSvcHibernateImpl.java");
- 
-            coupon appdb  = coupon;
-            Transaction tx = null;
-            
+            coupon appdb  = coupon;            
+            Session session = fetchSession();
+            log.info ("fetched session"); 
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                session.getTransaction().commit();    
+                tx.commit();
                 log.info("coupon saved. Check database for data!");
-                session.close();                                                 // added this line to fix session closing
-
-            }
+}
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+               if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+                status = true;
             }
             return status;
        }  
@@ -78,40 +74,35 @@ public class CouponSvcHibernateImpl implements ICouponSvc
     public List<coupon> getCoupon() throws CouponException, ClassNotFoundException {
         
         {
-            // boolean status = true;
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getCoupon - CouponSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
             List<coupon> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
+            {    
                 tx = session.beginTransaction();
-                log.info ("beginTransaction");
-                
+                log.info ("beginTransaction");   
                 // query students
                 theApplications = session.createQuery("from coupon").getResultList();
                 log.info ("session.createQuery passed");
-                session.close();   
+                tx.commit();
                 log.info("coupon queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return theApplications;
        }  
     }
@@ -124,39 +115,35 @@ public class CouponSvcHibernateImpl implements ICouponSvc
      */
     public coupon getACoupon(int id) throws CouponException, ClassNotFoundException {
         {
+            Transaction tx;
             int i = id;
             coupon c = new coupon();
-            
-            // boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getCoupon - CouponSvcHibernateImpl.java");
- 
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(coupon.class, i);
                 log.info ("session.createQuery passed");
-                session.close();   
+                tx.commit();
                 log.info("coupon queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return c;
        }  
     }
@@ -168,28 +155,24 @@ public class CouponSvcHibernateImpl implements ICouponSvc
   @Override
   public boolean updateCoupon(coupon coupon)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = false;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("updateCoupon - CouponSvcHibernateImpl.java");
- 
-            // updateApplication takes in an application object
             // this object includes the updates received and that need to be stored in the db
             coupon appdb  = coupon;
             // create a new application object.  This is where the current application object gets stored and 
             // will be used to make updates and store back in the db
             coupon appnew = null;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
+            { 
                 tx = session.beginTransaction();
-                log.info ("beginTransaction, Getting coupon with couponid:" + appdb.getCouponID());
-                
+                log.info ("beginTransaction, Getting coupon with couponid:" + appdb.getCouponID());   
                 // retrieve the current application object from the database
                 appnew = session.get(coupon.class, appdb.getCouponID());
                 // update all fields in the current advertisement object except the PK of consumerID  
@@ -199,28 +182,22 @@ public class CouponSvcHibernateImpl implements ICouponSvc
                 appnew.setCouponStartActive(appdb.getCouponStartActive());
                 appnew.setCouponEndActive(appdb.getCouponEndActive());
                 appnew.setCouponLocationsZip(appdb.getCouponLocationsZip());
-
 		System.out.println("Updating coupon...");
-
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);
-                
-		// commit the transaction
-		session.getTransaction().commit();
-                
+		tx.commit();
                 log.info("coupon updated. Check database for data!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+                status = true;
             }
             return status;
        }  
@@ -232,38 +209,34 @@ public class CouponSvcHibernateImpl implements ICouponSvc
     @Override
     public boolean deleteCoupon(coupon coupon)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = false;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("deleteCoupon - CouponSvcHibernateImpl.java");
- 
             coupon appdb  = coupon;
-            Transaction tx = null;
-            
+            Session session = fetchSession();
+            log.info ("fetched session");
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(coupon passed in)");
-                session.getTransaction().commit();                               // added this line to fix session closing
+                tx.commit();
                 log.info("coupon deleted. Check database for data not there!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close(); 
+                status = true;
             }
             return status;
        }  

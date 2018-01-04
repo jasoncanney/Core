@@ -33,9 +33,9 @@ public class couponManagerTest extends TestCase{
 		
 		super.setUp();
                 // Factory factory = Factory.getInstance();
-		coupon1 = new coupon (86730, "1", "2", "3", "4", "5","6");                
-                coupon2 = new coupon (86730, "1", "2", "3", "4", "5","6");             
-                coupon3 = new coupon (86731, "1", "2", "3", "4", "5","6");           
+		coupon1 = new coupon (86666, "1", "2", "3", "4", "5","6");                
+                coupon2 = new coupon (86666, "666", "2", "3", "4", "5","6");             
+                coupon3 = new coupon (86668, "1", "2", "3", "4", "5","6");           
 
         }
         /*

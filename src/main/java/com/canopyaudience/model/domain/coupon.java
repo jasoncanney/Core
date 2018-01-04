@@ -1,5 +1,6 @@
 package com.canopyaudience.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.Table;
  
  
 */
+@JsonAutoDetect
+
 @Entity
 @Table(name = "coupon")
 public class coupon implements Serializable
