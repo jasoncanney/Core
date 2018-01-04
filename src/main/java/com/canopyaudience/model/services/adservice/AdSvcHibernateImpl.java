@@ -95,7 +95,6 @@ public class AdSvcHibernateImpl implements IAdSvc
                 theApplications = session.createQuery("from advertisement").getResultList();
                 log.info ("session.createQuery passed");
                 // For logging what is in the List
-                // displayAdvertisements(theApplications);
                 tx.commit();
                 log.info("advertisement queried and put into List.");
             }

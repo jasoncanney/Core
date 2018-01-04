@@ -31,40 +31,22 @@ public class advertisementTest extends TestCase {
 	 * @throws java.lang.Exception
 	 */
 	@Before	
+        @Override
 	public void setUp() throws Exception {
 
         advertisement1 = new advertisement (12345, "BMW Fall Sales Event", 01, 02, 03, 04, "Fall Sales Event", "BMW","BMW","123","www.bmw.com","7234A");    
         advertisement2 = new advertisement (12346, "BMW Spring Sales Event", 01, 02, 03, 04, "Spring Sales Event", "BMW","BMW","123","www.bmw.com","7234A");
-	}
+	
+        }
         
-    /**
-     * Test of validate method, of class advertisement.
-     */
-    @Test
-    public void testValidateadvertisement1() {
-        log.info("starting testValidateadvertisement2()");
-	assertTrue ("advertisement validates", advertisement1.validate());
-	log.info("testValidateadvertisement PASSED");
-    }
+        /**
+         * Test of equals method, of class advertisement.
+         */
+        @Test
+        public void testNOTEqualsadvertisement() {
+            log.info("starting testEqualsadvertisement()");
+            assertFalse ("advertisement1 NOT equal advertisement2", advertisement1.equals(advertisement2));
+            log.info ("testNOTEqualsadvertisement PASSED");		
+        }
+   }
 
-    /**
-     * Test of validate method, of class advertisement.
-     */
-    @Test
-    public void testValidateadvertisement2() {
-        log.info("starting testValidateadvertisement2()");
-	assertTrue ("advertisement validates", advertisement2.validate());
-	log.info("testValidateadvertisement PASSED");
-    }
-    
-    /**
-     * Test of equals method, of class advertisement.
-     */
-    @Test
-    public void testEqualsadvertisement() {
-        log.info("starting testEqualsadvertisement()");
-	assertFalse ("advertisement1 NOT equal advertisement2", advertisement1.equals(advertisement2));
-	log.info ("testNOTEqualsadvertisement PASSED");		
-    }
-    
-}

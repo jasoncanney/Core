@@ -2,11 +2,9 @@ package com.canopyaudience.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.io.Serializable;
-import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -35,6 +33,12 @@ public class advertisement implements Serializable
 
         @Id
         // @GeneratedValue(strategy=GenerationType.IDENTITY)
+        @Column(name = "IDentifier")
+	/** 
+	 Identifier ID
+	*/
+	private int identifier;
+  
         @Column(name = "adID")
 	/** 
 	 Advertisement ID
@@ -120,6 +124,7 @@ public class advertisement implements Serializable
 
 	/** 
 	 Overloaded Constructor
+         @param identifier
 	 @param adID
 	 @param adtitle 
 	 @param addemo01 
@@ -134,184 +139,23 @@ public class advertisement implements Serializable
 	 @param adCampID
 	*/
 
-	public advertisement(int adID, String adtitle, int addemo01, int addemo02, int addemo03, int addemo04, String addescription, String adowner, String adbrand, String adPCC, String adURL, String adCampID)
-	{
-		super();
-		this.adID = adID;
-		this.adtitle = adtitle;
-		this.addemo01 = addemo01;
-		this.addemo02 = addemo02;
-		this.addemo03 = addemo03;
-		this.addemo04 = addemo04;
-		this.addescription = addescription;
-		this.adowner = adowner;
-		this.adbrand = adbrand;
-		this.adPCC = adPCC;
-		this.adURL = adURL;
-		this.adCampID = adCampID;
-	}
-
-	// getters and setters
-
-        public int getAdID() {
-            return adID;
-        }
-
-        public void setAdID(int adID) {
-            this.adID = adID;
-        }
-
-        public String getAdtitle() {
-            return adtitle;
-        }
-
-        public void setAdtitle(String adtitle) {
-            this.adtitle = adtitle;
-        }
-
-        public int getAddemo01() {
-            return addemo01;
-        }
-
-        public void setAddemo01(int addemo01) {
-            this.addemo01 = addemo01;
-        }
-
-        public int getAddemo02() {
-            return addemo02;
-        }
-
-        public void setAddemo02(int addemo02) {
-            this.addemo02 = addemo02;
-        }
-
-        public int getAddemo03() {
-            return addemo03;
-        }
-
-        public void setAddemo03(int addemo03) {
-            this.addemo03 = addemo03;
-        }
-
-        public int getAddemo04() {
-            return addemo04;
-        }
-
-        public void setAddemo04(int addemo04) {
-            this.addemo04 = addemo04;
-        }
-
-        public String getAddescription() {
-            return addescription;
-        }
-
-        public void setAddescription(String addescription) {
-            this.addescription = addescription;
-        }
-
-        public String getAdowner() {
-            return adowner;
-        }
-
-        public void setAdowner(String adowner) {
-            this.adowner = adowner;
-        }
-
-        public String getAdbrand() {
-            return adbrand;
-        }
-
-        public void setAdbrand(String adbrand) {
-            this.adbrand = adbrand;
-        }
-
-        public String getAdPCC() {
-            return adPCC;
-        }
-
-        public void setAdPCC(String adPCC) {
-            this.adPCC = adPCC;
-        }
-
-        public String getAdURL() {
-            return adURL;
-        }
-
-        public void setAdURL(String adURL) {
-            this.adURL = adURL;
-        }
-
-        public String getAdCampID() {
-            return adCampID;
-        }
-
-        public void setAdCampID(String adCampID) {
-            this.adCampID = adCampID;
-        }
-
-	
-
-	/** 
-	 Validate if the instance variables are valid
-	 
-	 @return  boolean - true if instance variables are valid, else false 
-	*/
-	public boolean validate()
-	{
-
-                if (adID == -1)
-		{
-			return false;
-		}
-		if (adtitle == null)
-		{
-			 return false;
-		}
-		if (addemo01 == -1)
-		{
-			return false;
-		}
-		if (addemo02 == -1)
-		{
-			return false;
-		}
-		if (addemo03 == -1)
-		{
-			return false;
-		}
-		if (addemo04 == -1)
-		{
-			return false;
-		}
-		if (addescription == null)
-		{
-			return false;
-		}
-
-		if (adowner == null)
-		{
-			return false;
-		}
-		if (adbrand == null)
-		{
-			return false;
-		}
-		if (adPCC == null)
-		{
-			return false;
-		}
-		if (adURL == null)
-		{
-			return false;
-		}
-		if (adCampID == null)
-		{
-			return false;
-		}
-		return true;
-	}
-
-	/** Equals Test Method
+	public advertisement(int identifier, int adID, String adtitle, int addemo01, int addemo02, int addemo03, int addemo04, String addescription, String adowner, String adbrand, String adPCC, String adURL, String adCampID) {
+        this.identifier = identifier;
+        this.adID = adID;
+        this.adtitle = adtitle;
+        this.addemo01 = addemo01;
+        this.addemo02 = addemo02;
+        this.addemo03 = addemo03;
+        this.addemo04 = addemo04;
+        this.addescription = addescription;
+        this.adowner = adowner;
+        this.adbrand = adbrand;
+        this.adPCC = adPCC;
+        this.adURL = adURL;
+        this.adCampID = adCampID;
+    }
+        /**
+	 Overloaded Constructor
 	 @param adID
 	 @param adtitle 
 	 @param addemo01 
@@ -325,104 +169,201 @@ public class advertisement implements Serializable
 	 @param adURL
 	 @param adCampID
 	*/
+         public advertisement(int adID, String adtitle, int addemo01, int addemo02, int addemo03, int addemo04, String addescription, String adowner, String adbrand, String adPCC, String adURL, String adCampID) {
+        this.adID = adID;
+        this.adtitle = adtitle;
+        this.addemo01 = addemo01;
+        this.addemo02 = addemo02;
+        this.addemo03 = addemo03;
+        this.addemo04 = addemo04;
+        this.addescription = addescription;
+        this.adowner = adowner;
+        this.adbrand = adbrand;
+        this.adPCC = adPCC;
+        this.adURL = adURL;
+        this.adCampID = adCampID;
+        }
 
-	public boolean equals(advertisement advertisement)
+    public int getIdentifier() {
+        return identifier;
+    }
 
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
 
-	{
+    public int getAdID() {
+        return adID;
+    }
 
-			if (!(new Integer(adID)).equals(advertisement.adID))
-			{
-				return false;
-			}
+    public void setAdID(int adID) {
+        this.adID = adID;
+    }
 
-			if (!adtitle.equals(advertisement.adtitle))
-			{
-				return false;
-			}
-			if (!(new Integer(addemo01)).equals(advertisement.addemo01))
-			{
-				return false;
-			}
-			if (!(new Integer(addemo02)).equals(advertisement.addemo02))
-			{
-				return false;
-			}
+    public String getAdtitle() {
+        return adtitle;
+    }
 
-			if (!(new Integer(addemo03)).equals(advertisement.addemo03))
-			{
-				return false;
-			}
-			if (!(new Integer(addemo04)).equals(advertisement.addemo04))
-			{
-				return false;
-			}
-			if (!addescription.equals(advertisement.addescription))
-			{
-				return false;
-			}
+    public void setAdtitle(String adtitle) {
+        this.adtitle = adtitle;
+    }
 
-			if (!adowner.equals(advertisement.adowner))
-			{
-				return false;
-			}
-			if (!adbrand.equals(advertisement.adbrand))
-			{
-				return false;
-			}
-			if (!adPCC.equals(advertisement.adPCC))
-			{
-				return false;
-			}
-			if (!adURL.equals(advertisement.adURL))
-			{
-				return false;
-			}
-			if (!adCampID.equals(advertisement.adCampID))
-			{
-				return false;
-			}
-		return true;
-	}
+    public int getAddemo01() {
+        return addemo01;
+    }
 
-		/** 
-		 Constructs a <code>STring</code> with all attributes
-		 in name = value format
-		 
-		 @return a <code>String</code> representation
-		 of this object
-		 
-		*/
+    public void setAddemo01(int addemo01) {
+        this.addemo01 = addemo01;
+    }
 
-		@Override
-		public String toString()
-		{
-			StringBuilder strBfr = new StringBuilder();
-			strBfr.append("adID:");
-			strBfr.append(adID);
-			strBfr.append("\nadtitle:");
-			strBfr.append(adtitle);
-			strBfr.append("\naddemo01:");
-			strBfr.append(addemo01);
-			strBfr.append("\naddemo02:");
-			strBfr.append(addemo02);
-			strBfr.append("\naddemo03:");
-			strBfr.append(addemo03);
-			strBfr.append("\naddemo04:");
-			strBfr.append(addemo04);
-			strBfr.append("\naddescription:");
-			strBfr.append(addescription);
-			strBfr.append("\nadowner:");
-			strBfr.append(adowner);
-			strBfr.append("\nadbrand:");
-			strBfr.append(adbrand);
-			strBfr.append("\nadPCC:");
-			strBfr.append(adPCC);
-			strBfr.append("\nadURL:");
-			strBfr.append(adURL);
-			strBfr.append("\nadCampID:");
-			strBfr.append(adCampID);
-		return strBfr.toString();
-		}
+    public int getAddemo02() {
+        return addemo02;
+    }
+
+    public void setAddemo02(int addemo02) {
+        this.addemo02 = addemo02;
+    }
+
+    public int getAddemo03() {
+        return addemo03;
+    }
+
+    public void setAddemo03(int addemo03) {
+        this.addemo03 = addemo03;
+    }
+
+    public int getAddemo04() {
+        return addemo04;
+    }
+
+    public void setAddemo04(int addemo04) {
+        this.addemo04 = addemo04;
+    }
+
+    public String getAddescription() {
+        return addescription;
+    }
+
+    public void setAddescription(String addescription) {
+        this.addescription = addescription;
+    }
+
+    public String getAdowner() {
+        return adowner;
+    }
+
+    public void setAdowner(String adowner) {
+        this.adowner = adowner;
+    }
+
+    public String getAdbrand() {
+        return adbrand;
+    }
+
+    public void setAdbrand(String adbrand) {
+        this.adbrand = adbrand;
+    }
+
+    public String getAdPCC() {
+        return adPCC;
+    }
+
+    public void setAdPCC(String adPCC) {
+        this.adPCC = adPCC;
+    }
+
+    public String getAdURL() {
+        return adURL;
+    }
+
+    public void setAdURL(String adURL) {
+        this.adURL = adURL;
+    }
+
+    public String getAdCampID() {
+        return adCampID;
+    }
+
+    public void setAdCampID(String adCampID) {
+        this.adCampID = adCampID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.identifier;
+        hash = 89 * hash + this.adID;
+        hash = 89 * hash + Objects.hashCode(this.adtitle);
+        hash = 89 * hash + this.addemo01;
+        hash = 89 * hash + this.addemo02;
+        hash = 89 * hash + this.addemo03;
+        hash = 89 * hash + this.addemo04;
+        hash = 89 * hash + Objects.hashCode(this.addescription);
+        hash = 89 * hash + Objects.hashCode(this.adowner);
+        hash = 89 * hash + Objects.hashCode(this.adbrand);
+        hash = 89 * hash + Objects.hashCode(this.adPCC);
+        hash = 89 * hash + Objects.hashCode(this.adURL);
+        hash = 89 * hash + Objects.hashCode(this.adCampID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final advertisement other = (advertisement) obj;
+        if (this.identifier != other.identifier) {
+            return false;
+        }
+        if (this.adID != other.adID) {
+            return false;
+        }
+        if (this.addemo01 != other.addemo01) {
+            return false;
+        }
+        if (this.addemo02 != other.addemo02) {
+            return false;
+        }
+        if (this.addemo03 != other.addemo03) {
+            return false;
+        }
+        if (this.addemo04 != other.addemo04) {
+            return false;
+        }
+        if (!Objects.equals(this.adtitle, other.adtitle)) {
+            return false;
+        }
+        if (!Objects.equals(this.addescription, other.addescription)) {
+            return false;
+        }
+        if (!Objects.equals(this.adowner, other.adowner)) {
+            return false;
+        }
+        if (!Objects.equals(this.adbrand, other.adbrand)) {
+            return false;
+        }
+        if (!Objects.equals(this.adPCC, other.adPCC)) {
+            return false;
+        }
+        if (!Objects.equals(this.adURL, other.adURL)) {
+            return false;
+        }
+        if (!Objects.equals(this.adCampID, other.adCampID)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "advertisement{" + "identifier=" + identifier + ", adID=" + adID + ", adtitle=" + adtitle + ", addemo01=" + addemo01 + ", addemo02=" + addemo02 + ", addemo03=" + addemo03 + ", addemo04=" + addemo04 + ", addescription=" + addescription + ", adowner=" + adowner + ", adbrand=" + adbrand + ", adPCC=" + adPCC + ", adURL=" + adURL + ", adCampID=" + adCampID + '}';
+    }
 
 }

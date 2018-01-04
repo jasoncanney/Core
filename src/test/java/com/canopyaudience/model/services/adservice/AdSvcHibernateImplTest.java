@@ -8,7 +8,6 @@ package com.canopyaudience.model.services.adservice;
 // import static org.junit.Assert.*;
 
 import com.canopyaudience.model.domain.advertisement;
-import com.canopyaudience.model.services.exception.AdvertisementException;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
