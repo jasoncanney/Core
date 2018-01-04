@@ -27,16 +27,14 @@ public class CouponSvcHibernateImplTest extends TestCase{
 
     coupon coupon1;
     coupon coupon2;
-    coupon coupon3;
 
     @Before	
 	protected void setUp() throws Exception {
 		
 		super.setUp();
                 // Factory factory = Factory.getInstance();
-		coupon1 = new coupon (86730, "1", "2", "3", "4", "5","6");                
-                coupon2 = new coupon (86730, "1", "2", "3", "4", "5","6");             
-                coupon3 = new coupon (86731, "1", "2", "3", "4", "5","6");           
+		coupon1 = new coupon(1,"twitter","twitter","10%","1/1/18","12/31/18","all","http://www.bentonjohnbjr.com","x5324",1);
+                coupon2 = new coupon(19,"Coach","Coach","2%","1/1/18","12/31/18","all","http://www.farmersinsurancegroup.com","x5324",19);
 
         }
         /*

@@ -32,9 +32,8 @@ public class couponTest extends TestCase{
 	 */
 	@Before	
 	public void setUp() throws Exception {
-
-        coupon1 = new coupon (12345, "01", "02", "03","04","05","06");    
-        coupon2 = new coupon (12346, "01", "02", "03","04","05","06");
+            coupon1 = new coupon(1,"twitter","twitter","10%","1/1/18","12/31/18","all","http://www.bentonjohnbjr.com","x5324",1);
+            coupon2 = new coupon(19,"Coach","Coach","2%","1/1/18","12/31/18","all","http://www.farmersinsurancegroup.com","x5324",19);
 	}
         
     /**

@@ -172,16 +172,20 @@ public class CouponSvcHibernateImpl implements ICouponSvc
             try 
             { 
                 tx = session.beginTransaction();
-                log.info ("beginTransaction, Getting coupon with couponid:" + appdb.getCouponID());   
+                log.info ("beginTransaction, Getting coupon with couponid:" + appdb.getIdentifier());
                 // retrieve the current application object from the database
-                appnew = session.get(coupon.class, appdb.getCouponID());
+                appnew = session.get(coupon.class, appdb.getIdentifier());
                 // update all fields in the current advertisement object except the PK of consumerID  
+                appnew.setCouponID(appdb.getCouponID());
                 appnew.setCouponTitle(appdb.getCouponTitle());
                 appnew.setCouponDescription(appdb.getCouponDescription());
                 appnew.setCouponValue(appdb.getCouponValue());
                 appnew.setCouponStartActive(appdb.getCouponStartActive());
                 appnew.setCouponEndActive(appdb.getCouponEndActive());
                 appnew.setCouponLocationsZip(appdb.getCouponLocationsZip());
+                appnew.setCouponURL(appdb.getCouponURL());
+                appnew.setAdCampID(appdb.getAdCampID());
+                appnew.setAdID(appdb.getAdID());
 		System.out.println("Updating coupon...");
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);
