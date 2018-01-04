@@ -1,5 +1,6 @@
 package com.canopyaudience.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.io.Serializable;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
  be received by the CDE from advertisers and then stored in a data store
  by the CDE
 */
+@JsonAutoDetect
 
 @Entity
 @Table(name = "advertisement")

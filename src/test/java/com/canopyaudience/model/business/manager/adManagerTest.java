@@ -33,8 +33,8 @@ public class adManagerTest  extends TestCase {
 		
 		super.setUp();
                 // Factory factory = Factory.getInstance();
-		advertisement1 = new advertisement (8675330,"Store", 1, 2, 3, 4,"OCAP","1239876","A987654321","OCAP Stack","http://www.adobe.com/ocap","Hans Bender");                
-                advertisement2 = new advertisement (8675330,"Update", 1, 2, 3, 4,"TVGuide","1239876","A987654321","RDK-B","http://www.adobe.com/ocap","Hans Bender");                
+		advertisement1 = new advertisement (8996666,"Store", 1, 2, 3, 4,"OCAP","1239876","A987654321","OCAP Stack","http://www.adobe.com/ocap","Hans Bender");                
+                advertisement2 = new advertisement (8996666,"Update", 1, 2, 3, 4,"TVGuide","1239876","A987654321","RDK-B","http://www.adobe.com/ocap","Hans Bender");                
                 advertisement3 = new advertisement (8675322,"Delete", 1, 2, 3, 4,"TVGuide","1239876","A987654321","RDK-B","http://www.adobe.com/ocap","Hans Bender");                
 
         }
@@ -62,17 +62,17 @@ public class adManagerTest  extends TestCase {
 
      /**
      * Test of Get method, of class adImpManager.
-     */
+     *//*
     @Test
     public void test2AdManagerCreateGetA() throws Exception {
         log.info ("adManagerTest - test2AdManagerCreateGetA");
         adManager instance = new adManager();
         advertisement c = instance.GetA(advertisement1.getAdID());
         assertEquals(c.getAdID(), advertisement1.getAdID());   
-    }
+    }*/
     /**
      * Test of Update method, of class adManager.
-     */
+     *//*
     @Test
     public void test3Update() {
          log.info ("adManagerTest - test3Update");
@@ -80,7 +80,7 @@ public class adManagerTest  extends TestCase {
         boolean expResult = true;
         boolean result = instance.Update(advertisement2);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);        
-    }
+    }*/
 
     /**
      * Test of Delete method, of class adManager.

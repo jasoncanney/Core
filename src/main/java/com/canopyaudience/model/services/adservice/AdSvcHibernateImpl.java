@@ -33,38 +33,36 @@ public class AdSvcHibernateImpl implements IAdSvc
   @Override
   public boolean storeAdvertisement(advertisement advertisement)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = false;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("storeAdvertisement - AdSvcHibernateImpl.java");
- 
             advertisement appdb  = advertisement;
-            Transaction tx = null;
-            
+            Session session = fetchSession();
+            log.info ("fetched session");
+
             try 
             {
-                Session session = fetchSession();
                 log.info(appdb.toString());
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.save(appdb);
                 log.info ("session.saved");
-                session.getTransaction().commit();                               // added this line to fix session closing
-                session.close();                                                 // added this line to fix session closing
+                tx.commit();
                 log.info("advertisement saved. Check database for data!");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+               if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+                status = true;
             }
             return status;
        }  
@@ -80,42 +78,37 @@ public class AdSvcHibernateImpl implements IAdSvc
     public List<advertisement> getAdvertisement() throws AdvertisementException, ClassNotFoundException {
         
         {
-            // boolean status = true;
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
-            log.info ("getAdvertisement - AdSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
+            log.info ("getAdvertisement - AdSvcHibernateImpl.java");            
             List<advertisement> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
-                
                 // query students
                 theApplications = session.createQuery("from advertisement").getResultList();
                 log.info ("session.createQuery passed");
                 // For logging what is in the List
                 // displayAdvertisements(theApplications);
-                session.close();    
+                tx.commit();
                 log.info("advertisement queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return theApplications;
        }  
     }
@@ -132,39 +125,34 @@ public class AdSvcHibernateImpl implements IAdSvc
             
             int i = id;
             advertisement c = new advertisement();
-            
-            
-            // boolean status = true;
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("getAdvertisement - AdSvcHibernateImpl.java");
- 
-            Transaction tx = null;
-            
             List<advertisement> theApplications = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
             {
-                Session session = fetchSession();
-                log.info ("fetched session");
+                
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 c = session.get(advertisement.class, i);
-                session.close();   
-                
+                tx.commit();
+                log.info("advertisement  for one id queried and put into List.");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
-            }     
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+            }
             return c;
        }  
     }
@@ -177,29 +165,25 @@ public class AdSvcHibernateImpl implements IAdSvc
   @Override
   public boolean updateAdvertisement(advertisement advertisement)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = false;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("updateAdvertisement - AdSvcHibernateImpl.java");
- 
             // updateApplication takes in an application object
             // this object includes the updates received and that need to be stored in the db
             advertisement appdb  = advertisement;
-
             // create a new application object.  This is where the current application object gets stored and 
             // will be used to make updates and store back in the db
             advertisement appnew = null;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
+            { 
                 tx = session.beginTransaction();
-                log.info ("beginTransaction, Getting advertisement with adID:" + appdb.getAdID());
-                
+                log.info ("beginTransaction, Getting advertisement with adID:" + appdb.getAdID());   
                 // retrieve the current application object from the database
                 appnew = session.get(advertisement.class, appdb.getAdID());
                 // update all fields in the current advertisement object except the PK of consumerID  
@@ -214,29 +198,23 @@ public class AdSvcHibernateImpl implements IAdSvc
                 appnew.setAdPCC(appdb.getAdPCC());
                 appnew.setAdURL(appdb.getAdURL());
                 appnew.setAdCampID(appdb.getAdCampID());
-	
 		System.out.println("Updating advertisement...");
-
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);
-                
 		// commit the transaction
-		session.getTransaction().commit();
-                
-                // tx.commit();
-                session.close();                                                 // added this line to fix session closing
-
+		tx.commit();
                 log.info("advertisement updated. Check database for data!");
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     //tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close();                                                 // added this line to fix session closing
+                status = true;
             }
             return status;
        }  
@@ -247,39 +225,35 @@ public class AdSvcHibernateImpl implements IAdSvc
     @Override
     public boolean deleteAdvertisement(advertisement advertisement)
         {
-          boolean status = true;
+            Transaction tx;
+            boolean status = false;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-
             log.info ("deleteAdvertisement - AdSvcHibernateImpl.java");
- 
             advertisement appdb  = advertisement;
-            Transaction tx = null;
+            Session session = fetchSession();
+            log.info ("fetched session");
             
             try 
-            {
-                Session session = fetchSession();
-                log.info ("fetched session");
+            {    
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
                 session.delete(appdb);
                 log.info ("session.delete(advertisement passed in)");
-                session.getTransaction().commit();                               // added this line to fix session closing
-                // tx.commit();
+                tx.commit();
                 log.info("advertisement deleted. Check database for data not there!");
-                session.close();                                                 // added this line to fix session closing
-
             }
             catch(Exception e)
             {
-              if (tx==null) 
-                            {
-                                     // tx.rollback();
-                                     e.printStackTrace();
-
-                            }
-              log.error (e.getClass() + ": " + e.getMessage(), e);
+              if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+                log.error (e.getClass() + ": " + e.getMessage(), e);
+                }
+            }
+            finally{
+                session.close(); 
+                status = true;
             }
             return status;
        }  
