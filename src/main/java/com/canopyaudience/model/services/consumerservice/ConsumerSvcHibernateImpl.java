@@ -217,7 +217,7 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
     @Override
     public boolean deleteConsumer(consumer consumer)
         {
-          boolean status = true;
+            boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");

@@ -39,8 +39,8 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
         long date_2 = System.currentTimeMillis();
 
         adimpression1 = new adimpression(33,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
-        adimpression2 = new adimpression(34,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
-        adimpression3 = new adimpression(8675312,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
+        adimpression2 = new adimpression(34,8675309,66666,777777,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
+        adimpression3 = new adimpression(63,8675777,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,222222211,222222222,1,"80126");
 
 
         }
@@ -59,16 +59,16 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
 */ 
         /**
      * Test of storeAdImpression method, of class AdImpressionSvcHibernateImpl.
-     */
+     *//*
     @Test
     public void test1StoreAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testStoreAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
         boolean expResult = true;
-        boolean result = instance.storeAdImpression(adimpression3);
+        boolean result = instance.storeAdImpression(adimpression1);
         assertEquals(expResult, result);
     
-    }
+    }*/
     
     /**
      * Test of getaConsumer method, of class AdImpressionSvcHibernateImpl.
@@ -84,16 +84,16 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     */
     /**
      * Test of updateAdImpression method, of class AdImpressionSvcHibernateImpl.
-     *//*
+     */
     //@Test
     public void test3UpdateAdImpression() {
     log.info ("AdImpressionSvcHibernateImplTest - testUpdateAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
         boolean expResult = true;
-        boolean result = instance.updateAdImpression(adimpression2);  // adimpression2 is a pre-updated adimpression object for adimpression1
+        boolean result = instance.updateAdImpression(adimpression3);  // adimpression2 is a pre-updated adimpression object for adimpression1
         assertEquals(expResult, result);    
     }
-  */
+  
     /**
      * Test of deleteAdImpression method, of class AdImpressionSvcHibernateImpl.
      *//*
@@ -102,7 +102,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
     log.info ("AdImpressionSvcHibernateImplTest - testDeleteAdImpression");
         AdImpressionSvcHibernateImpl instance = new AdImpressionSvcHibernateImpl();
         boolean expResult = true;
-        boolean result = instance.deleteAdImpression(adimpression1);
+        boolean result = instance.deleteAdImpression(adimpression3);
         assertEquals(expResult, result); 
 
     }*/

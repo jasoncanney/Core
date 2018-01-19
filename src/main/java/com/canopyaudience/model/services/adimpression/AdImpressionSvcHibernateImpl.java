@@ -207,7 +207,6 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
   @Override
   public boolean updateAdImpression(adimpression adimpression)
         {
-            Transaction tx;
             boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
@@ -215,16 +214,18 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             log.info ("updateAdImpression - AdImpressionSvcHibernateImpl.java");
             adimpression appdb  = adimpression;
             adimpression appnew = null;
+            Transaction tx = null;
             Session session = fetchSession();
             log.info ("fetched session");     
             
             try 
-            {
-                       
+            {      
                 tx = session.beginTransaction();
                 log.info ("beginTransaction, Getting adimpression with impression id:" + appdb.getImpID());
                 // retrieve the current adimpression object from the database
                 // update all fields in the current adimpression object except the PK of consumerID   
+                appnew = session.get(adimpression.class, appdb.getImpID());
+                
                 appnew.setConsumerID(appdb.getConsumerID());
                 appnew.setSessionID(appdb.getSessionID());
                 appnew.setServiceID(appdb.getServiceID()); // check domain object, think this is missing
@@ -242,7 +243,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                 appnew.setLocationID(appdb.getLocationID());
                 appnew.setLocationZip(appdb.getLocationZip());
 		System.out.println("Updating adimpression...");
-                session.saveOrUpdate(appnew);
+                session.update(appnew);
                 tx.commit();
                 log.info("Application updated. Check database for data!");
             }
@@ -265,13 +266,13 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     @Override
     public boolean deleteAdImpression(adimpression adimpression)
         {
-            Transaction tx;
             boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
             log.info ("deleteAdImpression - AdImpressionSvcHibernateImpl.java");
             adimpression appdb  = adimpression;
+            Transaction tx = null;
             Session session = fetchSession();
             log.info ("fetched session");
             
