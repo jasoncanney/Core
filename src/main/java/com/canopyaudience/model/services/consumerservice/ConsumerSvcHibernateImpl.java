@@ -191,6 +191,7 @@ public class ConsumerSvcHibernateImpl implements IConsumerSvc
                 appnew.setConsumerState(appdb.getConsumerState());
                 appnew.setConsumerZip(appdb.getConsumerZip());
                 appnew.setConsumerSocEmail(appdb.getConsumerSocEmail());
+                appnew.setConsumerPWD(appdb.getConsumerPWD());
 		System.out.println("Updating consumer...");
                 // application object is updated in the db based on the Primary Key that was unchanged
                 session.update(appnew);

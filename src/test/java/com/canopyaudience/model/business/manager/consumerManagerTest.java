@@ -32,9 +32,9 @@ public class consumerManagerTest extends TestCase{
 		
 		super.setUp();
                 // Factory factory = Factory.getInstance();
-		consumer1 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10",1,"2",3);                
-                consumer2 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10",1,"2",3);             
-                consumer3 = new consumer (86731, "1", "2", "3", "4", "5","6","7","8","9","10",1,"2",3);           
+		consumer1 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10",1,"2",3, "password1");                
+                consumer2 = new consumer (86730, "1", "2", "3", "4", "5","6","7","8","9","10",1,"2",3, "password2");             
+                // consumer3 = new consumer (86731, "1", "2", "3", "4", "5","6","7","8","9","10",1,"2",3, "password3");              
 
         }
         /*

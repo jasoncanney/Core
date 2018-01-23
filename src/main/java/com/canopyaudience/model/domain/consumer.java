@@ -114,6 +114,12 @@ public class consumer implements Serializable
 	*/
 	private int providerID;
 
+        @Column(name = "ConsumerPWD")
+        /**
+         * Consumer Password
+         */        
+	String consumerPWD;
+        
 	/** 
 	  Default Constructor
 	  @param consumer object
@@ -122,13 +128,12 @@ public class consumer implements Serializable
 	{
 
 	}
-
-        
+ 
         /*
         Overloaded Constructor
         *
         */
-        public consumer(int consumerID, String consumerFirstName, String consumerMiddleInitial, String consumerLastName, String consumerEmail, String consumerPhone, String consumerAddress, String consumerCity, String consumerState, String consumerZip, String consumerSocEmail, int demoID, String deviceLocID, int providerID) {
+        public consumer(int consumerID, String consumerFirstName, String consumerMiddleInitial, String consumerLastName, String consumerEmail, String consumerPhone, String consumerAddress, String consumerCity, String consumerState, String consumerZip, String consumerSocEmail, int demoID, String deviceLocID, int providerID, String consumerPWD) {
             this.consumerID = consumerID;
             this.consumerFirstName = consumerFirstName;
             this.consumerMiddleInitial = consumerMiddleInitial;
@@ -143,6 +148,7 @@ public class consumer implements Serializable
             this.demoID = demoID;
             this.deviceLocID = deviceLocID;
             this.providerID = providerID;
+            this.consumerPWD = consumerPWD;
         }
 
     public int getConsumerID() {
@@ -257,23 +263,32 @@ public class consumer implements Serializable
         this.providerID = providerID;
     }
 
+    public String getConsumerPWD() {
+        return consumerPWD;
+    }
+
+    public void setConsumerPWD(String consumerPWD) {
+        this.consumerPWD = consumerPWD;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.consumerID;
-        hash = 67 * hash + Objects.hashCode(this.consumerFirstName);
-        hash = 67 * hash + Objects.hashCode(this.consumerMiddleInitial);
-        hash = 67 * hash + Objects.hashCode(this.consumerLastName);
-        hash = 67 * hash + Objects.hashCode(this.consumerEmail);
-        hash = 67 * hash + Objects.hashCode(this.consumerPhone);
-        hash = 67 * hash + Objects.hashCode(this.consumerAddress);
-        hash = 67 * hash + Objects.hashCode(this.consumerCity);
-        hash = 67 * hash + Objects.hashCode(this.consumerState);
-        hash = 67 * hash + Objects.hashCode(this.consumerZip);
-        hash = 67 * hash + Objects.hashCode(this.consumerSocEmail);
-        hash = 67 * hash + this.demoID;
-        hash = 67 * hash + Objects.hashCode(this.deviceLocID);
-        hash = 67 * hash + this.providerID;
+        int hash = 5;
+        hash = 97 * hash + this.consumerID;
+        hash = 97 * hash + Objects.hashCode(this.consumerFirstName);
+        hash = 97 * hash + Objects.hashCode(this.consumerMiddleInitial);
+        hash = 97 * hash + Objects.hashCode(this.consumerLastName);
+        hash = 97 * hash + Objects.hashCode(this.consumerEmail);
+        hash = 97 * hash + Objects.hashCode(this.consumerPhone);
+        hash = 97 * hash + Objects.hashCode(this.consumerAddress);
+        hash = 97 * hash + Objects.hashCode(this.consumerCity);
+        hash = 97 * hash + Objects.hashCode(this.consumerState);
+        hash = 97 * hash + Objects.hashCode(this.consumerZip);
+        hash = 97 * hash + Objects.hashCode(this.consumerSocEmail);
+        hash = 97 * hash + this.demoID;
+        hash = 97 * hash + Objects.hashCode(this.deviceLocID);
+        hash = 97 * hash + this.providerID;
+        hash = 97 * hash + Objects.hashCode(this.consumerPWD);
         return hash;
     }
 
@@ -293,9 +308,6 @@ public class consumer implements Serializable
             return false;
         }
         if (this.demoID != other.demoID) {
-            return false;
-        }
-        if (!Objects.equals(this.deviceLocID , other.deviceLocID)) {
             return false;
         }
         if (this.providerID != other.providerID) {
@@ -331,12 +343,18 @@ public class consumer implements Serializable
         if (!Objects.equals(this.consumerSocEmail, other.consumerSocEmail)) {
             return false;
         }
+        if (!Objects.equals(this.deviceLocID, other.deviceLocID)) {
+            return false;
+        }
+        if (!Objects.equals(this.consumerPWD, other.consumerPWD)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "consumer{" + "consumerID=" + consumerID + ", consumerFirstName=" + consumerFirstName + ", consumerMiddleInitial=" + consumerMiddleInitial + ", consumerLastName=" + consumerLastName + ", consumerEmail=" + consumerEmail + ", consumerPhone=" + consumerPhone + ", consumerAddress=" + consumerAddress + ", consumerCity=" + consumerCity + ", consumerState=" + consumerState + ", consumerZip=" + consumerZip + ", consumerSocEmail=" + consumerSocEmail + ", demoID=" + demoID + ", deviceLocID=" + deviceLocID + ", providerID=" + providerID + '}';
+        return "consumer{" + "consumerID=" + consumerID + ", consumerFirstName=" + consumerFirstName + ", consumerMiddleInitial=" + consumerMiddleInitial + ", consumerLastName=" + consumerLastName + ", consumerEmail=" + consumerEmail + ", consumerPhone=" + consumerPhone + ", consumerAddress=" + consumerAddress + ", consumerCity=" + consumerCity + ", consumerState=" + consumerState + ", consumerZip=" + consumerZip + ", consumerSocEmail=" + consumerSocEmail + ", demoID=" + demoID + ", deviceLocID=" + deviceLocID + ", providerID=" + providerID + ", consumerPWD=" + consumerPWD + '}';
     }
 
     @Override

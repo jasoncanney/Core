@@ -33,8 +33,8 @@ public class consumerTest extends TestCase {
 	@Before	
 	public void setUp() throws Exception {
 
-        consumer1 = new consumer (12345, "01", "02", "03","04","05","06","07","08","09","10", 1, "2", 3);    
-        consumer2 = new consumer (12346, "01", "02", "03","04","05","06","07","08","09","10", 1, "2", 3);
+        consumer1 = new consumer (12345, "01", "02", "03","04","05","06","07","08","09","10", 1, "2", 3, "password");    
+        consumer2 = new consumer (12346, "01", "02", "03","04","05","06","07","08","09","10", 1, "2", 3, "password2");
 	}
         
     /**
