@@ -40,7 +40,7 @@ public class AdImpressionSvcHibernateImplTest extends TestCase{
 
         adimpression1 = new adimpression(33,8675309,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
         adimpression2 = new adimpression(34,8675309,66666,777777,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,date_1,date_2,1,"80126");
-        adimpression3 = new adimpression(63,8675777,1234598,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,222222211,222222222,1,"80126");
+        adimpression3 = new adimpression(63,8675777,777777,6006,78943,"1239878xx98",1,1,31,"2004","123xwe4",87685,123987,222222211,222222222,1,"80126");
 
 
         }

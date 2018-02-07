@@ -67,9 +67,6 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             
             return status;
        }  
-         
-	
-    
     /**
      * Pulls data from database through hibernate interface
      * @return <list> of adimpression
@@ -217,10 +214,10 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             Transaction tx = null;
             Session session = fetchSession();
             log.info ("fetched session");     
-            
             try 
             {      
                 tx = session.beginTransaction();
+                log.info(appdb.toString());
                 log.info ("beginTransaction, Getting adimpression with impression id:" + appdb.getImpID());
                 // retrieve the current adimpression object from the database
                 // update all fields in the current adimpression object except the PK of consumerID   
@@ -243,9 +240,10 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
                 appnew.setLocationID(appdb.getLocationID());
                 appnew.setLocationZip(appdb.getLocationZip());
 		System.out.println("Updating adimpression...");
-                session.update(appnew);
+                log.info(appnew.toString());
+                session.saveOrUpdate(appnew);
                 tx.commit();
-                log.info("Application updated. Check database for data!");
+                log.info("Ad Impression updated. Check database for data!");
             }
             catch(Exception e)
             {
