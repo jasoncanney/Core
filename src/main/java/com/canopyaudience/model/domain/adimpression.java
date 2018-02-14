@@ -37,7 +37,7 @@ public class adimpression implements Serializable
         */
 	private int impID;
         
-        @Id
+        // @Id
         // @GeneratedValue(strategy=GenerationType.IDENTITY)
         @Column(name = "ConsumerID")
 	/** 

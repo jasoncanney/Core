@@ -165,13 +165,13 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     public adimpression getAAdImpression(int id) throws AdImpressionException, ClassNotFoundException {
         
         {
-            Transaction tx;
             int i = id;
             adimpression c = new adimpression();
+            Transaction tx;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
-            log.info ("getAdImpression - AdImpressionSvcHibernateImpl.java");
+            log.info ("getAAdImpression - AdImpressionSvcHibernateImpl.java");
             Session session = fetchSession();
             log.info ("fetched session");
                         
@@ -264,13 +264,13 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
     @Override
     public boolean deleteAdImpression(adimpression adimpression)
         {
+            Transaction tx;
             boolean status = true;
             log.info("-------------------------------");
             log.info("Using Hibernate Implementation");
             log.info("-------------------------------");
             log.info ("deleteAdImpression - AdImpressionSvcHibernateImpl.java");
             adimpression appdb  = adimpression;
-            Transaction tx = null;
             Session session = fetchSession();
             log.info ("fetched session");
             
@@ -278,6 +278,7 @@ public class AdImpressionSvcHibernateImpl implements IAdImpressionSvc
             {
                 tx = session.beginTransaction();
                 log.info ("beginTransaction");
+                log.info (appdb.toString());
                 session.delete(appdb);
                 log.info ("session.delete(adimpression passed in)");
                 tx.commit();
