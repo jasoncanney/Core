@@ -1,17 +1,23 @@
+CREATE SCHEMA `genadx` DEFAULT CHARACTER SET latin1 ;
+
 DROP TABLE IF EXISTS `genadx`.`consumer`;
 
 CREATE TABLE `consumer` (
   `ConsumerID` int(11) NOT NULL AUTO_INCREMENT,
-  `ConsumerFirstName` varchar(50) NOT NULL,
+  `ConsumerFirstName` varchar(50) DEFAULT NULL,
   `ConsumerMiddleInitial` varchar(50) DEFAULT NULL,
-  `ConsumerLastName` varchar(50) NOT NULL,
-  `ConsumerEmail` varchar(50) NOT NULL,
+  `ConsumerLastName` varchar(50) DEFAULT NULL,
+  `ConsumerEmail` varchar(50) DEFAULT NULL,
   `ConsumerPhone` varchar(50) DEFAULT NULL,
-  `ConsumerAddress` varchar(50) NOT NULL,
-  `ConsumerCity` varchar(50) NOT NULL,
-  `ConsumerState` varchar(50) NOT NULL,
-  `ConsumerZip` varchar(50) NOT NULL,
+  `ConsumerAddress` varchar(50) DEFAULT NULL,
+  `ConsumerCity` varchar(50) DEFAULT NULL,
+  `ConsumerState` varchar(50) DEFAULT NULL,
+  `ConsumerZip` varchar(50) DEFAULT NULL,
   `ConsumerSocEmail` varchar(50) NOT NULL,
+  `DemoID` int(11) DEFAULT NULL,
+  `DeviceLocID`varchar(50) DEFAULT NULL,
+  `ConsumerPWD`varchar(100) NOT NULL,
+  `ProviderID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ConsumerID`),
   UNIQUE KEY `ConsumerSocEmail` (`ConsumerSocEmail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
@@ -19,7 +25,8 @@ CREATE TABLE `consumer` (
 DROP TABLE IF EXISTS `genadx`.`advertisement`;
 
 CREATE TABLE `advertisement` (
-  `adID` int(11) DEFAULT NULL,
+  `IDentifier` int(11) NOT NULL AUTO_INCREMENT,
+  `adID` int(11) NOT NULL,
   `adtitle` varchar(50) NOT NULL,
   `addemo01` int(11) DEFAULT NULL,
   `addemo02` int(11) DEFAULT NULL,
@@ -30,8 +37,9 @@ CREATE TABLE `advertisement` (
   `adbrand` varchar(50) NOT NULL,
   `adpcc` varchar(50) NOT NULL,
   `adurl` varchar(50) NOT NULL,
-  `adcampid` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adcampid` varchar(50) NOT NULL,
+  PRIMARY KEY (`IDentifier`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `genadx`.`consumerHistory`;
 
@@ -44,17 +52,31 @@ CREATE TABLE `consumerhistory` (
   `couponID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `genadx`.`provider`;
+
+CREATE TABLE `provider` (
+  `IDentifier` int(11) NOT NULL AUTO_INCREMENT,
+  `providerID` int(11) NOT NULL,
+  `providerName` varchar(50) NOT NULL,
+PRIMARY KEY (`IDentifier`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `genadx`.`coupon`;
 
 CREATE TABLE `coupon` (
+  `IDentifier` int(11) NOT NULL AUTO_INCREMENT,	 
   `couponID` int(11) DEFAULT NULL,
   `couponTitle` varchar(50) NOT NULL,
   `couponDescription` varchar(50) NOT NULL,
-  `couponValue` float DEFAULT NULL,
+  `couponValue` varchar(50) NOT NULL,
   `couponStartActive` varchar(50) NOT NULL,
   `couponEndActive` varchar(50) NOT NULL,
-  `couponLocationsZip` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `couponLocationsZip` varchar(50) NOT NULL,
+  `couponURL` varchar(50) NOT NULL,
+  `adcampid` varchar(50) NOT NULL,
+   `adID` int(11) NOT NULL,
+  PRIMARY KEY (`IDentifier`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `genadx`.`log`;
 
@@ -72,13 +94,10 @@ DROP TABLE IF EXISTS `genadx`.`preference`;
 
 CREATE TABLE `preference` (
   `preferenceID` int(11) NOT NULL AUTO_INCREMENT,
-  `preferenceGsSegment` int(11) DEFAULT NULL,
-  `preferenceCaTypeCode` int(11) DEFAULT NULL,
-  `preferenceCaValueCode` int(11) DEFAULT NULL,
-  `preferencePcc` int(11) DEFAULT NULL,
-  `preferenceBrandOwner` varchar(50) DEFAULT NULL,
-  `preferenceProductDesc` varchar(50) DEFAULT NULL,
-  `preferenceDate` DATETIME NOT NULL,
+   `preferenceChoice` int(11) DEFAULT NULL,
+  `preferenceDate` BIGINT NOT NULL,
+  `advertisementID` int(11) DEFAULT NULL,
+  `couponID` int(11) DEFAULT NULL,
   `consumerID` int(11) DEFAULT NULL,
   PRIMARY KEY (`preferenceID`),
   UNIQUE KEY `preferenceID` (`preferenceID`)
@@ -87,26 +106,25 @@ CREATE TABLE `preference` (
 DROP TABLE IF EXISTS `genadx`.`adimpression`;
 
 CREATE TABLE `adimpression` (
+`ImpID` int(11) NOT NULL AUTO_INCREMENT,
  `ConsumerID` int NOT NULL,
- `SessionID` varchar(50) NOT NULL,
-  `ServiceID` varchar(50) NOT NULL,
-  `ContentID` varchar(50) NOT NULL,
-  `Duration` varchar(50) NOT NULL,
-  `CurrentDateTime` varchar(50) NOT NULL,
+ `SessionID` int(11) NOT NULL,
+  `ServiceID` int(11) NOT NULL,
+  `ContentID` int(11) NOT NULL,
   `TerminalID` varchar(50) NOT NULL,
- `OppType` varchar(50) NOT NULL,
-  `OppNum` varchar(50) NOT NULL,
- `OppDuration` varchar(50) NOT NULL,
- `PCCCode` varchar(50) NOT NULL,
+ `OppType` int(11) NOT NULL,
+  `OppNum` int(11) NOT NULL,
+ `OppDuration` int(11) NOT NULL,
+ `AdPCC`varchar(50) NOT NULL,
   `AdCampID` varchar(50) NOT NULL,
- `AssetID` varchar(50) NOT NULL,
-  `AssetProviderID` varchar(50) NOT NULL,
-  `ViewStartTime` varchar(50) NOT NULL,
-  `ViewEndTime` varchar(50) NOT NULL,
-  `LocationID` varchar(50) NOT NULL,
-  `LocationZip` varchar(50) NOT NULL,
-  PRIMARY KEY (`ConsumerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ `AssetID` int(11) NOT NULL,
+  `AssetProviderID` int(11) NOT NULL,
+  `ViewStartTime` BIGINT NOT NULL,
+  `ViewEndTime` BIGINT NOT NULL,
+  `LocationID` int(11) NOT NULL,
+  `LocationZip`varchar(50) NOT NULL,
+PRIMARY KEY (`ImpID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `genadx`.`myads`;
 
@@ -128,6 +146,42 @@ CREATE TABLE `myads` (
     PRIMARY KEY (`IDentifier`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
  
+ DROP TABLE IF EXISTS `genadx`.`interest`;
+
+CREATE TABLE `interest` (
+`IntID` int(11) NOT NULL AUTO_INCREMENT,
+`IntDate` BIGINT NOT NULL,
+`IntWeight` int NOT NULL, 
+`ConsumerID` int NOT NULL,
+`ProviderID` int NOT NULL,
+`ProviderName` varchar(50) NOT NULL,
+`LocationZip` varchar(50) NOT NULL,
+`Demographic` int NOT NULL,
+`AdID` int(11) DEFAULT NULL,
+`AdURL` varchar(50) NOT NULL,
+`AdPCC` varchar(50) NOT NULL,
+`AdOwner` varchar(50) NOT NULL,
+PRIMARY KEY (`IntID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+ 
+ DROP TABLE IF EXISTS `genadx`.`recommendation`;
+
+CREATE TABLE `recommendation` (
+`RecoID` int(11) NOT NULL AUTO_INCREMENT,
+`RecoDate` DATETIME NOT NULL,
+`RecoWeight` int NOT NULL, 
+`ConsumerID` int NOT NULL,
+`ProviderID` int NOT NULL,
+`ProviderName` varchar(50) NOT NULL,
+`LocationZip` varchar(50) NOT NULL,
+`Demographic` int NOT NULL,
+`AdID` int(11) DEFAULT NULL,
+`AdURL` varchar(50) NOT NULL,
+`AdPCC` varchar(50) NOT NULL,
+`AdOwner` varchar(50) NOT NULL,
+PRIMARY KEY (`RecoID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+ 
 DROP TABLE IF EXISTS `genadx`.`login`;
 
 CREATE TABLE `genadx`.`login` (
@@ -141,3 +195,48 @@ INSERT INTO genadx.login (UserName,PassWord) VALUES
 
 INSERT INTO genadx.login (UserName,PassWord) VALUES
 ("admin", "admin");
+
+DROP TABLE IF EXISTS `genadx`.`users`;
+
+CREATE TABLE `genadx`.`users` (
+  `username` varchar(50) NOT NULL ,
+  `password` varchar(50) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO genadx.users (username,password,enabled) VALUES
+("jason@jason.com", "{noop}test123",1);
+
+INSERT INTO genadx.users (username,password,enabled) VALUES
+("michael@jason.com", "{noop}test123",1);
+
+DROP TABLE IF EXISTS `genadx`.`authorities`;
+
+CREATE TABLE `genadx`.`authorities` (
+  `username` varchar(50) NOT NULL ,
+  `authority` varchar(50) NOT NULL,
+  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
+  CONSTRAINT `authorities_ibfk_1`
+  FOREIGN KEY (`username`)
+  REFERENCES `users` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO genadx.authorities (username,authority) VALUES
+("jason@jason.com", "ROLE_EMPLOYEE");
+
+INSERT INTO genadx.authorities (username,authority) VALUES
+("michael@jason.com", "ROLE_MANAGER");
+
+INSERT INTO genadx.authorities (username,authority) VALUES
+("jason@jason.com", "ROLE_ADMIN");
+
+INSERT INTO genadx.authorities (username,authority) VALUES
+("michael@jason.com", "ROLE_EMPLOYEE");
+
+
+
+
+
+
+
