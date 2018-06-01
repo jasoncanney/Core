@@ -12,8 +12,6 @@ import com.canopyaudience.model.domain.preference;
 import com.canopyaudience.model.domain.interest;
 import com.canopyaudience.model.domain.provider;
 import com.canopyaudience.model.services.exception.PreferenceException;
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 
